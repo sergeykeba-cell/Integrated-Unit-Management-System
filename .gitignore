@@ -1,0 +1,4 @@
+users.json
+*.log
+output/
+*.db
