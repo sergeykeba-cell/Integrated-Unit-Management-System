@@ -1,0 +1,42 @@
+{
+  "admin": {
+    "display_name": "Адміністратор",
+    "role": "admin",
+    "salt": "62d55bc272ed529b086412de468be2140f8b85aa27cfa306f3b53180379b5b65",
+    "hash": "39a894dd6acdd0ae2eb6ba3d78242290a5bc0b249efc491401eff91eb0ef9e4b",
+    "created_by": "system",
+    "created_at": "2026-03-20T20:31:51.200298",
+    "last_login": "2026-03-21T13:58:20.038187",
+    "active": true
+  },
+  "operator": {
+    "display_name": "Оператор",
+    "role": "operator",
+    "salt": "2f1c159066adc66cb3968ee1ad7abc255c514920a51d1f5caf798a9afd91937b",
+    "hash": "9b7139d0aff946b243058e80eb12ea71c8752f3925a2645a25531560052a3027",
+    "created_by": "system",
+    "created_at": "2026-03-20T20:31:52.175617",
+    "last_login": null,
+    "active": true
+  },
+  "medic": {
+    "display_name": "Медична служба",
+    "role": "medic",
+    "salt": "0eaab0e65637b20b23cd37c91cb5f6f3080ad9c0595a7c46e057f54bf3bb4bbf",
+    "hash": "94836032dfe1eeb3cf0d27c20812f67ec9951183ef21d41509280b72d48b6bd8",
+    "created_by": "system",
+    "created_at": "2026-03-20T20:31:53.161019",
+    "last_login": null,
+    "active": true
+  },
+  "reader": {
+    "display_name": "Читач",
+    "role": "reader",
+    "salt": "c9cc490837f0d76764ec6ce2cbb3cb4c8cc5c2807acb7accf05adfba1f67f8ab",
+    "hash": "70cb39eccb32bf0412ecb4a1da66682273932c13609588788546415346d44fbf",
+    "created_by": "system",
+    "created_at": "2026-03-20T20:31:54.182002",
+    "last_login": null,
+    "active": true
+  }
+}
