@@ -1,8 +1,8 @@
 # Integrated-Unit-Management-System
-A lightweight, self-hosted web application for personnel records, document workflow, and medical registry management — built for real operational use.
+A lightweight, self-hosted web application for personnel records, document workflow, and Health records module management — built for real operational use.
 # Integrated Unit Management System
 
-> A lightweight, self-hosted web application for personnel records, document workflow, and medical registry management — built for real operational use.
+> A lightweight, self-hosted web application for personnel records, document workflow, and Health records module management — built for real operational use.
 
 ---
 
@@ -11,9 +11,9 @@ A lightweight, self-hosted web application for personnel records, document workf
 This system replaced manual Excel spreadsheets and paper-based workflows with a structured, role-controlled web interface accessible from any browser on the local network.
 
 **Core features:**
-- 👥 **Personnel registry** — add, edit, search personnel records
+- 👥 **Staff registry** — add, edit, search personnel records
 - 📄 **PDF document generation** — auto-fill documents from templates with variable substitution (compliant with official formatting standards)
-- 🏥 **Medical registry** — track and update medical records per role
+- 🏥 **Health records module** — track and update medical records per role
 - 🔐 **Role-based access control** — Admin / Operator / Medic / Reader with granular permissions
 - 📋 **Audit log** — every action is logged with timestamp and user
 - 📦 **SQLite backend** — zero-config, portable, no external database required
@@ -86,7 +86,7 @@ integrated/
 
 ## 💡 Background
 
-This project was built to solve a real operational problem: manual data entry across multiple Excel files caused errors, duplication, and slow document turnaround. The system unified all records into a single searchable database and automated document generation — reducing processing time significantly.
+This project was built to solve: manual data entry across multiple Excel files caused errors, duplication, and slow document turnaround. The system unified all records into a single searchable database and automated document generation — reducing processing time significantly.
 
 **Stack:** Python · SQLite · HTML/JS · ReportLab  
 
