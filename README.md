@@ -88,9 +88,7 @@ integrated/
 
 This project was built to solve a real operational problem: manual data entry across multiple Excel files caused errors, duplication, and slow document turnaround. The system unified all records into a single searchable database and automated document generation — reducing processing time significantly.
 
-**Built by:** Sergiy Keba  
 **Stack:** Python · SQLite · HTML/JS · ReportLab  
-**Status:** Production (actively used)
 
 ---
 
