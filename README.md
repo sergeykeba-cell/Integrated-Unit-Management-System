@@ -61,7 +61,7 @@ python server.py
 # or on Windows: START.bat
 ```
 
-Open `http://localhost:7020` in your browser.
+Open `http://localhost:8080` in your browser.
 
 ---
 
