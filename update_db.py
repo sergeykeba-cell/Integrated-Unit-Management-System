@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-update_db.py — Оновлення military.db з Excel-файлу  В/Ч А7020
+update_db.py — Оновлення data.db з Excel-файлу
 Використання:
-  python update_db.py --excel FILE.xlsx --db military.db
-  python update_db.py --excel FILE.xlsx --db military.db --dry-run
-  python update_db.py --excel FILE.xlsx --db military.db --yes
+  python update_db.py --excel FILE.xlsx --db data.db
+  python update_db.py --excel FILE.xlsx --db data.db --dry-run
+  python update_db.py --excel FILE.xlsx --db data.db --yes
 """
 import sqlite3, re, sys, shutil, datetime, argparse
 import pandas as pd
@@ -492,7 +492,7 @@ def db_count(conn, t):
 
 
 def main():
-    ap = argparse.ArgumentParser(description='В/Ч А7020 — оновлення БД з Excel')
+    ap = argparse.ArgumentParser(description='Оновлення БД з Excel')
     ap.add_argument('--excel',   required=True)
     ap.add_argument('--db',      required=True)
     ap.add_argument('--dry-run', action='store_true')
@@ -510,7 +510,7 @@ def main():
 
     print()
     print(bold('═══════════════════════════════════════════════'))
-    print(bold('  В/Ч А7020 · Оновлення БД з Excel'))
+    print(bold('  Оновлення БД з Excel'))
     print(bold('═══════════════════════════════════════════════'))
     print(f'  Excel: {cyan(str(excel_path))}  ({excel_path.stat().st_size//1024} KB)')
     print(f'  БД:    {cyan(str(db_path))}  ({db_path.stat().st_size//1024} KB)')
@@ -578,7 +578,7 @@ def main():
     total_new = sum(len(v) for v in results.values())
 
     print(bold('  ┌─ Підсумок ─────────────────────────────────┐'))
-    print(f'  │  Нових в/с:       {green(str(len(results.get("personnel",[]))))}')
+    print(f'  │  Нових персонал:  {green(str(len(results.get("personnel",[]))))}')
     print(f'  │  Нових СЗЧ:       {green(str(len(results.get("szc",[]))))}')
     print(f'  │  Нових транзитних: {green(str(len(results.get("transit",[]))))}')
     print(f'  │  {bold(f"Всього: {total_new}")}')
@@ -603,14 +603,14 @@ def main():
     ts = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     bdir = db_path.parent / 'backups'
     bdir.mkdir(exist_ok=True)
-    bpath = bdir / f'military_{ts}.db'
+    bpath = bdir / f'data_{ts}.db'
     shutil.copy2(str(db_path), str(bpath))
     print(f'  {dim(f"Резервна копія: {bpath.name}")}')
     print()
 
     # ── Запис ─────────────────────────────────────────────────────────────────
     if results.get('personnel'):
-        print(f'  Запис {len(results["personnel"])} в/с...', end='', flush=True)
+        print(f'  Запис {len(results["personnel"])} записів персоналу...', end='', flush=True)
         n = insert_personnel(results['personnel'], conn)
         print(f'  {green(f"✓ {n} додано")}')
 
