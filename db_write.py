@@ -1,5 +1,5 @@
 """
-db_write.py — API запису в SQLite для В/Ч А7020
+db_write.py — API запису в SQLite для 7020
 
 Patches applied:
   [D1] _backup() race: set flag inside lock before copy (prevents double-copy)
@@ -108,26 +108,18 @@ PERSONNEL_FIELDS = [
 
 REQUIRED_PERSONNEL = ["pib", "rank_text"]
 
-RANK_TO_GROUP = {
-    "генерал": "ОФ", "полковник": "ОФ", "підполковник": "ОФ",
-    "майор": "ОФ", "капітан": "ОФ", "старший лейтенант": "ОФ",
-    "лейтенант": "ОФ", "молодший лейтенант": "ОФ",
-    "старший сержант": "Серж", "сержант": "Серж", "молодший сержант": "Серж",
-    "старшина": "Серж", "майстер-сержант": "Серж",
-    "штаб-сержант": "Серж", "головний сержант": "Серж",
-    "солдат": "Солд", "старший солдат": "Солд",
-    "матрос": "Солд", "старший матрос": "Солд",
+
 }
 
 
 def _infer_filter_group(rank: str) -> str:
     if not rank:
-        return "Солд"
+        return "Сол"
     r = rank.lower().strip()
     for key, group in RANK_TO_GROUP.items():
         if key in r:
             return group
-    return "Солд"
+    return "Сол"
 
 
 def add_personnel(data: dict, user: str) -> int:
@@ -203,7 +195,7 @@ delete_personnel = soft_delete_personnel
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  СЗЧ JOURNAL
+#   JOURNAL
 # ══════════════════════════════════════════════════════════════════════════════
 
 SZC_FIELDS = [
