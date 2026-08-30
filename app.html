@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>В/Ч А7020 · СЗЧ</title>
+<title>·</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -80,7 +80,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
     <div id="li-db-hint" style="margin-top:14px;text-align:center">
       <div style="font-size:10px;color:var(--text3);margin-bottom:8px">База даних не відкрита</div>
       <button onclick="document.getElementById('dbf').click()" style="padding:8px 18px;background:var(--bg3);border:1px solid var(--blue-b);border-radius:8px;color:var(--blue);font-family:var(--mono);font-size:11px;font-weight:600;cursor:pointer;letter-spacing:.05em">
-        📂 Відкрити military.db
+        📂 Відкрити mi.db
       </button>
     </div>
   </div>
@@ -90,14 +90,14 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
   <!-- Стан 1: автопошук (показується при завантаженні) -->
   <div id="ls-auto" class="lbox" style="pointer-events:none">
     <div class="spin" style="margin:0 auto 12px"></div>
-    <div class="ltitle">Пошук military.db...</div>
+    <div class="ltitle">Пошук mi.db...</div>
     <div class="lsub">Шукаємо базу даних в папці програми</div>
   </div>
   <!-- Стан 2: ручне введення (якщо autoload не спрацював) -->
   <div id="ls-manual" class="lbox" style="display:none">
     <div class="lic">🗄️</div>
     <div class="ltitle">База даних не знайдена</div>
-    <div class="lsub" style="margin-bottom:14px">Покладіть <b>military.db</b> в папку програми або вкажіть шлях вручну</div>
+    <div class="lsub" style="margin-bottom:14px">Покладіть <b>mi.db</b> в папку програми або вкажіть шлях вручну</div>
     <input type="file" id="dbf" accept=".db,.sqlite,.sqlite3" style="display:none" onchange="onFile(event)">
     <div style="display:flex;gap:7px;margin-bottom:10px">
       <input id="db-path-inp" class="sinp" style="flex:1;padding:9px 12px;font-size:12px"
@@ -118,7 +118,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
   <header class="topbar">
     <div class="logo-wrap"><div class="logo-ic">🌿</div><div><div class="logo-title">В/Ч А7020<span class="logo-dot">·</span>СЗЧ</div><div class="logo-sub">пошук особового складу · генерація документів · реєстр напрямків</div></div></div>
     <nav class="tnav-wrap">
-      <div class="tnav active" onclick="gomain('szc')">Пошук / СЗЧ</div>
+      <div class="tnav active" onclick="gomain('szc')">Пошук / </div>
       <div class="tnav" onclick="gomain('personnel')">Особовий склад</div>
       <div class="tnav" onclick="gomain('health')">Медична служба</div>
       <div class="tnav" onclick="gomain('stats')">Статистика</div>
@@ -136,10 +136,10 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
     <div id="panel-szc" class="panel active">
       <div class="ptabs">
         <div class="ptab active" onclick="gosub('szc','search')">Пошук о/с</div>
-        <div class="ptab" onclick="gosub('szc','szcj')">Журнал СЗЧ</div>
+        <div class="ptab" onclick="gosub('szc','szcj')">Журнал </div>
         <div class="ptab" onclick="gosub('szc','transit')">Транзит</div>
         <div class="ptab" onclick="gosub('szc','reg')">Реєстр напрямків</div>
-        <div class="ptab" onclick="gosub('szc','ext')">📋 Додаток А7020</div>
+        <div class="ptab" onclick="gosub('szc','ext')">📋 Додаток 7020</div>
         <div class="ptab" onclick="gosub('szc','rec')">🏥 Прийомка</div>
       </div>
       <div id="szc-search" class="sub active">
@@ -162,7 +162,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
       </div>
       <div id="szc-szcj" class="sub">
         <div class="filters"><input class="fi" id="sj-pib" placeholder="П.І.Б..." oninput="db300(loadSzcJ)()" style="min-width:200px"><input class="fi" id="sj-obl" placeholder="Область..." oninput="db300(loadSzcJ)()"><input class="fi" id="sj-from" type="date" onchange="loadSzcJ()"><input class="fi" id="sj-to" type="date" onchange="loadSzcJ()"><button class="bsm" onclick="expCSV('szc')">⬇ CSV</button></div>
-        <div class="tcrd"><table class="gt"><thead><tr><th>#</th><th>П.І.Б.</th><th>Звання</th><th>Дата СЗЧ</th><th>Область призову</th><th>Звідки прийшов</th><th>Телефон</th><th>Стан</th><th></th></tr></thead><tbody id="sj-body"></tbody></table><div class="pag" id="sj-pag"></div></div>
+        <div class="tcrd"><table class="gt"><thead><tr><th>#</th><th>П.І.Б.</th><th>зв</th><th>Дата СЗЧ</th><th>Область призову</th><th>Звідки прийшов</th><th>Телефон</th><th>Стан</th><th></th></tr></thead><tbody id="sj-body"></tbody></table><div class="pag" id="sj-pag"></div></div>
       </div>
       <div id="szc-transit" class="sub">
         <div class="filters"><input class="fi" id="tr-pib" placeholder="П.І.Б..." oninput="db300(loadTransit)()" style="min-width:200px"></div>
