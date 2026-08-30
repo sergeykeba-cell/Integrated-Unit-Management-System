@@ -3,14 +3,14 @@
 import_extended.py — Імпорт додаткових файлів до military.db
 
 Підтримувані формати:
-  1. Додаток А7020 (СЗЧ реєстр) — .xlsx з аркушем 'А7020' та 'по в_ч'
-  2. Прийомка — .ods або .xlsx з колонками: номер, в/з, ПІБ, д.н., СЗЧ В/Ч, придатність
+  1. Додаток) — .xlsx з аркушем '7' та 'по'
+  2. Прийомка — .ods або .xlsx з колонками: номер, в/з, ПІБ, д.н., 
 
 Використання:
-  python import_extended.py --file Додаток.xlsx --db military.db
-  python import_extended.py --file Прийомка.ods  --db military.db
-  python import_extended.py --file Додаток.xlsx --db military.db --dry-run
-  python import_extended.py --file Прийомка.ods  --db military.db --clear
+  python import_extended.py --file Додаток.xlsx --db mi.db
+  python import_extended.py --file Прийомка.ods  --db mi.db
+  python import_extended.py --file Додаток.xlsx --db mi.db --dry-run
+  python import_extended.py --file Прийомка.ods  --db mi.db --clear
 """
 import sqlite3, re, sys, argparse, datetime, os
 from pathlib import Path
@@ -56,8 +56,8 @@ def detect_type(path: Path, df_sheets=None):
     if ext == '.ods':
         return 'reception'
     if ext in ('.xlsx', '.xls'):
-        if df_sheets and 'А7020' in df_sheets:
-            return 'szc_extended'
+        if df_sheets and '20' in df_sheets:
+            return 'extended'
         # Try to detect by columns
         return 'reception'
     return None
@@ -93,7 +93,7 @@ def ensure_tables(conn):
     conn.commit()
 
     conn.executescript("""
-        CREATE TABLE IF NOT EXISTS military_units (
+        CREATE TABLE IF NOT EXISTS mi_units (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
             unit_code   TEXT UNIQUE,
             full_name   TEXT,
@@ -114,9 +114,7 @@ def ensure_tables(conn):
             source_unit         TEXT,
             source_unit_name    TEXT,
             suspension_info     TEXT,
-            erdr_no             TEXT,
-            erdr_info           TEXT,
-            szc_date            TEXT,
+            sc_date             TEXT,
             arrival_date        TEXT,
             bzvp_info           TEXT,
             sedo_out_no         TEXT,
@@ -258,35 +256,35 @@ def import_szc_extended(df, conn, dry_run=False, source_file=''):
         data.append((
             s(row.get('№')),
             s(row.get('Категорія')),
-            s(row.get('Військове звання')),
+            s(row.get('звання')),
             pib,
             parse_date(row.get('Дата народження')),
             s(row.get('Військова частина, яку військовослужбовець самовільно залишив')),
-            s(row.get('Назви в/ч')),
+            s(row.get('Назви ')),
             s(row.get('Відомості про призупинення служби')),
             s(row.get('Номер ЄРДР')),
             s(row.get('ЄРДР')),
             szc_date,
-            parse_date(row.get('Дата прибуття військовослужбовця до резервного підрозділу')),
+            parse_date(row.get('Дата прибуття  до  підрозділу')),
             s(row.get('БЗВП, періоди проходження, навчальний підрозділ та номер сертифікату')),
             s(row.get('Номер вихідного повідомлення СЕДО на попередню частину')),
             parse_date(row.get('Дата вихідного повідомлення на навчальні центри')),
-            s(row.get('Рід військ, оперативне командування')),
+            s(row.get('Рід')),
             s(row.get('Кадрові рішення')),
             s(row.get('Примітка')),
-            s(row.get('Придатність до військової служби')),
+            s(row.get('Придатність до служби')),
             s(row.get('Куди по наказу')),
-            s(row.get('Бажання військовослужбовця')),
-            s(row.get('Наказ на переміщення з А7020')),
+            s(row.get('Бажання')),
+            s(row.get('Наказ на переміщення')),
             s(row.get('Статус')),
             parse_date(row.get('Дата')),
             s(row.get('Куди вибув')),
-            s(row.get('Поданий план переміщення про зарахування в А7020')),
+            s(row.get('Поданий план переміщення про зарахування')),
             s(row.get('Статус у відрядженні')),
             parse_date(row.get('Дата зміни статусу у відрядженні')),
             s(row.get('Службові примітки')),
             s(row.get('ЛІКУВАННЯ або ВЛК')),
-            s(row.get('Відповідь від військової частини чи навчального центру')),
+            s(row.get('Відповідь від  частини чи навчального центру')),
             s(row.get('Примітка Вік, 50+ в/ч жінки')),
             s(row.get("Відомості про стан здоров'я")),
             s(row.get('Проживання')),
@@ -298,7 +296,7 @@ def import_szc_extended(df, conn, dry_run=False, source_file=''):
             s(row.get('Вручено підозру')),
             parse_date(row.get('Дата коли ухвала набрала законної сили')),
             s(row.get('Ухвала суду про звільнення від кримінальної відповідальності')),
-            s(row.get('Придатність до військової служби.1')),
+            s(row.get('Придатність до служби.1')),
             s(row.get('Номер, дата документа і де проходив ВЛК')),
             s(row.get('Знаходиться на лікуванні, обстежень')),
             parse_date(row.get('Дата з якого перебуває в лікарні')),
@@ -366,7 +364,7 @@ def import_reception(df, conn, dry_run=False, source_file=''):
             s(row.get('в/з')),
             pib,
             parse_date(row.get('д.н.')),
-            s(row.get('СЗЧ В/Ч')),
+            s(row.get('СЧ Ч')),
             s(row.get('придатність')),
             s(row.get('50+')),
             s(row.get('прид.')),
@@ -392,7 +390,7 @@ def import_reception(df, conn, dry_run=False, source_file=''):
 
 def main():
     ap = argparse.ArgumentParser(
-        description='Імпорт Додатку А7020 та Прийомки до military.db',
+        description='Імпорт Додатку та Прийомки до mi.db',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Приклади:
@@ -402,8 +400,8 @@ def main():
   python import_extended.py --file "Priyomka 17.03.26.xlsx" --db military.db --clear
 
 Тип визначається автоматично по вмісту:
-  - xlsx з аркушем 'А7020' → реєстр СЗЧ (Додаток)
-  - xlsx/ods без аркуша 'А7020' → прийомка
+  - xlsx з аркушем 'А' → реєстр (Додаток)
+  - xlsx/ods без аркуша 'А' → прийомка
         """
     )
     ap.add_argument('--file',    required=True, help='Шлях до .xlsx або .ods файлу')
@@ -427,7 +425,7 @@ def main():
 
     print()
     print(bold("═══════════════════════════════════════════════"))
-    print(bold("  В/Ч А7020 · Імпорт розширених даних"))
+    print(bold("   7020 · Імпорт розширених даних"))
     print(bold("═══════════════════════════════════════════════"))
     print(f"  Файл: {cyan(str(file_path))}  ({file_path.stat().st_size//1024} KB)")
     print(f"  БД:   {cyan(str(db_path))}")
@@ -471,7 +469,7 @@ def main():
 
         # Import А7020 sheet
         if 'А7020' in xf.sheet_names:
-            print(bold("  [А7020] СЗЧ реєстр..."))
+            print(bold("  [А] реєстр..."))
 
             if args.clear and not args.dry_run:
                 conn.execute("DELETE FROM szc_extended WHERE source_file=?", (source_file,))
@@ -481,7 +479,7 @@ def main():
             import warnings
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
-                df_szc = xf.parse('А7020', skiprows=5, header=0, dtype=str)
+                df_szc = xf.parse('А', skiprows=5, header=0, dtype=str)
 
             df_szc = clean_cols(df_szc)
             total_rows = len(df_szc[df_szc.get('ПІБ', pd.Series()).notna()])
