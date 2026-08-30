@@ -1,0 +1,21 @@
+# --- Add these lines to the existing .gitignore ---
+
+# Logs (may contain real IPs, timestamps, request data in production)
+*.log
+access.log
+update.log
+
+# Credentials / user accounts (README claims this is excluded, but it is
+# currently tracked in the repo — see note below)
+users.json
+
+# Runtime-created directories
+backups/
+profiles/
+output/
+data/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3

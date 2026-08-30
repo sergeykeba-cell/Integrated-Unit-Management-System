@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - BIND_HOST=0.0.0.0
+      - PORT=8080
+    volumes:
+      # NOTE: mount the whole app directory as a volume so the SQLite db file,
+      # backups/, profiles/, output/, and users.json all persist across
+      # container restarts — regardless of the exact filename/path server.py
+      # actually uses internally (unverified — check db_candidates logic in
+      # server.py and adjust this to a narrower mount once confirmed).
+      - app_data:/app/data
+      - ./backups:/app/backups
+      - ./profiles:/app/profiles
+      - ./output:/app/output
+
+volumes:
+  app_data:
