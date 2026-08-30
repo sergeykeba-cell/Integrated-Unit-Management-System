@@ -1,5 +1,5 @@
 """
-server.py — В/Ч А7020  v2.3
+server.py — v2.3
 
 Patches applied (review 2026-03-20):
   [1]  NameError: s not defined in _handle_db_load → fixed
@@ -189,21 +189,17 @@ class Handler(BaseHTTPRequestHandler):
             # Auth on /api/query still protects the actual data
             _parent = os.path.dirname(BASE_DIR)
             db_candidates = [
-                os.path.join(BASE_DIR,  "military.db"),          # поруч з server.py
-                os.path.join(_parent,   "military.db"),          # батьківська папка
-                os.path.join(_parent,   "ВМ",        "military.db"),
-                os.path.join(_parent,   "BM",        "military.db"),
-                os.path.join(_parent,   "vm",        "military.db"),
-                os.path.join(_parent,   "a7020",     "military.db"),
-                os.path.join(_parent,   "A7020",     "military.db"),
-                os.path.join("C:\\",    "A7020",     "military.db"),
-                os.path.join("C:\\",    "military",  "military.db"),
-                os.path.join("C:\\",    "military.db"),
+                os.path.join(BASE_DIR,  "data.db"),          # поруч з server.py
+                os.path.join(_parent,   "data.db"),          # батьківська папка
+                os.path.join(_parent,   "app_data", "data.db"),
+                os.path.join(_parent,   "data",     "data.db"),
+                os.path.join("C:\\",    "app_data", "data.db"),
+                os.path.join("C:\\",    "data.db"),
             ]
             found = next((c for c in db_candidates if os.path.exists(c)), None)
             if not found:
                 candidates_str = "; ".join(db_candidates[:4])
-                self._json({"ok": False, "error": f"military.db не знайдено. Перевірено: {candidates_str} — скопіюйте military.db у папку з server.py"})
+                self._json({"ok": False, "error": f"data.db не знайдено. Перевірено: {candidates_str} — скопіюйте data.db у папку з server.py"})
                 return
             try:
                 conn = _sqlite3.connect(found)
@@ -679,7 +675,7 @@ class Handler(BaseHTTPRequestHandler):
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
-    parser = argparse.ArgumentParser(description="В/Ч А7020 Server")
+    parser = argparse.ArgumentParser(description="Server")
     parser.add_argument("--network", action="store_true",
                         help="Listen on 0.0.0.0 (all interfaces) instead of localhost only")
     args, _ = parser.parse_known_args()
@@ -699,7 +695,7 @@ def main():
 
     print()
     print("  ================================================")
-    print(f"  V/Ch A7020  v2.3  {'NETWORK MODE' if args.network else 'LOCAL MODE'}")
+    print(f"  Server  v2.3  {'NETWORK MODE' if args.network else 'LOCAL MODE'}")
     print("  ================================================")
     print(f"  Local:   http://localhost:{PORT}")
     if args.network:
