@@ -62,8 +62,8 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
   <div style="background:var(--bg2);border:1px solid var(--line2);border-radius:14px;padding:36px 40px;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.6)">
     <div style="text-align:center;margin-bottom:24px">
       <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#1a5cd8,#3b8cff);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 12px">🌿</div>
-      <div style="font-size:14px;font-weight:600;color:var(--text)">В/Ч А7020</div>
-      <div style="font-size:10px;color:var(--text3);margin-top:3px;letter-spacing:.05em;text-transform:uppercase">Система обліку особового складу</div>
+      <div style="font-size:14px;font-weight:600;color:var(--text)">Організація</div>
+      <div style="font-size:10px;color:var(--text3);margin-top:3px;letter-spacing:.05em;text-transform:uppercase">Система обліку персоналу</div>
     </div>
     <div style="margin-bottom:10px">
       <div style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:5px">Логін</div>
@@ -80,7 +80,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
     <div id="li-db-hint" style="margin-top:14px;text-align:center">
       <div style="font-size:10px;color:var(--text3);margin-bottom:8px">База даних не відкрита</div>
       <button onclick="document.getElementById('dbf').click()" style="padding:8px 18px;background:var(--bg3);border:1px solid var(--blue-b);border-radius:8px;color:var(--blue);font-family:var(--mono);font-size:11px;font-weight:600;cursor:pointer;letter-spacing:.05em">
-        📂 Відкрити mi.db
+        📂 Відкрити data.db
       </button>
     </div>
   </div>
@@ -90,18 +90,18 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
   <!-- Стан 1: автопошук (показується при завантаженні) -->
   <div id="ls-auto" class="lbox" style="pointer-events:none">
     <div class="spin" style="margin:0 auto 12px"></div>
-    <div class="ltitle">Пошук mi.db...</div>
+    <div class="ltitle">Пошук data.db...</div>
     <div class="lsub">Шукаємо базу даних в папці програми</div>
   </div>
   <!-- Стан 2: ручне введення (якщо autoload не спрацював) -->
   <div id="ls-manual" class="lbox" style="display:none">
     <div class="lic">🗄️</div>
     <div class="ltitle">База даних не знайдена</div>
-    <div class="lsub" style="margin-bottom:14px">Покладіть <b>mi.db</b> в папку програми або вкажіть шлях вручну</div>
+    <div class="lsub" style="margin-bottom:14px">Покладіть <b>data.db</b> в папку програми або вкажіть шлях вручну</div>
     <input type="file" id="dbf" accept=".db,.sqlite,.sqlite3" style="display:none" onchange="onFile(event)">
     <div style="display:flex;gap:7px;margin-bottom:10px">
       <input id="db-path-inp" class="sinp" style="flex:1;padding:9px 12px;font-size:12px"
-        placeholder="C:\A7020\military.db"
+        placeholder="C:\Organization\data.db"
         onkeydown="if(event.key==='Enter')loadByPath()">
       <button onclick="loadByPath()" style="padding:9px 16px;background:var(--blue);border:none;border-radius:8px;color:#fff;font-family:var(--mono);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">
         Відкрити
@@ -116,10 +116,10 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
 </div>
 <div id="app" style="display:none">
   <header class="topbar">
-    <div class="logo-wrap"><div class="logo-ic">🌿</div><div><div class="logo-title">В/Ч А7020<span class="logo-dot">·</span>СЗЧ</div><div class="logo-sub">пошук особового складу · генерація документів · реєстр напрямків</div></div></div>
+    <div class="logo-wrap"><div class="logo-ic">🌿</div><div><div class="logo-title">Організація<span class="logo-dot">·</span>Відсутність</div><div class="logo-sub">пошук персоналу · генерація документів · реєстр напрямків</div></div></div>
     <nav class="tnav-wrap">
       <div class="tnav active" onclick="gomain('szc')">Пошук / </div>
-      <div class="tnav" onclick="gomain('personnel')">Особовий склад</div>
+      <div class="tnav" onclick="gomain('personnel')">Персонал</div>
       <div class="tnav" onclick="gomain('health')">Медична служба</div>
       <div class="tnav" onclick="gomain('stats')">Статистика</div>
       <div class="tnav" onclick="gomain('dilo')">📝 Діловод</div>
@@ -139,11 +139,11 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
         <div class="ptab" onclick="gosub('szc','szcj')">Журнал </div>
         <div class="ptab" onclick="gosub('szc','transit')">Транзит</div>
         <div class="ptab" onclick="gosub('szc','reg')">Реєстр напрямків</div>
-        <div class="ptab" onclick="gosub('szc','ext')">📋 Додаток 7020</div>
+        <div class="ptab" onclick="gosub('szc','ext')">📋 Розширені дані</div>
         <div class="ptab" onclick="gosub('szc','rec')">🏥 Прийомка</div>
       </div>
       <div id="szc-search" class="sub active">
-        <div class="slabel">Пошук особового складу</div>
+        <div class="slabel">Пошук персоналу</div>
         <div class="stabs">
           <div class="stab active" id="st-pib" onclick="smode('pib')"><span>👤</span> П.І.Б.</div>
           <div class="stab" id="st-phone" onclick="smode('phone')"><span>📞</span> Номер телефону</div>
@@ -162,20 +162,20 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
       </div>
       <div id="szc-szcj" class="sub">
         <div class="filters"><input class="fi" id="sj-pib" placeholder="П.І.Б..." oninput="db300(loadSzcJ)()" style="min-width:200px"><input class="fi" id="sj-obl" placeholder="Область..." oninput="db300(loadSzcJ)()"><input class="fi" id="sj-from" type="date" onchange="loadSzcJ()"><input class="fi" id="sj-to" type="date" onchange="loadSzcJ()"><button class="bsm" onclick="expCSV('szc')">⬇ CSV</button></div>
-        <div class="tcrd"><table class="gt"><thead><tr><th>#</th><th>П.І.Б.</th><th>зв</th><th>Дата СЗЧ</th><th>Область призову</th><th>Звідки прийшов</th><th>Телефон</th><th>Стан</th><th></th></tr></thead><tbody id="sj-body"></tbody></table><div class="pag" id="sj-pag"></div></div>
+        <div class="tcrd"><table class="gt"><thead><tr><th>#</th><th>П.І.Б.</th><th>зв</th><th>Дата Відсутність</th><th>Регіон зарахування</th><th>Звідки прийшов</th><th>Телефон</th><th>Стан</th><th></th></tr></thead><tbody id="sj-body"></tbody></table><div class="pag" id="sj-pag"></div></div>
       </div>
       <div id="szc-transit" class="sub">
         <div class="filters"><input class="fi" id="tr-pib" placeholder="П.І.Б..." oninput="db300(loadTransit)()" style="min-width:200px"></div>
-        <div class="tcrd"><table class="gt"><thead><tr><th>#</th><th>П.І.Б.</th><th>Звання</th><th>Командування</th><th>Напрямок</th><th>Статус СЗЧ</th><th>Телефон</th></tr></thead><tbody id="tr-body"></tbody></table><div class="pag" id="tr-pag"></div></div>
+        <div class="tcrd"><table class="gt"><thead><tr><th>#</th><th>П.І.Б.</th><th>Ранг</th><th>Керівництво</th><th>Напрямок</th><th>Статус Відсутність</th><th>Телефон</th></tr></thead><tbody id="tr-body"></tbody></table><div class="pag" id="tr-pag"></div></div>
       </div>
       <div id="szc-reg" class="sub"><div style="display:flex;flex-direction:column;align-items:center;padding:52px 24px;gap:10px"><div style="font-size:36px;opacity:.3">📋</div><div style="font-size:12px;color:var(--text3)">Реєстр напрямків — у розробці</div></div></div>
     </div>      <div id="szc-ext" class="sub">
         <div class="filters">
           <input class="fi" id="ext-pib" placeholder="П.І.Б..." oninput="db300(loadExt)()" style="min-width:200px">
-          <input class="fi" id="ext-unit" placeholder="В/Ч..." oninput="db300(loadExt)()" style="min-width:100px">
+          <input class="fi" id="ext-unit" placeholder="Орг...." oninput="db300(loadExt)()" style="min-width:100px">
           <select class="fs" id="ext-status" onchange="loadExt()">
             <option value="">Всі статуси</option>
-            <option value="СЗЧ">СЗЧ</option>
+            <option value="Відсутність">Відсутність</option>
             <option value="В строю">В строю</option>
             <option value="Відряджений">Відряджений</option>
             <option value="Виключений">Виключений</option>
@@ -186,8 +186,8 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
           <button class="bsm" onclick="expCSV('ext')">⬇ CSV</button>
         </div>
         <div class="tcrd"><table class="gt"><thead><tr>
-          <th>#</th><th>П.І.Б.</th><th>Звання</th><th>Дата н.</th>
-          <th>В/Ч</th><th>Дата СЗЧ</th><th>Статус</th><th>Придатність</th><th></th>
+          <th>#</th><th>П.І.Б.</th><th>Ранг</th><th>Дата н.</th>
+          <th>Організація</th><th>Дата Відсутність</th><th>Статус</th><th>Придатність</th><th></th>
         </tr></thead><tbody id="ext-body"></tbody></table>
         <div class="pag" id="ext-pag"></div></div>
       </div>
@@ -204,26 +204,26 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
         </div>
         <div id="rec-stats" style="padding:6px 0 4px;font-size:11px;color:var(--text3)"></div>
         <div class="tcrd"><table class="gt"><thead><tr>
-          <th>#</th><th>П.І.Б.</th><th>Звання</th><th>Дата н.</th>
-          <th>В/Ч СЗЧ</th><th>Придатність</th><th>Куди</th>
+          <th>#</th><th>П.І.Б.</th><th>Ранг</th><th>Дата н.</th>
+          <th>Орг. відсутності</th><th>Придатність</th><th>Куди</th>
         </tr></thead><tbody id="rec-body"></tbody></table></div>
       </div>
 
 
     <div id="panel-personnel" class="panel">
       <div class="filters"><input class="fi" id="pp-pib" placeholder="П.І.Б..." oninput="db300(loadP)()" style="min-width:200px"><select class="fs" id="pp-st" onchange="loadP()"><option value="">Всі статуси</option><option value="0">Активний (з позначкою)</option>
-<option value="__active__">Активний + без статусу</option><option value="виключений">Виключений</option><option value="Відрядження">Відрядження</option><option value="Лікування">Лікування</option><option value="СЗЧ/Арешт">СЗЧ</option></select><select class="fs" id="pp-sub" onchange="loadP()"><option value="">Всі підрозділи</option></select><select class="fs" id="pp-fg" onchange="loadP()"><option value="">Весь склад</option><option value="ОФ">Офіцери</option><option value="Серж">Сержанти</option><option value="Солд">Солдати</option></select><button class="bsm" onclick="expCSV('personnel')">⬇ CSV</button></div>
-      <div class="tcrd"><div class="tcrd-hdr"><span class="tcrd-title">Особовий склад</span><span id="p-tot" style="font-size:10px;color:var(--text3)"></span></div><table class="gt"><thead><tr><th>П.І.Б.</th><th>Звання</th><th>Підрозділ</th><th>Посада</th><th>Статус</th><th>Телефон</th><th>Кров</th></tr></thead><tbody id="p-body"></tbody></table><div class="pag" id="p-pag"></div></div>
+<option value="__active__">Активний + без статусу</option><option value="виключений">Виключений</option><option value="Відрядження">Відрядження</option><option value="Лікування">Лікування</option><option value="Відсутність">Відсутність</option></select><select class="fs" id="pp-sub" onchange="loadP()"><option value="">Всі підрозділи</option></select><select class="fs" id="pp-fg" onchange="loadP()"><option value="">Весь персонал</option><option value="ОФ">Керівний склад</option><option value="Серж">Супервайзери</option><option value="Солд">Спеціалісти</option></select><button class="bsm" onclick="expCSV('personnel')">⬇ CSV</button></div>
+      <div class="tcrd"><div class="tcrd-hdr"><span class="tcrd-title">Персонал</span><span id="p-tot" style="font-size:10px;color:var(--text3)"></span></div><table class="gt"><thead><tr><th>П.І.Б.</th><th>Ранг</th><th>Підрозділ</th><th>Посада</th><th>Статус</th><th>Телефон</th><th>Кров</th></tr></thead><tbody id="p-body"></tbody></table><div class="pag" id="p-pag"></div></div>
     </div>
     <div id="panel-health" class="panel">
       <div class="ptabs">
-        <div class="ptab active" onclick="gosub('health','vlk')">ВЛК / Стан здоров'я</div>
-        <div class="ptab" onclick="gosub('health','wounds')">Поранені</div>
-        <div class="ptab" onclick="gosub('health','ato')">Учасники АТО/ООС</div>
+        <div class="ptab active" onclick="gosub('health','vlk')">Медкомісія / Стан здоров'я</div>
+        <div class="ptab" onclick="gosub('health','wounds')">Постраждалі</div>
+        <div class="ptab" onclick="gosub('health','ato')">Учасники спецоперацій</div>
         <div class="ptab" onclick="gosub('health','leaves')">Відпустки</div>
         <div class="ptab" onclick="gosub('health','med-pers')">👤 Пошук о/с</div>
-        <div class="ptab" onclick="gosub('health','med-szc')">📋 Журнал СЗЧ</div>
-        <div class="ptab" onclick="gosub('health','reg-vlk')">🏥 Реєстр ВЛК</div>
+        <div class="ptab" onclick="gosub('health','med-szc')">📋 Журнал відсутності</div>
+        <div class="ptab" onclick="gosub('health','reg-vlk')">🏥 Реєстр медкомісій</div>
         <div class="ptab" onclick="gosub('health','reg-konsult')">👨‍⚕️ Реєстр конс.</div>
         <div class="ptab" onclick="gosub('health','reg-char')">📋 Реєстр хар-к</div>
         <div class="ptab" onclick="gosub('health','reg-analyses')">🛏 Реєстр стаціонару</div>
@@ -243,16 +243,16 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
         </div>
         <div id="hv-stats" style="padding:6px 0 4px;font-size:11px;color:var(--text3)"></div>
         <div class="tcrd"><table class="gt"><thead><tr>
-          <th>П.І.Б.</th><th>Звання</th><th>Підрозділ</th><th>Стан здоров'я</th><th>Рішення ВЛК</th><th>Телефон</th><th style="min-width:220px">Документи</th>
+          <th>П.І.Б.</th><th>Ранг</th><th>Підрозділ</th><th>Стан здоров'я</th><th>Рішення медкомісії</th><th>Телефон</th><th style="min-width:220px">Документи</th>
         </tr></thead><tbody id="hv-body"></tbody></table>
         <div class="pag" id="hv-pag"></div></div>
       </div>
-      <div id="health-wounds" class="sub"><div id="w-stats" class="sgrid"></div><div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Звання</th><th>Підрозділ</th><th>Статус</th><th>Стан здоров'я</th><th>Рішення ВЛК</th><th>Телефон</th></tr></thead><tbody id="w-body"></tbody></table></div></div>
-      <div id="health-ato" class="sub"><div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Звання</th><th>Підрозділ</th><th>Статус</th><th>Номер УБД</th><th>Телефон</th></tr></thead><tbody id="ato-body"></tbody></table><div class="pag" id="ato-pag"></div></div></div>
-      <div id="health-leaves" class="sub"><div class="filters"><input class="fi" id="lv-pib" placeholder="П.І.Б..." oninput="db300(loadLv)()" style="min-width:180px"><select class="fs" id="lv-yr" onchange="loadLv()"><option value="">Всі роки</option><option>2022</option><option>2023</option><option>2024</option><option>2025</option><option>2026</option></select><select class="fs" id="lv-sub" onchange="loadLv()"><option value="">Всі підрозділи</option></select></div><div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Звання</th><th>Підрозділ</th><th>Рік</th><th>Днів</th><th>Наказ</th></tr></thead><tbody id="lv-body"></tbody></table><div class="pag" id="lv-pag"></div></div></div>
+      <div id="health-wounds" class="sub"><div id="w-stats" class="sgrid"></div><div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Ранг</th><th>Підрозділ</th><th>Статус</th><th>Стан здоров'я</th><th>Рішення медкомісії</th><th>Телефон</th></tr></thead><tbody id="w-body"></tbody></table></div></div>
+      <div id="health-ato" class="sub"><div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Ранг</th><th>Підрозділ</th><th>Статус</th><th>Номер посвідчення</th><th>Телефон</th></tr></thead><tbody id="ato-body"></tbody></table><div class="pag" id="ato-pag"></div></div></div>
+      <div id="health-leaves" class="sub"><div class="filters"><input class="fi" id="lv-pib" placeholder="П.І.Б..." oninput="db300(loadLv)()" style="min-width:180px"><select class="fs" id="lv-yr" onchange="loadLv()"><option value="">Всі роки</option><option>2022</option><option>2023</option><option>2024</option><option>2025</option><option>2026</option></select><select class="fs" id="lv-sub" onchange="loadLv()"><option value="">Всі підрозділи</option></select></div><div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Ранг</th><th>Підрозділ</th><th>Рік</th><th>Днів</th><th>Наказ</th></tr></thead><tbody id="lv-body"></tbody></table><div class="pag" id="lv-pag"></div></div></div>
     </div>
       <div id="health-med-pers" class="sub">
-        <div class="slabel">Пошук особового складу — медичні дані</div>
+        <div class="slabel">Пошук персоналу — медичні дані</div>
         <div class="filters">
           <input class="fi" id="mp-pib" placeholder="П.І.Б..." oninput="db300(loadMedPers)()" style="min-width:220px">
           <input class="fi" id="mp-sub" placeholder="Підрозділ..." oninput="db300(loadMedPers)()" style="min-width:130px">
@@ -261,7 +261,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
             <option value="Лікування">Лікування</option>
             <option value="0">Активний</option>
             <option value="Відрядження">Відрядження</option>
-            <option value="СЗЧ/Арешт">СЗЧ/Арешт</option>
+            <option value="Відсутність">Відсутність</option>
           </select>
           <select class="fs" id="mp-fit" onchange="loadMedPers()">
             <option value="">Будь-який стан</option>
@@ -273,24 +273,24 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
         </div>
         <div id="mp-stats" style="padding:5px 0 3px;font-size:11px;color:var(--text3)"></div>
         <div class="tcrd"><table class="gt"><thead><tr>
-          <th>П.І.Б.</th><th>Звання</th><th>Підрозділ</th><th>Статус</th>
-          <th>Стан здоров'я</th><th>Рішення ВЛК</th><th>Телефон</th>
+          <th>П.І.Б.</th><th>Ранг</th><th>Підрозділ</th><th>Статус</th>
+          <th>Стан здоров'я</th><th>Рішення медкомісії</th><th>Телефон</th>
           <th style="min-width:260px">Документи / Діловод</th>
         </tr></thead><tbody id="mp-body"></tbody></table>
         <div class="pag" id="mp-pag"></div></div>
       </div>
 
       <div id="health-med-szc" class="sub">
-        <div class="slabel">Журнал СЗЧ — медичні дані (з Додатку А7020)</div>
+        <div class="slabel">Журнал відсутності — медичні дані (з Додатку )</div>
         <div class="filters">
           <input class="fi" id="ms-pib"  placeholder="П.І.Б..." oninput="db300(loadMedSzc)()" style="min-width:220px">
-          <input class="fi" id="ms-unit" placeholder="В/Ч СЗЧ..." oninput="db300(loadMedSzc)()" style="min-width:110px">
+          <input class="fi" id="ms-unit" placeholder="Орг. відсутності..." oninput="db300(loadMedSzc)()" style="min-width:110px">
           <select class="fs" id="ms-fit" onchange="loadMedSzc()">
             <option value="">Будь-яка придатність</option>
             <option value="придатний">Придатний</option>
             <option value="обмежений">Обмежений</option>
             <option value="непридатний">Непридатний</option>
-            <option value="потребує ВЛК">Потребує ВЛК</option>
+            <option value="потребує медкомісія">Потребує медкомісія</option>
           </select>
           <input class="fi" id="ms-from" type="date" onchange="loadMedSzc()" title="Від">
           <input class="fi" id="ms-to"   type="date" onchange="loadMedSzc()" title="До">
@@ -298,14 +298,14 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
         </div>
         <div id="ms-stats" style="padding:5px 0 3px;font-size:11px;color:var(--text3)"></div>
         <div class="tcrd"><table class="gt"><thead><tr>
-          <th>П.І.Б.</th><th>Звання</th><th>Дата н.</th><th>В/Ч</th>
-          <th>Дата СЗЧ</th><th>Придатність</th><th>Стан здоров'я</th><th>Діагноз</th><th></th>
+          <th>П.І.Б.</th><th>Ранг</th><th>Дата н.</th><th>Організація</th>
+          <th>Дата Відсутність</th><th>Придатність</th><th>Стан здоров'я</th><th>Діагноз</th><th></th>
         </tr></thead><tbody id="ms-body"></tbody></table>
         <div class="pag" id="ms-pag"></div></div>
       </div>
 
       <div id="health-reg-vlk" class="sub">
-        <div class="slabel">🏥 Реєстр направлень на ВЛК</div>
+        <div class="slabel">🏥 Реєстр направлень на медкомісію</div>
         <div class="filters">
           <input class="fi" id="reg-vlk-pib"  placeholder="П.І.Б..." oninput="loadReg('reg-vlk')" style="min-width:220px">
           <input class="fi" id="reg-vlk-from" type="date" onchange="loadReg('reg-vlk')" title="Від">
@@ -313,7 +313,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
           <button class="bsm" onclick="expReg('reg-vlk')">⬇ CSV</button>
         </div>
         <div id="reg-vlk-stats" style="padding:5px 0 3px;font-size:11px;color:var(--text3)"></div>
-        <div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Звання</th><th>Підрозділ</th><th>Дата н.</th><th>Діагноз</th><th>Заклад</th><th>Дата</th><th>Результат</th><th>Примітка</th><th>Ким</th><th></th></tr></thead><tbody id="reg-vlk-body"></tbody></table></div>
+        <div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Ранг</th><th>Підрозділ</th><th>Дата н.</th><th>Діагноз</th><th>Заклад</th><th>Дата</th><th>Результат</th><th>Примітка</th><th>Ким</th><th></th></tr></thead><tbody id="reg-vlk-body"></tbody></table></div>
       </div>
 
       <div id="health-reg-konsult" class="sub">
@@ -325,7 +325,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
           <button class="bsm" onclick="expReg('reg-konsult')">⬇ CSV</button>
         </div>
         <div id="reg-konsult-stats" style="padding:5px 0 3px;font-size:11px;color:var(--text3)"></div>
-        <div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Звання</th><th>Підрозділ</th><th>Дата н.</th><th>Спеціаліст</th><th>Мета</th><th>Дата</th><th>Результат</th><th>Примітка</th><th>Ким</th><th></th></tr></thead><tbody id="reg-konsult-body"></tbody></table></div>
+        <div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Ранг</th><th>Підрозділ</th><th>Дата н.</th><th>Спеціаліст</th><th>Мета</th><th>Дата</th><th>Результат</th><th>Примітка</th><th>Ким</th><th></th></tr></thead><tbody id="reg-konsult-body"></tbody></table></div>
       </div>
 
       <div id="health-reg-char" class="sub">
@@ -337,7 +337,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
           <button class="bsm" onclick="expReg('reg-char')">⬇ CSV</button>
         </div>
         <div id="reg-char-stats" style="padding:5px 0 3px;font-size:11px;color:var(--text3)"></div>
-        <div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Звання</th><th>Підрозділ</th><th>Дата н.</th><th>Стан здоров'я</th><th>Рішення ВЛК</th><th>Придатність</th><th>Дата</th><th>Примітка</th><th>Ким</th><th></th></tr></thead><tbody id="reg-char-body"></tbody></table></div>
+        <div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Ранг</th><th>Підрозділ</th><th>Дата н.</th><th>Стан здоров'я</th><th>Рішення медкомісії</th><th>Придатність</th><th>Дата</th><th>Примітка</th><th>Ким</th><th></th></tr></thead><tbody id="reg-char-body"></tbody></table></div>
       </div>
 
       <div id="health-reg-analyses" class="sub">
@@ -349,7 +349,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
           <button class="bsm" onclick="expReg('reg-analyses')">⬇ CSV</button>
         </div>
         <div id="reg-analyses-stats" style="padding:5px 0 3px;font-size:11px;color:var(--text3)"></div>
-        <div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Звання</th><th>Підрозділ</th><th>Дата н.</th><th>Лікувальний заклад</th><th>Відділення</th><th>Дата</th><th>Виписка</th><th>Діагноз</th><th>Ким</th><th></th></tr></thead><tbody id="reg-analyses-body"></tbody></table></div>
+        <div class="tcrd"><table class="gt"><thead><tr><th>П.І.Б.</th><th>Ранг</th><th>Підрозділ</th><th>Дата н.</th><th>Лікувальний заклад</th><th>Відділення</th><th>Дата</th><th>Виписка</th><th>Діагноз</th><th>Ким</th><th></th></tr></thead><tbody id="reg-analyses-body"></tbody></table></div>
       </div>
 
     <div id="panel-stats" class="panel">
@@ -357,7 +357,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
         <div class="tcrd" style="padding:16px"><div style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:12px">По підрозділах</div><div class="bar-list" id="st-u"></div></div>
         <div class="tcrd" style="padding:16px"><div style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:12px">Тип служби</div><div class="bar-list" id="st-s"></div></div>
-        <div class="tcrd" style="padding:16px"><div style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:12px">Область призову (топ-10)</div><div class="bar-list" id="st-o"></div></div>
+        <div class="tcrd" style="padding:16px"><div style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:12px">Регіон зарахування (топ-10)</div><div class="bar-list" id="st-o"></div></div>
         <div class="tcrd" style="padding:16px"><div style="font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:12px">Група крові</div><div class="bar-list" id="st-b"></div></div>
       </div>
     </div>
@@ -365,125 +365,125 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
     <!-- ENTRY PANEL -->
     <div id="panel-dilo" class="panel">
       <div class="ptabs">
-        <div class="ptab" onclick="gosub('dilo','dilo-szc')">🔍 СЗЧ</div>
-        <div class="ptab" onclick="gosub('dilo','dilo-pers')">🔍 Особовий склад</div>
-        <div class="ptab active" onclick="gosub('dilo','rap-vlk')">📋 Рапорт на ВЛК</div>
-        <div class="ptab" onclick="gosub('dilo','rap-vidp')">🏖 Рапорт на відпустку</div>
+        <div class="ptab" onclick="gosub('dilo','dilo-szc')">🔍 Відсутність</div>
+        <div class="ptab" onclick="gosub('dilo','dilo-pers')">🔍 Персонал</div>
+        <div class="ptab active" onclick="gosub('dilo','rap-vlk')">📋 Заява на медкомісію</div>
+        <div class="ptab" onclick="gosub('dilo','rap-vidp')">🏖 Заява на відпустку</div>
         <div class="ptab" onclick="gosub('dilo','rap-mat')">💰 Матеріальна допомога</div>
-        <div class="ptab" onclick="gosub('dilo','rap-free')">📄 Довільний рапорт</div>
+        <div class="ptab" onclick="gosub('dilo','rap-free')">📄 Заява довільного змісту</div>
         <div class="ptab" onclick="gosub('dilo','rap-dovidka')">🗒 Довідка</div>
         <div class="ptab" onclick="gosub('dilo','rap-nakaz')">⚖ Наказ</div>
         <div class="ptab" onclick="gosub('dilo','med-char')">📋 Мед. характ.</div>
-        <div class="ptab" onclick="gosub('dilo','naprvlk-form')">🏥 Направл. ВЛК</div>
+        <div class="ptab" onclick="gosub('dilo','naprvlk-form')">🏥 Направл. медкомісія</div>
       </div>
 
-      <!-- Пошук СЗЧ -->
+      <!-- Пошук по відсутності -->
       <div id="dilo-dilo-szc" class="sub">
-        <div class="slabel">Пошук по журналу СЗЧ</div>
+        <div class="slabel">Пошук по журналу відсутності</div>
         <div class="filters">
           <input class="fi" id="dszc-pib"  placeholder="П.І.Б..." oninput="db300(loadDiloSzc)()" style="min-width:220px">
-          <input class="fi" id="dszc-unit" placeholder="В/Ч СЗЧ..." oninput="db300(loadDiloSzc)()" style="min-width:120px">
-          <input class="fi" id="dszc-obl"  placeholder="Область призову..." oninput="db300(loadDiloSzc)()" style="min-width:150px">
-          <input class="fi" id="dszc-from" type="date" onchange="loadDiloSzc()" title="Дата СЗЧ від">
-          <input class="fi" id="dszc-to"   type="date" onchange="loadDiloSzc()" title="Дата СЗЧ до">
+          <input class="fi" id="dszc-unit" placeholder="Орг. відсутності..." oninput="db300(loadDiloSzc)()" style="min-width:120px">
+          <input class="fi" id="dszc-obl"  placeholder="Регіон зарахування..." oninput="db300(loadDiloSzc)()" style="min-width:150px">
+          <input class="fi" id="dszc-from" type="date" onchange="loadDiloSzc()" title="Дата Відсутність від">
+          <input class="fi" id="dszc-to"   type="date" onchange="loadDiloSzc()" title="Дата Відсутність до">
         </div>
         <div id="dszc-stats" style="padding:5px 0 3px;font-size:11px;color:var(--text3)"></div>
         <div class="tcrd"><table class="gt"><thead><tr>
-          <th>ПІБ</th><th>Звання</th><th>Дата н.</th><th>В/Ч</th>
-          <th>Дата СЗЧ</th><th>Область</th><th>Телефон</th><th>Стан</th>
+          <th>ПІБ</th><th>Ранг</th><th>Дата н.</th><th>Організація</th>
+          <th>Дата Відсутність</th><th>Область</th><th>Телефон</th><th>Стан</th>
           <th style="min-width:200px">Дії</th>
         </tr></thead><tbody id="dszc-body"></tbody></table>
         <div class="pag" id="dszc-pag"></div></div>
       </div>
 
-      <!-- Пошук Особовий склад -->
+      <!-- Пошук Персонал -->
       <div id="dilo-dilo-pers" class="sub">
         <div class="slabel">Пошук по особовому складу</div>
         <div class="filters">
           <input class="fi" id="dpers-pib" placeholder="П.І.Б..." oninput="db300(loadDiloPers)()" style="min-width:220px">
           <input class="fi" id="dpers-sub" placeholder="Підрозділ..." oninput="db300(loadDiloPers)()" style="min-width:140px">
           <select class="fs" id="dpers-fg" onchange="loadDiloPers()">
-            <option value="">Весь склад</option>
-            <option value="ОФ">Офіцери</option>
-            <option value="Серж">Сержанти</option>
-            <option value="Солд">Солдати</option>
+            <option value="">Весь персонал</option>
+            <option value="ОФ">Керівний склад</option>
+            <option value="Серж">Супервайзери</option>
+            <option value="Солд">Спеціалісти</option>
           </select>
           <select class="fs" id="dpers-st" onchange="loadDiloPers()">
             <option value="">Всі статуси</option>
             <option value="0">Активний</option>
             <option value="Лікування">Лікування</option>
             <option value="Відрядження">Відрядження</option>
-            <option value="СЗЧ/Арешт">СЗЧ/Арешт</option>
+            <option value="Відсутність">Відсутність</option>
             <option value="виключений">Виключений</option>
           </select>
         </div>
         <div id="dpers-stats" style="padding:5px 0 3px;font-size:11px;color:var(--text3)"></div>
         <div class="tcrd"><table class="gt"><thead><tr>
-          <th>ПІБ</th><th>Звання</th><th>Підрозділ</th><th>Статус</th>
+          <th>ПІБ</th><th>Ранг</th><th>Підрозділ</th><th>Статус</th>
           <th>Телефон</th><th>Дата н.</th>
-          <th style="min-width:220px">Рапорти / Документи</th>
+          <th style="min-width:220px">Заяваи / Документи</th>
         </tr></thead><tbody id="dpers-body"></tbody></table>
         <div class="pag" id="dpers-pag"></div></div>
       </div>
 
-      <!-- Рапорт на ВЛК -->
+      <!-- Заява на медкомісію -->
       <div id="dilo-rap-vlk" class="sub active">
-        <div class="slabel">Рапорт на ВЛК</div>
+        <div class="slabel">Заява на медкомісію</div>
         <div id="dilo-vlk-person-block" style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:14px;display:flex;align-items:center;gap:12px">
           <div style="flex:1">
-            <input class="fi" id="dilo-vlk-search" placeholder="Знайти військовослужбовця... (ПІБ)" oninput="diloSearch('vlk')" style="min-width:280px">
+            <input class="fi" id="dilo-vlk-search" placeholder="Знайти співробітника... (ПІБ)" oninput="diloSearch('vlk')" style="min-width:280px">
             <div id="dilo-vlk-results" style="display:none;position:absolute;z-index:100;background:var(--bg2);border:1px solid var(--border);border-radius:8px;max-height:200px;overflow-y:auto;min-width:320px;box-shadow:0 8px 24px rgba(0,0,0,.3)"></div>
           </div>
           <div id="dilo-vlk-badge" style="font-size:12px;color:var(--text3)">Оберіть особу або заповніть вручну</div>
         </div>
         <div id="dilo-vlk-form" class="dilo-form"></div>
         <div style="display:flex;gap:10px;margin-top:16px">
-          <button onclick="diloGenDoc('vlk')" style="background:var(--blue);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">📄 Сформувати рапорт</button>
+          <button onclick="diloGenDoc('vlk')" style="background:var(--blue);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">📄 Сформувати заяву</button>
           <button onclick="diloClear('vlk')" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13px">✕ Очистити</button>
         </div>
       </div>
 
-      <!-- Рапорт на відпустку -->
+      <!-- Заява на відпустку -->
       <div id="dilo-rap-vidp" class="sub">
-        <div class="slabel">Рапорт на відпустку</div>
+        <div class="slabel">Заява на відпустку</div>
         <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:14px;display:flex;align-items:center;gap:12px">
-          <input class="fi" id="dilo-vidp-search" placeholder="Знайти військовослужбовця..." oninput="diloSearch('vidp')" style="min-width:280px">
+          <input class="fi" id="dilo-vidp-search" placeholder="Знайти співробітника..." oninput="diloSearch('vidp')" style="min-width:280px">
           <div id="dilo-vidp-results" style="display:none;position:absolute;z-index:100;background:var(--bg2);border:1px solid var(--border);border-radius:8px;max-height:200px;overflow-y:auto;min-width:320px;box-shadow:0 8px 24px rgba(0,0,0,.3)"></div>
           <div id="dilo-vidp-badge" style="font-size:12px;color:var(--text3)">Оберіть особу або заповніть вручну</div>
         </div>
         <div id="dilo-vidp-form" class="dilo-form"></div>
         <div style="display:flex;gap:10px;margin-top:16px">
-          <button onclick="diloGenDoc('vidp')" style="background:var(--blue);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">📄 Сформувати рапорт</button>
+          <button onclick="diloGenDoc('vidp')" style="background:var(--blue);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">📄 Сформувати заяву</button>
           <button onclick="diloClear('vidp')" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13px">✕ Очистити</button>
         </div>
       </div>
 
       <!-- Матеріальна допомога -->
       <div id="dilo-rap-mat" class="sub">
-        <div class="slabel">Рапорт на матеріальну допомогу</div>
+        <div class="slabel">Заява на матеріальну допомогу</div>
         <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:14px;display:flex;align-items:center;gap:12px">
-          <input class="fi" id="dilo-mat-search" placeholder="Знайти військовослужбовця..." oninput="diloSearch('mat')" style="min-width:280px">
+          <input class="fi" id="dilo-mat-search" placeholder="Знайти співробітника..." oninput="diloSearch('mat')" style="min-width:280px">
           <div id="dilo-mat-results" style="display:none;position:absolute;z-index:100;background:var(--bg2);border:1px solid var(--border);border-radius:8px;max-height:200px;overflow-y:auto;min-width:320px;box-shadow:0 8px 24px rgba(0,0,0,.3)"></div>
           <div id="dilo-mat-badge" style="font-size:12px;color:var(--text3)">Оберіть особу або заповніть вручну</div>
         </div>
         <div id="dilo-mat-form" class="dilo-form"></div>
         <div style="display:flex;gap:10px;margin-top:16px">
-          <button onclick="diloGenDoc('mat')" style="background:var(--blue);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">📄 Сформувати рапорт</button>
+          <button onclick="diloGenDoc('mat')" style="background:var(--blue);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">📄 Сформувати заяву</button>
           <button onclick="diloClear('mat')" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13px">✕ Очистити</button>
         </div>
       </div>
 
-      <!-- Довільний рапорт -->
+      <!-- Заява довільного змісту -->
       <div id="dilo-rap-free" class="sub">
-        <div class="slabel">Рапорт довільного змісту</div>
+        <div class="slabel">Заява довільного змісту</div>
         <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:14px;display:flex;align-items:center;gap:12px">
-          <input class="fi" id="dilo-free-search" placeholder="Знайти військовослужбовця..." oninput="diloSearch('free')" style="min-width:280px">
+          <input class="fi" id="dilo-free-search" placeholder="Знайти співробітника..." oninput="diloSearch('free')" style="min-width:280px">
           <div id="dilo-free-results" style="display:none;position:absolute;z-index:100;background:var(--bg2);border:1px solid var(--border);border-radius:8px;max-height:200px;overflow-y:auto;min-width:320px;box-shadow:0 8px 24px rgba(0,0,0,.3)"></div>
           <div id="dilo-free-badge" style="font-size:12px;color:var(--text3)">Оберіть особу або заповніть вручну</div>
         </div>
         <div id="dilo-free-form" class="dilo-form"></div>
         <div style="display:flex;gap:10px;margin-top:16px">
-          <button onclick="diloGenDoc('free')" style="background:var(--blue);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">📄 Сформувати рапорт</button>
+          <button onclick="diloGenDoc('free')" style="background:var(--blue);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">📄 Сформувати заяву</button>
           <button onclick="diloClear('free')" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);padding:10px 18px;border-radius:8px;cursor:pointer;font-size:13px">✕ Очистити</button>
         </div>
       </div>
@@ -492,7 +492,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
       <div id="dilo-rap-dovidka" class="sub">
         <div class="slabel">Довідка про проходження служби</div>
         <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:14px;display:flex;align-items:center;gap:12px">
-          <input class="fi" id="dilo-dovidka-search" placeholder="Знайти військовослужбовця..." oninput="diloSearch('dovidka')" style="min-width:280px">
+          <input class="fi" id="dilo-dovidka-search" placeholder="Знайти співробітника..." oninput="diloSearch('dovidka')" style="min-width:280px">
           <div id="dilo-dovidka-results" style="display:none;position:absolute;z-index:100;background:var(--bg2);border:1px solid var(--border);border-radius:8px;max-height:200px;overflow-y:auto;min-width:320px;box-shadow:0 8px 24px rgba(0,0,0,.3)"></div>
           <div id="dilo-dovidka-badge" style="font-size:12px;color:var(--text3)">Оберіть особу або заповніть вручну</div>
         </div>
@@ -505,7 +505,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
 
       <!-- Наказ -->
       <div id="dilo-rap-nakaz" class="sub">
-        <div class="slabel">Наказ по особовому складу</div>
+        <div class="slabel">Наказ по персоналу</div>
         <div id="dilo-nakaz-form" class="dilo-form"></div>
         <div style="display:flex;gap:10px;margin-top:16px">
           <button onclick="diloGenDoc('nakaz')" style="background:var(--blue);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">📄 Сформувати наказ</button>
@@ -516,21 +516,21 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
 
     <div id="panel-entry" class="panel">
       <div class="ptabs">
-        <div class="ptab active" onclick="gosub('entry','new-person')">👤 Новий військовослужбовець</div>
-        <div class="ptab" onclick="gosub('entry','new-szc')">⚠️ Запис СЗЧ</div>
+        <div class="ptab active" onclick="gosub('entry','new-person')">👤 Новий співробітник</div>
+        <div class="ptab" onclick="gosub('entry','new-szc')">⚠️ Запис про відсутність</div>
       </div>
 
-      <!-- Новий в/с -->
+      <!-- Новий службу -->
       <div id="entry-new-person" class="sub active">
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;max-width:900px">
           <div style="grid-column:1/-1;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);padding-bottom:4px;border-bottom:1px solid var(--line);margin-bottom:2px">Основні дані</div>
           <div><div class="dfield-lbl-f">П.І.Б. *</div><input class="fi" id="np-pib" style="width:100%" placeholder="ПРІЗВИЩЕ Ім'я По-батькові"></div>
-          <div><div class="dfield-lbl-f">Військове звання *</div>
+          <div><div class="dfield-lbl-f">Ранг *</div>
             <select class="fs" id="np-rank" style="width:100%" onchange="npAutoGroup()">
               <option value="">— оберіть —</option>
-              <optgroup label="Офіцери"><option>молодший лейтенант</option><option>лейтенант</option><option>старший лейтенант</option><option>капітан</option><option>майор</option><option>підполковник</option><option>полковник</option></optgroup>
-              <optgroup label="Сержанти"><option>молодший сержант</option><option>сержант</option><option>старший сержант</option><option>штаб-сержант</option><option>майстер-сержант</option><option>старшина</option></optgroup>
-              <optgroup label="Солдати"><option>солдат</option><option>старший солдат</option></optgroup>
+              <optgroup label="Керівний склад"><option>молодший спеціаліст-керівник</option><option>керівник підрозділу</option><option>старший керівник підрозділу</option><option>начальник підрозділу</option><option>заступник керівника</option><option>керівник департаменту</option><option>директор департаменту</option></optgroup>
+              <optgroup label="Супервайзери"><option>молодший керівник групи</option><option>керівник групи</option><option>старший керівник групи</option><option>відповідальний спеціаліст</option><option>провідний спеціаліст</option><option>бригадир</option></optgroup>
+              <optgroup label="Спеціалісти"><option>спеціаліст</option><option>старший спеціаліст</option></optgroup>
             </select>
           </div>
           <div><div class="dfield-lbl-f">Категорія</div>
@@ -538,19 +538,19 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
           </div>
           <div><div class="dfield-lbl-f">Дата народження</div><input class="fi" type="date" id="np-dob" style="width:100%"></div>
           <div><div class="dfield-lbl-f">ІПН</div><input class="fi" id="np-ipn" style="width:100%" placeholder="1234567890" maxlength="10"></div>
-          <div><div class="dfield-lbl-f">Серія та № ВКО</div><input class="fi" id="np-ticket" style="width:100%" placeholder="МА123456"></div>
+          <div><div class="dfield-lbl-f">Серія та № посвідчення</div><input class="fi" id="np-ticket" style="width:100%" placeholder="МА123456"></div>
           <div><div class="dfield-lbl-f">Телефон</div><input class="fi" id="np-phone" style="width:100%" placeholder="0501234567"></div>
-          <div><div class="dfield-lbl-f">Підрозділ</div><input class="fi" id="np-sub" style="width:100%" placeholder="1 рота"></div>
+          <div><div class="dfield-lbl-f">Підрозділ</div><input class="fi" id="np-sub" style="width:100%" placeholder="1 підрозділ"></div>
           <div><div class="dfield-lbl-f">Посада (ВОС)</div><input class="fi" id="np-pos" style="width:100%" placeholder="кулеметник"></div>
 
           <div style="grid-column:1/-1;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);padding-bottom:4px;border-bottom:1px solid var(--line);margin-top:6px;margin-bottom:2px">Призов та служба</div>
           <div><div class="dfield-lbl-f">Вид служби</div>
-            <select class="fs" id="np-svc" style="width:100%"><option value="мобілізація">Мобілізація</option><option value="контракт">Контракт</option></select>
+            <select class="fs" id="np-svc" style="width:100%"><option value="переведення">Переведення</option><option value="контракт">Контракт</option></select>
           </div>
           <div><div class="dfield-lbl-f">Дата зарахування</div><input class="fi" type="date" id="np-enroll" style="width:100%"></div>
-          <div><div class="dfield-lbl-f">Дата призову</div><input class="fi" type="date" id="np-consc-date" style="width:100%"></div>
-          <div><div class="dfield-lbl-f">ТЦК призову</div><input class="fi" id="np-tck" style="width:100%" placeholder="Вінницький РТЦК"></div>
-          <div><div class="dfield-lbl-f">Область призову</div><input class="fi" id="np-oblast" style="width:100%" placeholder="Вінницька"></div>
+          <div><div class="dfield-lbl-f">Дата зарахування</div><input class="fi" type="date" id="np-consc-date" style="width:100%"></div>
+          <div><div class="dfield-lbl-f">Кадровий підрозділ</div><input class="fi" id="np-tck" style="width:100%" placeholder="Вінницький Ркадровий підрозділ"></div>
+          <div><div class="dfield-lbl-f">Регіон зарахування</div><input class="fi" id="np-oblast" style="width:100%" placeholder="Вінницька"></div>
           <div><div class="dfield-lbl-f">Статус</div>
             <select class="fs" id="np-status" style="width:100%"><option value="0">Активний (з позначкою)</option>
 <option value="__active__">Активний + без статусу</option><option value="Лікування">Лікування</option><option value="Відрядження">Відрядження</option></select>
@@ -569,11 +569,11 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
           <div><div class="dfield-lbl-f">Освіта</div>
             <select class="fs" id="np-edu" style="width:100%"><option value="">—</option><option>вища</option><option>неповна вища</option><option>середня спеціальна</option><option>повна середня</option></select>
           </div>
-          <div><div class="dfield-lbl-f">Учасник АТО/ООС</div>
+          <div><div class="dfield-lbl-f">Учасник спецоперацій</div>
             <select class="fs" id="np-ato" style="width:100%"><option value="0">Ні</option><option value="1">Так</option></select>
           </div>
-          <div><div class="dfield-lbl-f">Номер УБД</div><input class="fi" id="np-ubd" style="width:100%" placeholder="УБД123456"></div>
-          <div><div class="dfield-lbl-f">Поранення</div>
+          <div><div class="dfield-lbl-f">Номер посвідчення</div><input class="fi" id="np-ubd" style="width:100%" placeholder="посвідчення учасника123456"></div>
+          <div><div class="dfield-lbl-f">Травма</div>
             <select class="fs" id="np-wound" style="width:100%"><option value="0">Немає</option><option value="1">Є</option></select>
           </div>
           <div><div class="dfield-lbl-f">ПІБ родича</div><input class="fi" id="np-relative" style="width:100%" placeholder="ПРІЗВИЩЕ Ім'я По-батькові"></div>
@@ -582,12 +582,12 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
         <div id="np-err" style="display:none;margin-top:12px;background:var(--red-d);border:1px solid rgba(240,80,80,.25);border-radius:7px;padding:8px 12px;font-size:11px;color:var(--red);max-width:900px"></div>
         <div id="np-ok" style="display:none;margin-top:12px;background:var(--green-d);border:1px solid rgba(62,201,122,.25);border-radius:7px;padding:8px 12px;font-size:11px;color:var(--green);max-width:900px"></div>
         <div style="margin-top:16px;display:flex;gap:8px">
-          <button class="btn-find" onclick="submitNewPerson()">✚ Додати військовослужбовця</button>
+          <button class="btn-find" onclick="submitNewPerson()">✚ Додати співробітника</button>
           <button class="bsm" onclick="clearNewPerson()">Очистити</button>
         </div>
       </div>
 
-      <!-- Новий СЗЧ -->
+      <!-- Новий Відсутність -->
       <div id="entry-new-szc" class="sub">
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;max-width:900px">
           <div style="grid-column:1/-1;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);padding-bottom:4px;border-bottom:1px solid var(--line);margin-bottom:2px">Пошук в базі (необов'язково)</div>
@@ -598,10 +598,10 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
           <div style="grid-column:1/-1;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);padding-bottom:4px;border-bottom:1px solid var(--line);margin-top:6px;margin-bottom:2px">Дані запису</div>
           <div><div class="dfield-lbl-f"># Порядковий номер</div><input class="fi" id="szc-no" style="width:100%" placeholder="авто"></div>
           <div><div class="dfield-lbl-f">П.І.Б. *</div><input class="fi" id="szc-pib" style="width:100%" placeholder="ПРІЗВИЩЕ Ім'я По-батькові"></div>
-          <div><div class="dfield-lbl-f">Звання</div><input class="fi" id="szc-rank" style="width:100%" placeholder="солдат"></div>
-          <div><div class="dfield-lbl-f">Дата СЗЧ *</div><input class="fi" type="date" id="szc-date" style="width:100%"></div>
-          <div><div class="dfield-lbl-f">Область призову</div><input class="fi" id="szc-oblast" style="width:100%" placeholder="Вінницька"></div>
-          <div><div class="dfield-lbl-f">Звідки прийшов</div><input class="fi" id="szc-source" style="width:100%" placeholder="в/ч А0000"></div>
+          <div><div class="dfield-lbl-f">Ранг</div><input class="fi" id="szc-rank" style="width:100%" placeholder="спеціаліст"></div>
+          <div><div class="dfield-lbl-f">Дата Відсутність *</div><input class="fi" type="date" id="szc-date" style="width:100%"></div>
+          <div><div class="dfield-lbl-f">Регіон зарахування</div><input class="fi" id="szc-oblast" style="width:100%" placeholder="Вінницька"></div>
+          <div><div class="dfield-lbl-f">Звідки прийшов</div><input class="fi" id="szc-source" style="width:100%" placeholder="організації N"></div>
           <div><div class="dfield-lbl-f">Телефон</div><input class="fi" id="szc-phone" style="width:100%" placeholder="0501234567"></div>
           <div style="grid-column:1/3"><div class="dfield-lbl-f">Стан / примітка</div><input class="fi" id="szc-state" style="width:100%" placeholder="перебуває в розшуку..."></div>
           <div><div class="dfield-lbl-f">Дата обліку</div><input class="fi" type="date" id="szc-enroll" style="width:100%"></div>
@@ -609,7 +609,7 @@ table.gt tbody tr{border-bottom:1px solid var(--line);cursor:pointer;transition:
         <div id="szc-err" style="display:none;margin-top:12px;background:var(--red-d);border:1px solid rgba(240,80,80,.25);border-radius:7px;padding:8px 12px;font-size:11px;color:var(--red);max-width:900px"></div>
         <div id="szc-ok" style="display:none;margin-top:12px;background:var(--green-d);border:1px solid rgba(62,201,122,.25);border-radius:7px;padding:8px 12px;font-size:11px;color:var(--green);max-width:900px"></div>
         <div style="margin-top:16px;display:flex;gap:8px">
-          <button class="btn-find" onclick="submitSzc()">✚ Додати до журналу СЗЧ</button>
+          <button class="btn-find" onclick="submitSzc()">✚ Додати до журналу відсутності</button>
           <button class="bsm" onclick="clearSzc()">Очистити</button>
         </div>
       </div>
@@ -904,18 +904,18 @@ function doSearch(){
   document.getElementById('rcnt').textContent=total;
   let html='';
   if(persRows.length){
-    html+='<div class="rs-section"><div class="rs-label"><span class="rs-badge rs-badge-blue">👤 Особовий склад</span><span class="rs-cnt">'+persRows.length+'</span></div>'
-    +'<table class="rtable"><thead><tr><th>П.І.Б.</th><th>Телефон</th><th>Звання</th><th>Дата нар.</th><th>Розміщення</th><th>Підрозділ</th><th>Прибув</th></tr></thead><tbody>'
+    html+='<div class="rs-section"><div class="rs-label"><span class="rs-badge rs-badge-blue">👤 Персонал</span><span class="rs-cnt">'+persRows.length+'</span></div>'
+    +'<table class="rtable"><thead><tr><th>П.І.Б.</th><th>Телефон</th><th>Ранг</th><th>Дата нар.</th><th>Розміщення</th><th>Підрозділ</th><th>Прибув</th></tr></thead><tbody>'
     +persRows.map(r=>'<tr onclick="selPerson('+r.id+',this)" '+(r.id===selId?'class="sel"':'')+'><td style="font-weight:500">'+hi(r.pib,v)+'</td><td style="color:var(--blue)">'+hi(r.phone,v)+'</td><td style="color:var(--green)">'+(r.rank_text||'—')+'</td><td style="color:var(--text2)">'+(r.date_of_birth||'—')+'</td><td style="color:var(--amber)">'+(r.room||'—')+'</td><td style="color:var(--text2)">'+(r.subdivision||'—')+'</td><td style="'+(r.enroll_date?'color:var(--green)':'color:var(--text3)')+'">'+(r.enroll_date||'—')+'</td></tr>').join('')
     +'</tbody></table></div>';}
   if(szcRows.length){
-    html+='<div class="rs-section"><div class="rs-label"><span class="rs-badge rs-badge-amber">⚠️ Журнал СЗЧ</span><span class="rs-cnt">'+szcRows.length+'</span></div>'
-    +'<table class="rtable"><thead><tr><th>П.І.Б.</th><th>Звання</th><th>Дата СЗЧ</th><th>Область</th><th>Звідки</th><th>Телефон</th><th>Стан</th></tr></thead><tbody>'
+    html+='<div class="rs-section"><div class="rs-label"><span class="rs-badge rs-badge-amber">⚠️ Журнал відсутності</span><span class="rs-cnt">'+szcRows.length+'</span></div>'
+    +'<table class="rtable"><thead><tr><th>П.І.Б.</th><th>Ранг</th><th>Дата Відсутність</th><th>Область</th><th>Звідки</th><th>Телефон</th><th>Стан</th></tr></thead><tbody>'
     +szcRows.map(r=>'<tr style="cursor:pointer" onclick="gomain(\'szc\');gosub(\'szc\',\'szcj\');"><td style="font-weight:500">'+hi(r.pib_raw,v)+'</td><td style="color:var(--green)">'+(r.rank_raw||'—')+'</td><td style="color:var(--text2)">'+(r.szc_date||'—')+'</td><td>'+hi(r.conscription_oblast,v)+'</td><td style="color:var(--text2);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(r.source_unit||'—')+'</td><td style="color:var(--blue)">'+hi(r.phone,v)+'</td><td>'+(r.state?'<span style="background:var(--amber-d);color:var(--amber);padding:2px 6px;border-radius:4px;font-size:10px">'+r.state.substring(0,25)+'</span>':'—')+'</td></tr>').join('')
     +'</tbody></table></div>';}
   if(trRows.length){
     html+='<div class="rs-section"><div class="rs-label"><span class="rs-badge rs-badge-teal">🔄 Транзит</span><span class="rs-cnt">'+trRows.length+'</span></div>'
-    +'<table class="rtable"><thead><tr><th>П.І.Б.</th><th>Звання</th><th>Командування</th><th>БРЕЗ</th><th>Статус</th><th>Телефон</th></tr></thead><tbody>'
+    +'<table class="rtable"><thead><tr><th>П.І.Б.</th><th>Ранг</th><th>Керівництво</th><th>БРЕЗ</th><th>Статус</th><th>Телефон</th></tr></thead><tbody>'
     +trRows.map(r=>'<tr style="cursor:pointer" onclick="gomain(\'szc\');gosub(\'szc\',\'transit\');"><td style="font-weight:500">'+hi(r.pib_raw,v)+'</td><td style="color:var(--green)">'+(r.rank_raw||'—')+'</td><td style="color:var(--text2)">'+(r.command||'—')+'</td><td style="color:var(--teal)">'+(r.target_brez||'—')+'</td><td>'+(r.szc_status?'<span style="background:var(--amber-d);color:var(--amber);padding:2px 6px;border-radius:4px;font-size:10px">'+r.szc_status+'</span>':'—')+'</td><td style="color:var(--blue)">'+hi(r.phone,v)+'</td></tr>').join('')
     +'</tbody></table></div>';}
   if(!total)html='<div style="padding:32px;text-align:center;color:var(--text3)">Нічого не знайдено</div>';
@@ -923,25 +923,25 @@ function doSearch(){
   if(selId)showDC(selId);
 }
 function selPerson(id,tr){selId=id;document.querySelectorAll('.rtable tbody tr').forEach(t=>t.classList.remove('sel'));tr.classList.add('sel');showDC(id);}
-function showDC(id){const p=q('SELECT * FROM personnel WHERE id=?',[id])[0];if(!p)return;const hr=q('SELECT * FROM health_records WHERE personnel_id=? ORDER BY id DESC LIMIT 1',[id])[0];const lv=q('SELECT year,days_used FROM leave_records WHERE personnel_id=? ORDER BY year DESC',[id]);const rc=p.filter_group==='ОФ'?{bg:'rgba(59,140,255,.12)',c:'var(--blue)',b:'rgba(59,140,255,.25)'}:p.filter_group==='Серж'?{bg:'rgba(245,166,35,.12)',c:'var(--amber)',b:'rgba(245,166,35,.25)'}:{bg:'rgba(62,201,122,.12)',c:'var(--green)',b:'rgba(62,201,122,.25)'};const flds=[{l:'П.І.Б.',v:p.pib||'—',c:''},{l:'Номер телефону',v:p.phone||'—',c:'color:var(--blue)'},{l:'Військове звання',v:p.rank_text||'—',c:'color:var(--green)'},{l:'Дата народження',v:p.date_of_birth||'—',c:''},{l:'Дата зарахування у В/Ч А7020',v:p.enroll_date||'Невідомо',c:p.enroll_date?'':'color:var(--text3)'},{l:'Розміщення о/с',v:p.note||'—',c:p.note?'color:var(--amber)':'color:var(--text3)'}];if(p.conscription_tck||p.conscription_oblast)flds.push({l:'ТЦК призову',v:(p.conscription_tck||'—')+' · '+(p.conscription_oblast||'—'),c:'color:var(--text2)'});if(p.blood_type)flds.push({l:'Група крові',v:p.blood_type,c:'color:var(--amber)'});if(p.subdivision)flds.push({l:'Підрозділ',v:p.subdivision+(p.staff_type?' / '+p.staff_type:''),c:''});if(p.vos_position)flds.push({l:'Посада (ВОС)',v:p.vos_position,c:'color:var(--text2)'});if(p.vlk_decision_summary||hr?.vlk_decision)flds.push({l:'Рішення ВЛК',v:p.vlk_decision_summary||hr?.vlk_decision||'—',c:'color:var(--text2)'});if(lv.length)flds.push({l:'Відпустки',v:lv.map(l=>`${l.year}: ${l.days_used||'?'} дн.`).join(' · '),c:'color:var(--text2)'});const dc=document.getElementById('dcard');dc.style.display='block';dc.innerHTML=`<div class="dcard"><div class="dcard-hdr"><div><div class="dcard-name">${p.pib||'—'}</div>${p.subdivision?`<div class="dcard-sub">${p.subdivision}</div>`:''}</div><div class="dcard-right">${p.ato_participant?`<span class="rank-pill" style="background:var(--teal-d);color:var(--teal);border:1px solid rgba(45,207,184,.2)">АТО/ООС</span>`:''}${p.has_wound?`<span class="rank-pill" style="background:var(--red-d);color:var(--red);border:1px solid rgba(240,80,80,.2)">Поранений</span>`:''}${p.rank_text?`<span class="rank-pill" style="background:${rc.bg};color:${rc.c};border:1px solid ${rc.b}">${p.rank_text}</span>`:''}<button class="dc-x" onclick="closeD()">×</button></div></div><div class="dcard-fields">${flds.map(f=>`<div class="dfield"><div class="dfield-lbl">${f.l}</div><div class="dfield-val" style="${f.c}">${f.v}</div></div>`).join('')}</div><div class="dcard-docs">
+function showDC(id){const p=q('SELECT * FROM personnel WHERE id=?',[id])[0];if(!p)return;const hr=q('SELECT * FROM health_records WHERE personnel_id=? ORDER BY id DESC LIMIT 1',[id])[0];const lv=q('SELECT year,days_used FROM leave_records WHERE personnel_id=? ORDER BY year DESC',[id]);const rc=p.filter_group==='ОФ'?{bg:'rgba(59,140,255,.12)',c:'var(--blue)',b:'rgba(59,140,255,.25)'}:p.filter_group==='Серж'?{bg:'rgba(245,166,35,.12)',c:'var(--amber)',b:'rgba(245,166,35,.25)'}:{bg:'rgba(62,201,122,.12)',c:'var(--green)',b:'rgba(62,201,122,.25)'};const flds=[{l:'П.І.Б.',v:p.pib||'—',c:''},{l:'Номер телефону',v:p.phone||'—',c:'color:var(--blue)'},{l:'Ранг',v:p.rank_text||'—',c:'color:var(--green)'},{l:'Дата народження',v:p.date_of_birth||'—',c:''},{l:'Дата зарахування у Організація',v:p.enroll_date||'Невідомо',c:p.enroll_date?'':'color:var(--text3)'},{l:'Розміщення о/с',v:p.note||'—',c:p.note?'color:var(--amber)':'color:var(--text3)'}];if(p.conscription_tck||p.conscription_oblast)flds.push({l:'Кадровий підрозділ',v:(p.conscription_tck||'—')+' · '+(p.conscription_oblast||'—'),c:'color:var(--text2)'});if(p.blood_type)flds.push({l:'Група крові',v:p.blood_type,c:'color:var(--amber)'});if(p.subdivision)flds.push({l:'Підрозділ',v:p.subdivision+(p.staff_type?' / '+p.staff_type:''),c:''});if(p.vos_position)flds.push({l:'Посада (ВОС)',v:p.vos_position,c:'color:var(--text2)'});if(p.vlk_decision_summary||hr?.vlk_decision)flds.push({l:'Рішення медкомісії',v:p.vlk_decision_summary||hr?.vlk_decision||'—',c:'color:var(--text2)'});if(lv.length)flds.push({l:'Відпустки',v:lv.map(l=>`${l.year}: ${l.days_used||'?'} дн.`).join(' · '),c:'color:var(--text2)'});const dc=document.getElementById('dcard');dc.style.display='block';dc.innerHTML=`<div class="dcard"><div class="dcard-hdr"><div><div class="dcard-name">${p.pib||'—'}</div>${p.subdivision?`<div class="dcard-sub">${p.subdivision}</div>`:''}</div><div class="dcard-right">${p.ato_participant?`<span class="rank-pill" style="background:var(--teal-d);color:var(--teal);border:1px solid rgba(45,207,184,.2)">спецоперацій</span>`:''}${p.has_wound?`<span class="rank-pill" style="background:var(--red-d);color:var(--red);border:1px solid rgba(240,80,80,.2)">Травмований</span>`:''}${p.rank_text?`<span class="rank-pill" style="background:${rc.bg};color:${rc.c};border:1px solid ${rc.b}">${p.rank_text}</span>`:''}<button class="dc-x" onclick="closeD()">×</button></div></div><div class="dcard-fields">${flds.map(f=>`<div class="dfield"><div class="dfield-lbl">${f.l}</div><div class="dfield-val" style="${f.c}">${f.v}</div></div>`).join('')}</div><div class="dcard-docs">
           <div class="docs-lbl">Медичні документи</div>
           <div class="doc-btns">
-            <button class="dbtn dbtn-a" onclick="genDoc('naprvlk',${id})"><span>🏥</span> Напр. ВЛК</button>
+            <button class="dbtn dbtn-a" onclick="genDoc('naprvlk',${id})"><span>🏥</span> Напр. медкомісія</button>
             <button class="dbtn dbtn-g" onclick="genDoc('naprkonsult',${id})"><span>👨‍⚕️</span> Консультація</button>
             <button class="dbtn dbtn-r" onclick="genDoc('stac',${id})"><span>🛏</span> Стаціонар</button>
             <button class="dbtn dbtn-p" onclick="genDoc('medchar',${id})"><span>📋</span> Мед. хар-ка</button>
           </div>
-          <div class="docs-lbl" style="margin-top:10px">Рапорти та документи (Діловод)</div>
+          <div class="docs-lbl" style="margin-top:10px">Заяваи та документи (Діловод)</div>
           <div class="doc-btns">
-            <button class="dbtn" style="background:rgba(59,140,255,.1);color:var(--blue);outline:1px solid rgba(59,140,255,.2)" onclick="openDiloFor(${id},'vlk')"><span>📋</span> Рапорт на ВЛК</button>
-            <button class="dbtn" style="background:rgba(62,201,122,.1);color:var(--green);outline:1px solid rgba(62,201,122,.2)" onclick="openDiloFor(${id},'vidp')"><span>🏖</span> Рапорт на відпустку</button>
+            <button class="dbtn" style="background:rgba(59,140,255,.1);color:var(--blue);outline:1px solid rgba(59,140,255,.2)" onclick="openDiloFor(${id},'vlk')"><span>📋</span> Заява на медкомісію</button>
+            <button class="dbtn" style="background:rgba(62,201,122,.1);color:var(--green);outline:1px solid rgba(62,201,122,.2)" onclick="openDiloFor(${id},'vidp')"><span>🏖</span> Заява на відпустку</button>
             <button class="dbtn" style="background:rgba(245,166,35,.1);color:var(--amber);outline:1px solid rgba(245,166,35,.2)" onclick="openDiloFor(${id},'mat')"><span>💰</span> Матеріальна допомога</button>
-            <button class="dbtn" style="background:rgba(139,92,246,.1);color:#8b5cf6;outline:1px solid rgba(139,92,246,.2)" onclick="openDiloFor(${id},'free')"><span>📄</span> Довільний рапорт</button>
+            <button class="dbtn" style="background:rgba(139,92,246,.1);color:#8b5cf6;outline:1px solid rgba(139,92,246,.2)" onclick="openDiloFor(${id},'free')"><span>📄</span> Заява довільного змісту</button>
             <button class="dbtn" style="background:rgba(45,207,184,.1);color:var(--teal);outline:1px solid rgba(45,207,184,.2)" onclick="openDiloFor(${id},'dovidka')"><span>🗒</span> Довідка</button>
           </div>
         </div></div></div>`;dc.scrollIntoView({behavior:'smooth',block:'nearest'});}
 function closeD(){document.getElementById('dcard').style.display='none';document.querySelectorAll('.rtable tbody tr').forEach(t=>t.classList.remove('sel'));selId=null;}
-const TEMPLATES = {"rapport_vidpustka": {"name": "Рапорт на відпустку", "description": "Рапорт про надання щорічної відпустки", "fields": [{"id": "commander_rank", "label": "Звання командира (кому)", "type": "text", "placeholder": "полковнику"}, {"id": "commander_position", "label": "Посада командира (кому)", "type": "text", "placeholder": "командиру військової частини А0000"}, {"id": "commander_name", "label": "ПІБ командира (кому)", "type": "text", "placeholder": "Іваненку І.І."}, {"id": "author_rank", "label": "Своє звання", "type": "profile", "profile_key": "rank"}, {"id": "author_position", "label": "Своя посада", "type": "profile", "profile_key": "position"}, {"id": "author_name_full", "label": "ПІБ (повністю)", "type": "profile", "profile_key": "name_full"}, {"id": "author_name_short", "label": "ПІБ (скорочено)", "type": "profile", "profile_key": "name_short"}, {"id": "leave_type", "label": "Вид відпустки", "type": "dropdown", "options": ["щорічну основну", "додаткову", "за станом здоров'я", "соціальну"], "default": "щорічну основну"}, {"id": "leave_days", "label": "Кількість календарних днів", "type": "number", "default": "30"}, {"id": "leave_start", "label": "Дата початку відпустки", "type": "date"}, {"id": "leave_end", "label": "Дата закінчення відпустки", "type": "date"}, {"id": "leave_address", "label": "Адреса під час відпустки", "type": "text", "placeholder": "м. Київ, вул. ..."}, {"id": "unit_number", "label": "Номер частини", "type": "profile", "profile_key": "unit"}, {"id": "location", "label": "Місце складання", "type": "profile", "profile_key": "location"}, {"id": "doc_date", "label": "Дата рапорту", "type": "date", "auto": true}], "layout": "rapporт_standard"}, "rapport_materialna": {"name": "Рапорт на матеріальну допомогу", "description": "Рапорт про надання матеріальної допомоги", "fields": [{"id": "commander_rank", "label": "Звання командира (кому)", "type": "text", "placeholder": "полковнику"}, {"id": "commander_position", "label": "Посада командира (кому)", "type": "text", "placeholder": "командиру військової частини А0000"}, {"id": "commander_name", "label": "ПІБ командира (кому)", "type": "text", "placeholder": "Іваненку І.І."}, {"id": "author_rank", "label": "Своє звання", "type": "profile", "profile_key": "rank"}, {"id": "author_position", "label": "Своя посада", "type": "profile", "profile_key": "position"}, {"id": "author_name_full", "label": "ПІБ (повністю)", "type": "profile", "profile_key": "name_full"}, {"id": "author_name_short", "label": "ПІБ (скорочено)", "type": "profile", "profile_key": "name_short"}, {"id": "help_reason", "label": "Підстава для допомоги", "type": "dropdown", "options": ["у зв'язку зі скрутним матеріальним становищем", "у зв'язку з тяжкою хворобою", "у зв'язку зі смертю члена сім'ї", "у зв'язку з непередбаченими обставинами"], "default": "у зв'язку зі скрутним матеріальним становищем"}, {"id": "help_amount", "label": "Розмір допомоги (грн)", "type": "text", "placeholder": "5000"}, {"id": "unit_number", "label": "Номер частини", "type": "profile", "profile_key": "unit"}, {"id": "location", "label": "Місце складання", "type": "profile", "profile_key": "location"}, {"id": "doc_date", "label": "Дата рапорту", "type": "date", "auto": true}], "layout": "rapporт_standard"}, "rapport_vlk": {"name": "Рапорт на ВЛК", "description": "Рапорт про направлення на військово-лікарську комісію", "fields": [{"id": "sender_full_name_dative", "label": "ПІБ (давальний відмінок)", "type": "text", "placeholder": "КЕБІ Сергію Миколайовичу"}, {"id": "sender_dob", "label": "Дата народження", "type": "text", "placeholder": "11.10.1991"}, {"id": "sender_phone", "label": "Мобільний телефон", "type": "text", "placeholder": "0983343509"}, {"id": "procedure_type", "label": "Вид процедури", "type": "text", "placeholder": "проходження ВЛК", "default": "проходження ВЛК"}, {"id": "vlk_hospital", "label": "Назва закладу", "type": "textarea", "placeholder": "КНП «ВІННИЦЬКА ОБЛАСНА КЛІНІЧНА ПСИХОНЕВРОЛОГІЧНА ЛІКАРНЯ ім. акад. О.І. Ющенка Вінницької обласної ради»"}, {"id": "full_diagnosis", "label": "Діагноз", "type": "textarea", "placeholder": "F43.2 Розлад адаптації..."}, {"id": "medical_attachment", "label": "Додаток (назва документа)", "type": "text", "placeholder": "копія виписки з медичної картки стаціонарного хворого №3762"}, {"id": "sender_short_name", "label": "ПІБ (Ім'я ПРІЗВИЩЕ)", "type": "text", "placeholder": "Сергій КЕБА"}, {"id": "sender_surname_initials", "label": "ПІБ (ПРІЗВИЩЕ І.П.)", "type": "text", "placeholder": "КЕБИ С.М."}, {"id": "doc_date", "label": "Дата рапорту", "type": "date", "auto": true}, {"id": "plt_cmd_rank", "label": "Звання ком. взводу", "type": "text", "placeholder": "лейтенант"}, {"id": "plt_cmd_name", "label": "ПІБ ком. взводу (Ім'я ПРІЗВИЩЕ)", "type": "text", "placeholder": "Віктор БОНДАРЕНКО"}, {"id": "coy_cmd_rank", "label": "Звання ком. роти", "type": "text", "placeholder": "лейтенант"}, {"id": "coy_cmd_name", "label": "ПІБ ком. роти (Ім'я ПРІЗВИЩЕ)", "type": "text", "placeholder": "Ігор ЛЕГКИХ"}], "layout": "rapport_vlk"}, "rapporт_svoechasno": {"name": "Рапорт (довільна форма)", "description": "Рапорт довільного змісту", "fields": [{"id": "commander_rank", "label": "Звання командира (кому)", "type": "text", "placeholder": "полковнику"}, {"id": "commander_position", "label": "Посада командира (кому)", "type": "text", "placeholder": "командиру військової частини А0000"}, {"id": "commander_name", "label": "ПІБ командира (кому)", "type": "text", "placeholder": "Іваненку І.І."}, {"id": "author_rank", "label": "Своє звання", "type": "profile", "profile_key": "rank"}, {"id": "author_position", "label": "Своя посада", "type": "profile", "profile_key": "position"}, {"id": "author_name_full", "label": "ПІБ (повністю)", "type": "profile", "profile_key": "name_full"}, {"id": "author_name_short", "label": "ПІБ (скорочено)", "type": "profile", "profile_key": "name_short"}, {"id": "rapport_subject", "label": "Зміст рапорту", "type": "textarea", "placeholder": "Прошу Вас..."}, {"id": "unit_number", "label": "Номер частини", "type": "profile", "profile_key": "unit"}, {"id": "location", "label": "Місце складання", "type": "profile", "profile_key": "location"}, {"id": "doc_date", "label": "Дата рапорту", "type": "date", "auto": true}], "layout": "rapporт_standard"}, "dovidka_sluzhba": {"name": "Довідка про проходження служби", "description": "Довідка для пред'явлення за місцем вимоги", "fields": [{"id": "author_rank", "label": "Звання", "type": "profile", "profile_key": "rank"}, {"id": "author_position", "label": "Посада", "type": "profile", "profile_key": "position"}, {"id": "author_name_full", "label": "ПІБ (повністю)", "type": "profile", "profile_key": "name_full"}, {"id": "unit_number", "label": "Номер частини", "type": "profile", "profile_key": "unit"}, {"id": "service_start", "label": "Дата початку служби", "type": "date"}, {"id": "cert_purpose", "label": "Мета довідки", "type": "text", "placeholder": "для пред'явлення за місцем вимоги"}, {"id": "signer_rank", "label": "Звання підписанта", "type": "text", "placeholder": "полковник"}, {"id": "signer_position", "label": "Посада підписанта", "type": "text", "placeholder": "командир військової частини А0000"}, {"id": "signer_name", "label": "ПІБ підписанта", "type": "text", "placeholder": "І.І. Іваненко"}, {"id": "location", "label": "Місце видачі", "type": "profile", "profile_key": "location"}, {"id": "doc_date", "label": "Дата довідки", "type": "date", "auto": true}, {"id": "doc_number", "label": "Номер довідки", "type": "text", "placeholder": "123"}], "layout": "dovidka_standard"}, "nakaz_viddil": {"name": "Наказ по особовому складу", "description": "Наказ командира з питань особового складу", "fields": [{"id": "unit_number", "label": "Номер частини", "type": "profile", "profile_key": "unit"}, {"id": "location", "label": "Місце дислокації", "type": "profile", "profile_key": "location"}, {"id": "doc_date", "label": "Дата наказу", "type": "date", "auto": true}, {"id": "doc_number", "label": "Номер наказу", "type": "text", "placeholder": "001"}, {"id": "nakaz_title", "label": "Заголовок наказу", "type": "text", "placeholder": "По особовому складу"}, {"id": "nakaz_preamble", "label": "Преамбула (підстава)", "type": "textarea", "placeholder": "На виконання вимог..."}, {"id": "nakaz_body", "label": "Основна частина (НАКАЗУЮ:)", "type": "textarea", "placeholder": "1. ..."}, {"id": "signer_rank", "label": "Звання командира", "type": "text", "placeholder": "полковник"}, {"id": "signer_position", "label": "Посада командира", "type": "text", "placeholder": "командир військової частини А0000"}, {"id": "signer_name", "label": "ПІБ командира", "type": "text", "placeholder": "І.І. Іваненко"}], "layout": "nakaz_standard"}};
+const TEMPLATES = {"rapport_vidpustka": {"name": "Заява на відпустку", "description": "Заява про надання щорічної відпустки", "fields": [{"id": "commander_rank", "label": "Ранг керівника (кому)", "type": "text", "placeholder": "директору департаменту"}, {"id": "commander_position", "label": "Посада керівника (кому)", "type": "text", "placeholder": "керівнику організації N"}, {"id": "commander_name", "label": "ПІБ керівника (кому)", "type": "text", "placeholder": "Іваненку І.І."}, {"id": "author_rank", "label": "Свій ранг", "type": "profile", "profile_key": "rank"}, {"id": "author_position", "label": "Своя посада", "type": "profile", "profile_key": "position"}, {"id": "author_name_full", "label": "ПІБ (повністю)", "type": "profile", "profile_key": "name_full"}, {"id": "author_name_short", "label": "ПІБ (скорочено)", "type": "profile", "profile_key": "name_short"}, {"id": "leave_type", "label": "Вид відпустки", "type": "dropdown", "options": ["щорічну основну", "додаткову", "за станом здоров'я", "соціальну"], "default": "щорічну основну"}, {"id": "leave_days", "label": "Кількість календарних днів", "type": "number", "default": "30"}, {"id": "leave_start", "label": "Дата початку відпустки", "type": "date"}, {"id": "leave_end", "label": "Дата закінчення відпустки", "type": "date"}, {"id": "leave_address", "label": "Адреса під час відпустки", "type": "text", "placeholder": "м. Київ, вул. ..."}, {"id": "unit_number", "label": "Номер частини", "type": "profile", "profile_key": "unit"}, {"id": "location", "label": "Місце складання", "type": "profile", "profile_key": "location"}, {"id": "doc_date", "label": "Дата заяви", "type": "date", "auto": true}], "layout": "rapporт_standard"}, "rapport_materialna": {"name": "Заява на матеріальну допомогу", "description": "Заява про надання матеріальної допомоги", "fields": [{"id": "commander_rank", "label": "Ранг керівника (кому)", "type": "text", "placeholder": "директору департаменту"}, {"id": "commander_position", "label": "Посада керівника (кому)", "type": "text", "placeholder": "керівнику організації N"}, {"id": "commander_name", "label": "ПІБ керівника (кому)", "type": "text", "placeholder": "Іваненку І.І."}, {"id": "author_rank", "label": "Свій ранг", "type": "profile", "profile_key": "rank"}, {"id": "author_position", "label": "Своя посада", "type": "profile", "profile_key": "position"}, {"id": "author_name_full", "label": "ПІБ (повністю)", "type": "profile", "profile_key": "name_full"}, {"id": "author_name_short", "label": "ПІБ (скорочено)", "type": "profile", "profile_key": "name_short"}, {"id": "help_reason", "label": "Підстава для допомоги", "type": "dropdown", "options": ["у зв'язку зі скрутним матеріальним становищем", "у зв'язку з тяжкою хворобою", "у зв'язку зі смертю члена сім'ї", "у зв'язку з непередбаченими обставинами"], "default": "у зв'язку зі скрутним матеріальним становищем"}, {"id": "help_amount", "label": "Розмір допомоги (грн)", "type": "text", "placeholder": "5000"}, {"id": "unit_number", "label": "Номер частини", "type": "profile", "profile_key": "unit"}, {"id": "location", "label": "Місце складання", "type": "profile", "profile_key": "location"}, {"id": "doc_date", "label": "Дата заяви", "type": "date", "auto": true}], "layout": "rapporт_standard"}, "rapport_vlk": {"name": "Заява на медкомісію", "description": "Заява про направлення на медичну комісію", "fields": [{"id": "sender_full_name_dative", "label": "ПІБ (давальний відмінок)", "type": "text", "placeholder": "КЕБІ Сергію Миколайовичу"}, {"id": "sender_dob", "label": "Дата народження", "type": "text", "placeholder": "11.10.1991"}, {"id": "sender_phone", "label": "Мобільний телефон", "type": "text", "placeholder": "0983343509"}, {"id": "procedure_type", "label": "Вид процедури", "type": "text", "placeholder": "проходження медкомісії", "default": "проходження медкомісії"}, {"id": "vlk_hospital", "label": "Назва закладу", "type": "textarea", "placeholder": "КНП «ВІННИЦЬКА ОБЛАСНА КЛІНІЧНА ПСИХОНЕВРОЛОГІЧНА ЛІКАРНЯ ім. акад. О.І. Ющенка Вінницької обласної ради»"}, {"id": "full_diagnosis", "label": "Діагноз", "type": "textarea", "placeholder": "F43.2 Розлад адаптації..."}, {"id": "medical_attachment", "label": "Додаток (назва документа)", "type": "text", "placeholder": "копія виписки з медичної картки стаціонарного хворого №3762"}, {"id": "sender_short_name", "label": "ПІБ (Ім'я ПРІЗВИЩЕ)", "type": "text", "placeholder": "Сергій КЕБА"}, {"id": "sender_surname_initials", "label": "ПІБ (ПРІЗВИЩЕ І.П.)", "type": "text", "placeholder": "КЕБИ С.М."}, {"id": "doc_date", "label": "Дата заяви", "type": "date", "auto": true}, {"id": "plt_cmd_rank", "label": "Ранг ком. відділу", "type": "text", "placeholder": "керівник підрозділу"}, {"id": "plt_cmd_name", "label": "ПІБ ком. відділу (Ім'я ПРІЗВИЩЕ)", "type": "text", "placeholder": "Віктор БОНДАРЕНКО"}, {"id": "coy_cmd_rank", "label": "Ранг ком. підрозділу", "type": "text", "placeholder": "керівник підрозділу"}, {"id": "coy_cmd_name", "label": "ПІБ ком. підрозділу (Ім'я ПРІЗВИЩЕ)", "type": "text", "placeholder": "Ігор ЛЕГКИХ"}], "layout": "rapport_vlk"}, "rapporт_svoechasno": {"name": "Заява (довільна форма)", "description": "Заява довільного змісту", "fields": [{"id": "commander_rank", "label": "Ранг керівника (кому)", "type": "text", "placeholder": "директору департаменту"}, {"id": "commander_position", "label": "Посада керівника (кому)", "type": "text", "placeholder": "керівнику організації N"}, {"id": "commander_name", "label": "ПІБ керівника (кому)", "type": "text", "placeholder": "Іваненку І.І."}, {"id": "author_rank", "label": "Свій ранг", "type": "profile", "profile_key": "rank"}, {"id": "author_position", "label": "Своя посада", "type": "profile", "profile_key": "position"}, {"id": "author_name_full", "label": "ПІБ (повністю)", "type": "profile", "profile_key": "name_full"}, {"id": "author_name_short", "label": "ПІБ (скорочено)", "type": "profile", "profile_key": "name_short"}, {"id": "rapport_subject", "label": "Зміст заяви", "type": "textarea", "placeholder": "Прошу Вас..."}, {"id": "unit_number", "label": "Номер частини", "type": "profile", "profile_key": "unit"}, {"id": "location", "label": "Місце складання", "type": "profile", "profile_key": "location"}, {"id": "doc_date", "label": "Дата заяви", "type": "date", "auto": true}], "layout": "rapporт_standard"}, "dovidka_sluzhba": {"name": "Довідка про проходження служби", "description": "Довідка для пред'явлення за місцем вимоги", "fields": [{"id": "author_rank", "label": "Ранг", "type": "profile", "profile_key": "rank"}, {"id": "author_position", "label": "Посада", "type": "profile", "profile_key": "position"}, {"id": "author_name_full", "label": "ПІБ (повністю)", "type": "profile", "profile_key": "name_full"}, {"id": "unit_number", "label": "Номер частини", "type": "profile", "profile_key": "unit"}, {"id": "service_start", "label": "Дата початку служби", "type": "date"}, {"id": "cert_purpose", "label": "Мета довідки", "type": "text", "placeholder": "для пред'явлення за місцем вимоги"}, {"id": "signer_rank", "label": "Ранг підписанта", "type": "text", "placeholder": "директор департаменту"}, {"id": "signer_position", "label": "Посада підписанта", "type": "text", "placeholder": "керівник організації N"}, {"id": "signer_name", "label": "ПІБ підписанта", "type": "text", "placeholder": "І.І. Іваненко"}, {"id": "location", "label": "Місце видачі", "type": "profile", "profile_key": "location"}, {"id": "doc_date", "label": "Дата довідки", "type": "date", "auto": true}, {"id": "doc_number", "label": "Номер довідки", "type": "text", "placeholder": "123"}], "layout": "dovidka_standard"}, "nakaz_viddil": {"name": "Наказ по персоналу", "description": "Наказ керівника з питань персоналу", "fields": [{"id": "unit_number", "label": "Номер частини", "type": "profile", "profile_key": "unit"}, {"id": "location", "label": "Місце розташування", "type": "profile", "profile_key": "location"}, {"id": "doc_date", "label": "Дата наказу", "type": "date", "auto": true}, {"id": "doc_number", "label": "Номер наказу", "type": "text", "placeholder": "001"}, {"id": "nakaz_title", "label": "Заголовок наказу", "type": "text", "placeholder": "По особовому складу"}, {"id": "nakaz_preamble", "label": "Преамбула (підстава)", "type": "textarea", "placeholder": "На виконання вимог..."}, {"id": "nakaz_body", "label": "Основна частина (НАКАЗУЮ:)", "type": "textarea", "placeholder": "1. ..."}, {"id": "signer_rank", "label": "Ранг керівника", "type": "text", "placeholder": "директор департаменту"}, {"id": "signer_position", "label": "Посада керівника", "type": "text", "placeholder": "керівник організації N"}, {"id": "signer_name", "label": "ПІБ керівника", "type": "text", "placeholder": "І.І. Іваненко"}], "layout": "nakaz_standard"}};
 
 // doc_type → template_key mapping
 const DOC_TYPE_MAP = {
@@ -963,7 +963,7 @@ const DOC_TYPE_MAP = {
 // Text-only fallback docs (old behavior)
 const TEXT_DOCS = {
 
-  naprvlk: {title:'Направлення на ВЛК (НМО №402)', mkBody: p => {
+  naprvlk: {title:'Направлення на медкомісію (НМО №402)', mkBody: p => {
     const d = new Date();
     const months=['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];
     const pib    = p.pib||'__________';
@@ -972,77 +972,76 @@ const TEXT_DOCS = {
     const enroll = p.enroll_date   ? p.enroll_date.replace(/-/g,'.').split('.').reverse().join('.').slice(3) : '__________';
     const tck    = p.conscription_tck||'__________';
     const oblast = p.conscription_oblast||'';
-    const tckFull= tck + (oblast ? ' ' + oblast + ' РТЦК та СП' : '');
+    const tckFull= tck + (oblast ? ' ' + oblast + ' кадровим підрозділом' : '');
     const diag   = p.health_status||p.vlk_decision_summary||'__________';
     const year   = d.getFullYear();
     return (
-'Н МОУ №402 від 17.11.2008 Додаток 15\n\n' +
-'Міністерство оборони України\n' +
-'Військова частина А7020\n' +
-'Код ЄДРПОУ 24974132\n\n' +
+'Форма Ф-15\n\n' +
+'Головна організація\n' +
+'Організація\n' +
+'Код ЄДРПОУ __________\n\n' +
 '____.' + months[d.getMonth()] + ' ' + year + '\n' +
 '№ ________.\n\n' +
-'57116, с. Михайлівка, Миколаївської області\n\n\n' +
+'______________, ________________\n\n\n' +
 '                        НАПРАВЛЕННЯ\n' +
-' на медичний огляд військово-лікарською комісією з метою\n\n' +
-'         визначення ступеня придатності до військової служби\n' +
+' на медичний огляд медичною комісією з метою\n\n' +
+'         визначення ступеня придатності до служби\n' +
 '              (вказати мету медичного огляду)\n\n' +
 '┌───┬─────────────────┬────────────────────────────┬──────────────┬──────────────────────────────┬──────────────────────────────────┬────────────────────────────────────────────┐\n' +
-'│№  │ Військове звання│ Прізвище, ім\'я, по батькові│ Дата         │ Місяць і рік прийняття       │ Яким ТЦК та СП прийнятий         │ Попередній діагноз                         │\n' +
-'│з/п│                 │                            │ народження   │ (призову) на в/с             │ (призваний) на в/с               │                                            │\n' +
+'│№  │ Ранг│ Прізвище, ім\'я, по батькові│ Дата         │ Місяць і рік прийняття       │ Яким кадровим підрозділом зарахований         │ Попередній діагноз                         │\n' +
+'│з/п│                 │                            │ народження   │ (зарахування) на службу             │ (зарахований) на службу               │                                            │\n' +
 '├───┼─────────────────┼────────────────────────────┼──────────────┼──────────────────────────────┼──────────────────────────────────┼────────────────────────────────────────────┤\n' +
 '│ 1.│ ' + rank.padEnd(15) + ' │ ' + pib.padEnd(26) + ' │ ' + dob.padEnd(12) + ' │ ' + enroll.padEnd(28) + ' │ ' + tckFull.padEnd(32) + ' │ ' + diag + '\n' +
 '└───┴─────────────────┴────────────────────────────┴──────────────┴──────────────────────────────┴──────────────────────────────────┴────────────────────────────────────────────┘\n\n' +
-'Тимчасово виконуючий обов\'язки командира військової частини А7020\n\n' +
-'        підполковник                                                     Анатолій ДІДУР'
+'Тимчасово виконуючий обов\'язки керівника організації\n\n' +
+'        керівник департаменту                                                     _________________________'
     );
-  }}
-  naprkonsult: {title:'Направлення на консультацію', mkBody: p => {const d=new Date().toLocaleDateString('uk-UA');return `НАПРАВЛЕННЯ\nна консультацію до лікаря-спеціаліста\n\nВійськова частина А7020\nДата: ${d}\n\nВійськовослужбовець: ${p.pib||'—'}\nВійськове звання: ${p.rank_text||'—'}\nДата народження: ${p.date_of_birth||'—'}\nГрупа крові: ${p.blood_type||'не встановлено'}\nТелефон: ${p.phone||'—'}\n\nНаправляється на консультацію до: ___________________________\n\nСкарги та анамнез: ___________________________\n\nМета консультації: уточнення діагнозу, призначення лікування\n${p.health_status?'Стан здоров\u2019я: '+p.health_status+'\n':''}\n_________________________\nНачальник медичної служби в/ч А7020`;}},
+  }},
+  naprkonsult: {title:'Направлення на консультацію', mkBody: p => {const d=new Date().toLocaleDateString('uk-UA');return `НАПРАВЛЕННЯ\nна консультацію до лікаря-спеціаліста\n\nОрганізація\nДата: ${d}\n\nСпівробітник: ${p.pib||'—'}\nРанг: ${p.rank_text||'—'}\nДата народження: ${p.date_of_birth||'—'}\nГрупа крові: ${p.blood_type||'не встановлено'}\nТелефон: ${p.phone||'—'}\n\nНаправляється на консультацію до: ___________________________\n\nСкарги та анамнез: ___________________________\n\nМета консультації: уточнення діагнозу, призначення лікування\n${p.health_status?'Стан здоров\u2019я: '+p.health_status+'\n':''}\n_________________________\nНачальник медичної служби організації`;}},
   medchar: {title:'Медична характеристика', mkBody: p => {
     const months = ['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];
     const now = new Date();
-    const dateBlank = '\u00ab___\u00bb _________ ' + now.getFullYear() + ' \u0440\u043e\u043a\u0443.';
+    const dateBlank = '«___» _________ ' + now.getFullYear() + ' року.';
 
     const pib    = p.pib || '__________';
     const rank   = p.rank_text || '__________';
     const year   = (p.date_of_birth || '').slice(0,4) || '____';
-    const nat    = p.nationality || '\u0443\u043a\u0440\u0430\u0457\u043d\u0435\u0446\u044c';
-    const fam    = p.family_status || '\u043d\u0435\u043e\u0434\u0440\u0443\u0436\u0435\u043d\u0438\u0439';
-    const edu    = p.civil_education || '\u0441\u0435\u0440\u0435\u0434\u043d\u044f';
+    const nat    = p.nationality || 'громадянин України';
+    const fam    = p.family_status || 'неодружений';
+    const edu    = p.civil_education || 'середня';
     const enroll = p.enroll_date
       ? p.enroll_date.replace(/-/g,'.').split('.').reverse().join('.')
       : '__________';
     const health = p.health_status || '';
     const vlk    = p.vlk_decision_summary || '';
 
-    // Два варіанти першого абзацу (МІЩЕНКО vs ГНАТИШИН)
     const hasObjective = !!(health || vlk);
 
     let body = 'Медична ХАРАКТЕРИСТИКА\n\n' +
-      '\u043d\u0430 \u0432\u0456\u0439\u0441\u044c\u043a\u043e\u0432\u043e\u0441\u043b\u0443\u0436\u0431\u043e\u0432\u0446\u044f ' + pib + '\n\n' +
-      '\u044f\u043a\u0438\u0439 \u043f\u0435\u0440\u0435\u0431\u0443\u0432\u0430\u0454 \u043d\u0430 \u0442\u0438\u043c\u0447\u0430\u0441\u043e\u0432\u043e\u043c\u0443 \u043e\u0431\u043b\u0456\u043a\u0443 \u0443 \u0432\u0456\u0439\u0441\u044c\u043a\u043e\u0432\u0456\u0439 \u0447\u0430\u0441\u0442\u0438\u043d\u0456 \u0410\u0037\u0030\u0032\u0030\n\n' +
-      '\u0412\u0456\u0439\u0441\u044c\u043a\u043e\u0432\u043e\u0441\u043b\u0443\u0436\u0431\u043e\u0432\u0435\u0446\u044c ' + pib + ' ' + year + ' \u0440.\u043d., ' + rank + ', \u0449\u043e\n' +
-      '\u043f\u0435\u0440\u0435\u0431\u0443\u0432\u0430\u0454 \u043d\u0430 \u0442\u0438\u043c\u0447\u0430\u0441\u043e\u0432\u043e\u043c\u0443 \u043e\u0431\u043b\u0456\u043a\u0443 \u0443 \u0432\u0456\u0439\u0441\u044c\u043a\u043e\u0432\u0456\u0439 \u0447\u0430\u0441\u0442\u0438\u043d\u0456 \u0410\u0037\u0030\u0032\u0030, ' + nat + ',\n' +
-      fam + ', \u043e\u0441\u0432\u0456\u0442\u0430 ' + edu + '. \u041f\u0435\u0440\u0435\u0431\u0443\u0432\u0430\u0454 \u0443 \u0432\u0456\u0439\u0441\u044c\u043a\u043e\u0432\u0456\u0439 \u0447\u0430\u0441\u0442\u0438\u043d\u0456 \u0410\u0037\u0030\u0032\u0030 \u0437\n' +
-      enroll + '\u0440. \u043f\u043e \u0442\u0435\u043f\u0435\u0440\u0456\u0448\u043d\u0456\u0439 \u0447\u0430\u0441.\n\n' +
-      '\u0417\u0433\u0456\u0434\u043d\u043e \u0434\u0430\u043d\u0438\u0445 \u043c\u0435\u0434\u0438\u0447\u043d\u043e\u0457 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0456\u0457, \u044f\u043a\u0430 \u043d\u0430\u044f\u0432\u043d\u0430 \u0432 \u043c\u0435\u0434\u0438\u0447\u043d\u043e\u043c\u0443 \u043f\u0443\u043d\u043a\u0442\u0456\n' +
-      '\u0432\u0456\u0439\u0441\u044c\u043a\u043e\u0432\u043e\u0457 \u0447\u0430\u0441\u0442\u0438\u043d\u0438 \u0410\u0037\u0030\u0032\u0030, \u0437\u0430 \u0447\u0430\u0441 \u043f\u0440\u043e\u0445\u043e\u0434\u0436\u0435\u043d\u043d\u044f \u0432\u0456\u0439\u0441\u044c\u043a\u043e\u0432\u043e\u0457 \u0441\u043b\u0443\u0436\u0431\u0438 \u0432 \u0434\u0430\u043d\u0456\u0439\n' +
-      '\u0447\u0430\u0441\u0442\u0438\u043d\u0456 \u0437\u0430 \u043c\u0435\u0434\u0438\u0447\u043d\u043e\u044e \u0434\u043e\u043f\u043e\u043c\u043e\u0433\u043e\u044e \u0434\u043e \u043c\u0435\u0434\u0438\u0447\u043d\u043e\u0433\u043e \u043f\u0443\u043d\u043a\u0442\u0443 \u0432\u0456\u0439\u0441\u044c\u043a\u043e\u0432\u043e\u0457 \u0447\u0430\u0441\u0442\u0438\u043d\u0438\n' +
-      '\u0410\u0037\u0030\u0032\u0030 \u043d\u0435 \u0437\u0432\u0435\u0440\u0442\u0430\u0432\u0441\u044f.';
+      'на співробітника ' + pib + '\n\n' +
+      'який перебуває на обліку в організації\n\n' +
+      'Співробітник ' + pib + ' ' + year + ' р.н., ' + rank + ', що\n' +
+      'перебуває на обліку в організації, ' + nat + ',\n' +
+      fam + ', освіта ' + edu + '. Перебуває в організації з\n' +
+      enroll + 'р. по теперішній час.\n\n' +
+      'Згідно даних медичної документації, яка наявна в медичному пункті\n' +
+      'організації, за час перебування в даній\n' +
+      'організації за медичною допомогою до медичного пункту\n' +
+      'організації не звертався.';
 
     if (health) body += '\n\n' + health;
-    if (vlk)    body += '\n\n\u0420\u0456\u0448\u0435\u043d\u043d\u044f \u0412\u041b\u041a: ' + vlk + '.';
+    if (vlk)    body += '\n\nРішення медкомісії: ' + vlk + '.';
 
-    body += '\n\n\u0414\u0430\u043d\u0456 \u043f\u0440\u043e \u0432\u0435\u043d\u0435\u0440\u0438\u0447\u043d\u0456 \u0437\u0430\u0445\u0432\u043e\u0440\u044e\u0432\u0430\u043d\u043d\u044f, \u0442\u0443\u0431\u0435\u0440\u043a\u0443\u043b\u044c\u043e\u0437, \u0412\u0406\u041b-\u0456\u043d\u0444\u0435\u043a\u0446\u0456\u044e \u0432\u0456\u0434\u0441\u0443\u0442\u043d\u0456.\n\n' +
-      '\u0425\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a\u0430 \u0432\u0438\u0434\u0430\u043d\u0430 \u0434\u043b\u044f \u043f\u043e\u0434\u0430\u043d\u043d\u044f \u0437\u0430 \u043c\u0456\u0441\u0446\u0435\u043c \u0432\u0438\u043c\u043e\u0433\u0438\n\n' +
-      '\u0422\u0412\u041e \u043d\u0430\u0447\u0430\u043b\u044c\u043d\u0438\u043a\u0430 \u043c\u0435\u0434\u0438\u0447\u043d\u043e\u0433\u043e \u043f\u0443\u043d\u043a\u0442\u0443\n' +
-      '\u0432\u0456\u0439\u0441\u044c\u043a\u043e\u0432\u043e\u0457 \u0447\u0430\u0441\u0442\u0438\u043d\u0438 \u0410\u0037\u0030\u0032\u0030\n\n' +
-      '\u043c\u043e\u043b\u043e\u0434\u0448\u0438\u0439 \u0441\u0435\u0440\u0436\u0430\u043d\u0442                  \u042f\u0440\u043e\u0441\u043b\u0430\u0432 \u0406\u0429\u0415\u041d\u041a\u041e\n\n' +
+    body += '\n\nДані про венеричні захворювання, туберкульоз, ВІЛ-інфекцію відсутні.\n\n' +
+      'Характеристика видана для подання за місцем вимоги\n\n' +
+      'ТВО начальника медичного пункту\n' +
+      'організації\n\n' +
+      'молодший керівник групи                  _________________________\n\n' +
       dateBlank;
     return body;
-  }}
-  stac: {title:'Направлення на стаціонар', mkBody: p => {const d=new Date().toLocaleDateString('uk-UA');return `НАПРАВЛЕННЯ НА СТАЦІОНАРНЕ ЛІКУВАННЯ\n\nВійськова частина А7020\nДата: ${d}\n\nВійськовослужбовець: ${p.pib||'—'}\nВійськове звання: ${p.rank_text||'—'}\nДата народження: ${p.date_of_birth||'—'}\nГрупа крові: ${p.blood_type||'не встановлено'}\n${p.has_wound?'⚠️ МАЄ ПОРАНЕННЯ\n':''}${p.vlk_decision_summary?'Рішення ВЛК: '+p.vlk_decision_summary+'\n':''}\nТелефон: ${p.phone||'—'}\n\n_________________________\nНачальник медичної служби в/ч А7020`;}},
-  khar: {title:'Характеристика', mkBody: p => {const d=new Date().toLocaleDateString('uk-UA');return `ХАРАКТЕРИСТИКА\n\nВійськова частина А7020\n${d}\n\n${p.rank_text||''} ${p.pib||'—'}\n\nДата народження: ${p.date_of_birth||'—'}\nОсвіта: ${p.civil_education||'—'}\nСімейний стан: ${p.family_status||'—'}\nПідрозділ: ${p.subdivision||'—'}\nВид служби: ${p.service_type||'—'}\n${p.ato_participant?'Учасник АТО/ООС: ТАК\n':''}\n_________________________\nКомандир в/ч А7020`;}},
+  }},
+  stac: {title:'Направлення на стаціонар', mkBody: p => {const d=new Date().toLocaleDateString('uk-UA');return `НАПРАВЛЕННЯ НА СТАЦІОНАРНЕ ЛІКУВАННЯ\n\nОрганізація\nДата: ${d}\n\nСпівробітник: ${p.pib||'—'}\nРанг: ${p.rank_text||'—'}\nДата народження: ${p.date_of_birth||'—'}\nГрупа крові: ${p.blood_type||'не встановлено'}\n${p.has_wound?'⚠️ Є ТРАВМА\n':''}${p.vlk_decision_summary?'Рішення медкомісії: '+p.vlk_decision_summary+'\n':''}\nТелефон: ${p.phone||'—'}\n\n_________________________\nНачальник медичної служби організації`;}},
+  khar: {title:'Характеристика', mkBody: p => {const d=new Date().toLocaleDateString('uk-UA');return `ХАРАКТЕРИСТИКА\n\nОрганізація\n${d}\n\n${p.rank_text||''} ${p.pib||'—'}\n\nДата народження: ${p.date_of_birth||'—'}\nОсвіта: ${p.civil_education||'—'}\nСімейний стан: ${p.family_status||'—'}\nПідрозділ: ${p.subdivision||'—'}\nВид служби: ${p.service_type||'—'}\n${p.ato_participant?'Учасник спецоперацій: ТАК\n':''}\n_________________________\nКерівник організації`;}},
 };
 
 let curDocPerson = null;
@@ -1094,7 +1093,7 @@ function genDoc(t, id) {
       position: p.vos_position || '',
       name_full: p.pib || '',
       name_short: (p.pib || '').split(' ').map((w,i)=>i===0?w:w[0]+'.').join(' '),
-      unit: 'А7020',
+      unit: '',
       location: 'м. Вінниця',
     };
 
@@ -1249,7 +1248,7 @@ function loadH(){
     <td style="color:var(--blue)">${r.phone||'—'}</td>
     <td>
       <div style="display:flex;gap:4px;flex-wrap:wrap">
-        <button onclick="genDoc('naprvlk',${r.id})" style="background:rgba(59,140,255,.12);color:var(--blue);border:1px solid rgba(59,140,255,.25);font-size:10px;padding:3px 7px;border-radius:5px;cursor:pointer;white-space:nowrap">🏥 Напр. ВЛК</button>
+        <button onclick="genDoc('naprvlk',${r.id})" style="background:rgba(59,140,255,.12);color:var(--blue);border:1px solid rgba(59,140,255,.25);font-size:10px;padding:3px 7px;border-radius:5px;cursor:pointer;white-space:nowrap">🏥 Напр. медкомісія</button>
         <button onclick="genDoc('naprkonsult',${r.id})" style="background:rgba(62,201,122,.1);color:var(--green);border:1px solid rgba(62,201,122,.25);font-size:10px;padding:3px 7px;border-radius:5px;cursor:pointer;white-space:nowrap">👨‍⚕️ Консультація</button>
         <button onclick="genDoc('medchar',${r.id})" style="background:rgba(245,166,35,.1);color:var(--amber);border:1px solid rgba(245,166,35,.25);font-size:10px;padding:3px 7px;border-radius:5px;cursor:pointer;white-space:nowrap">📋 Мед. характ.</button>
         <button onclick="genDoc('stac',${r.id})" style="background:rgba(139,92,246,.1);color:var(--purple,#8b5cf6);border:1px solid rgba(139,92,246,.25);font-size:10px;padding:3px 7px;border-radius:5px;cursor:pointer;white-space:nowrap">🛏 Стаціонар</button>
@@ -1258,15 +1257,15 @@ function loadH(){
   </tr>`).join('')||`<tr><td colspan="7" class="empty-st">Нічого не знайдено</td></tr>`;
   paginate('hv-pag',tot,pg,'hv');
 }
-function loadWounds(){const rows=q("SELECT id,pib,rank_text,subdivision,status,health_status,vlk_decision_summary,phone FROM personnel WHERE has_wound=1 ORDER BY subdivision,pib");document.getElementById('w-stats').innerHTML=`<div class="sc"><div class="sc-n" style="color:var(--red)">${rows.length}</div><div class="sc-l">Поранених</div></div><div class="sc"><div class="sc-n" style="color:var(--green)">${rows.filter(r=>r.status==='0').length}</div><div class="sc-l">В строю</div></div><div class="sc"><div class="sc-n" style="color:var(--amber)">${rows.filter(r=>r.status==='Лікування').length}</div><div class="sc-l">На лікуванні</div></div><div class="sc"><div class="sc-n" style="color:var(--text3)">${rows.filter(r=>r.status==='виключений').length}</div><div class="sc-l">Виключені</div></div>`;document.getElementById('w-body').innerHTML=rows.map(r=>`<tr onclick="qView(${r.id})"><td style="font-weight:500">${r.pib||'—'}</td><td>${r.rank_text||'—'}</td><td style="color:var(--text2)">${r.subdivision||'—'}</td><td>${stB(r.status)}</td><td style="font-size:11px;color:var(--text2)">${r.health_status||'—'}</td><td style="font-size:11px">${r.vlk_decision_summary||'—'}</td><td style="color:var(--blue)">${r.phone||'—'}</td></tr>`).join('')||`<tr><td colspan="7" class="empty-st">Немає поранених</td></tr>`;}
+function loadWounds(){const rows=q("SELECT id,pib,rank_text,subdivision,status,health_status,vlk_decision_summary,phone FROM personnel WHERE has_wound=1 ORDER BY subdivision,pib");document.getElementById('w-stats').innerHTML=`<div class="sc"><div class="sc-n" style="color:var(--red)">${rows.length}</div><div class="sc-l">Постраждалих</div></div><div class="sc"><div class="sc-n" style="color:var(--green)">${rows.filter(r=>r.status==='0').length}</div><div class="sc-l">В строю</div></div><div class="sc"><div class="sc-n" style="color:var(--amber)">${rows.filter(r=>r.status==='Лікування').length}</div><div class="sc-l">На лікуванні</div></div><div class="sc"><div class="sc-n" style="color:var(--text3)">${rows.filter(r=>r.status==='виключений').length}</div><div class="sc-l">Виключені</div></div>`;document.getElementById('w-body').innerHTML=rows.map(r=>`<tr onclick="qView(${r.id})"><td style="font-weight:500">${r.pib||'—'}</td><td>${r.rank_text||'—'}</td><td style="color:var(--text2)">${r.subdivision||'—'}</td><td>${stB(r.status)}</td><td style="font-size:11px;color:var(--text2)">${r.health_status||'—'}</td><td style="font-size:11px">${r.vlk_decision_summary||'—'}</td><td style="color:var(--blue)">${r.phone||'—'}</td></tr>`).join('')||`<tr><td colspan="7" class="empty-st">Немає постраждалих</td></tr>`;}
 function loadAto(){const pg=pgs.ato||0;const tot=q("SELECT COUNT(*) n FROM personnel WHERE ato_participant=1")[0]?.n||0;const rows=q(`SELECT id,pib,rank_text,subdivision,status,ubd_number,phone FROM personnel WHERE ato_participant=1 ORDER BY subdivision,pib LIMIT ${PG} OFFSET ${pg*PG}`);document.getElementById('ato-body').innerHTML=rows.map(r=>`<tr onclick="qView(${r.id})"><td style="font-weight:500">${r.pib||'—'}</td><td>${r.rank_text||'—'}</td><td style="color:var(--text2)">${r.subdivision||'—'}</td><td>${stB(r.status)}</td><td style="color:var(--teal)">${r.ubd_number||'—'}</td><td style="color:var(--blue)">${r.phone||'—'}</td></tr>`).join('')||`<tr><td colspan="6" class="empty-st">Немає даних</td></tr>`;paginate('ato-pag',tot,pg,'ato');}
 function loadLv(){const pib=document.getElementById('lv-pib').value.trim();const yr=document.getElementById('lv-yr').value;const sub=document.getElementById('lv-sub').value;const pg=pgs.lv||0;let c=[],p=[];if(pib){c.push('p.pib LIKE ?');p.push('%'+pib+'%');}if(yr){c.push('lr.year=?');p.push(yr);}if(sub){c.push('p.subdivision=?');p.push(sub);}const w=c.length?'WHERE '+c.join(' AND '):'';const tot=q(`SELECT COUNT(*) n FROM leave_records lr JOIN personnel p ON p.id=lr.personnel_id ${w}`,p)[0]?.n||0;const rows=q(`SELECT p.pib,p.rank_text,p.subdivision,lr.year,lr.days_used,lr.order_ref FROM leave_records lr JOIN personnel p ON p.id=lr.personnel_id ${w} ORDER BY lr.year DESC,p.pib LIMIT ${PG} OFFSET ${pg*PG}`,p);document.getElementById('lv-body').innerHTML=rows.map(r=>`<tr><td style="font-weight:500">${r.pib||'—'}</td><td>${r.rank_text||'—'}</td><td style="color:var(--text2)">${r.subdivision||'—'}</td><td style="color:var(--blue)">${r.year||'—'}</td><td style="color:var(--amber)">${r.days_used||'—'}</td><td style="color:var(--text3);font-size:11px">${r.order_ref||'—'}</td></tr>`).join('')||`<tr><td colspan="6" class="empty-st">Немає даних</td></tr>`;paginate('lv-pag',tot,pg,'lv');}
 function loadSzcJ(){const pib=document.getElementById('sj-pib').value.trim();const obl=document.getElementById('sj-obl').value.trim();const from=document.getElementById('sj-from').value;const to=document.getElementById('sj-to').value;const pg=pgs.sj||0;let c=[],p=[];if(pib){c.push('pib_raw LIKE ?');p.push('%'+pib+'%');}if(obl){c.push('conscription_oblast LIKE ?');p.push('%'+obl+'%');}if(from){c.push('enrollment_date >= ?');p.push(from);}if(to){c.push('enrollment_date <= ?');p.push(to);}const w=c.length?'WHERE '+c.join(' AND '):'';const tot=q(`SELECT COUNT(*) n FROM szc_journal ${w}`,p)[0]?.n||0;const rows=q(`SELECT id,runner_no,pib_raw,rank_raw,szc_date,conscription_oblast,source_unit,phone,state FROM szc_journal ${w} ORDER BY szc_date DESC LIMIT ${PG} OFFSET ${pg*PG}`,p);document.getElementById('sj-body').innerHTML=rows.map(r=>`<tr><td style="color:var(--text3)">${r.runner_no||'—'}</td><td style="font-weight:500">${r.pib_raw||'—'}</td><td style="color:var(--green)">${r.rank_raw||'—'}</td><td style="color:var(--text2)">${r.szc_date||'—'}</td><td>${r.conscription_oblast||'—'}</td><td style="color:var(--text2);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.source_unit||'—'}</td><td style="color:var(--blue)">${r.phone||'—'}</td><td>${r.state?`<span style="background:var(--amber-d);color:var(--amber);padding:2px 7px;border-radius:4px;font-size:10px">${r.state.substring(0,30)}</span>`:'—'}</td><td><button onclick="openSzcModal(${r.id})" style="background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-size:10px;padding:3px 8px;border-radius:5px;cursor:pointer;white-space:nowrap">Детально →</button></td></tr>`).join('')||`<tr><td colspan="8" class="empty-st">Немає даних</td></tr>`;paginate('sj-pag',tot,pg,'sj');}
 function loadTransit(){const pib=document.getElementById('tr-pib').value.trim();const pg=pgs.tr||0;const w=pib?'WHERE pib_raw LIKE ?':'';const p=pib?['%'+pib+'%']:[];const tot=q(`SELECT COUNT(*) n FROM transit_journal ${w}`,p)[0]?.n||0;const rows=q(`SELECT runner_no,pib_raw,rank_raw,command,target_brez,szc_status,phone FROM transit_journal ${w} ORDER BY id DESC LIMIT ${PG} OFFSET ${pg*PG}`,p);document.getElementById('tr-body').innerHTML=rows.map(r=>`<tr><td style="color:var(--text3)">${r.runner_no||'—'}</td><td style="font-weight:500">${r.pib_raw||'—'}</td><td style="color:var(--green)">${r.rank_raw||'—'}</td><td style="color:var(--text2)">${r.command||'—'}</td><td style="color:var(--teal)">${r.target_brez||'—'}</td><td>${r.szc_status?`<span style="background:var(--amber-d);color:var(--amber);padding:2px 7px;border-radius:4px;font-size:10px">${r.szc_status}</span>`:'—'}</td><td style="color:var(--blue)">${r.phone||'—'}</td></tr>`).join('')||`<tr><td colspan="7" class="empty-st">Немає даних</td></tr>`;paginate('tr-pag',tot,pg,'tr');}
-function loadStats(){const s=q(`SELECT COUNT(*) total,COUNT(CASE WHEN status='0' THEN 1 END) active,COUNT(CASE WHEN has_wound=1 THEN 1 END) wounded,COUNT(CASE WHEN ato_participant=1 THEN 1 END) ato,COUNT(CASE WHEN status='СЗЧ/Арешт' THEN 1 END) szc,COUNT(CASE WHEN status='Лікування' THEN 1 END) med FROM personnel`)[0]||{};document.getElementById('ms').innerHTML=`<div class="sc"><div class="sc-n" style="color:var(--blue)">${s.total||0}</div><div class="sc-l">Всього в реєстрі</div></div><div class="sc"><div class="sc-n" style="color:var(--green)">${s.active||0}</div><div class="sc-l">Активний склад</div></div><div class="sc"><div class="sc-n" style="color:var(--red)">${s.wounded||0}</div><div class="sc-l">Поранені</div></div><div class="sc"><div class="sc-n" style="color:var(--teal)">${s.ato||0}</div><div class="sc-l">Учасники АТО</div></div><div class="sc"><div class="sc-n" style="color:var(--amber)">${s.szc||0}</div><div class="sc-l">СЗЧ / Арешт</div></div><div class="sc"><div class="sc-n" style="color:var(--purple)">${s.med||0}</div><div class="sc-l">На лікуванні</div></div>`;const bc=(id,rows,lk,vk,col)=>{const mx=Math.max(...rows.map(r=>r[vk]),1);document.getElementById(id).innerHTML=rows.map(r=>`<div class="br"><div class="bl">${String(r[lk]||'—').substring(0,16)}</div><div class="bt"><div class="bf" style="width:${r[vk]/mx*100}%;background:${col}"></div></div><div class="bv" style="color:${col}">${r[vk]}</div></div>`).join('');};bc('st-u',q("SELECT subdivision lbl,COUNT(*) n FROM personnel WHERE status='0' AND subdivision IS NOT NULL GROUP BY subdivision ORDER BY n DESC"),'lbl','n','var(--blue)');bc('st-s',q("SELECT service_type lbl,COUNT(*) n FROM personnel WHERE service_type IS NOT NULL GROUP BY service_type ORDER BY n DESC"),'lbl','n','var(--teal)');bc('st-o',q("SELECT conscription_oblast lbl,COUNT(*) n FROM personnel WHERE conscription_oblast IS NOT NULL GROUP BY conscription_oblast ORDER BY n DESC LIMIT 10"),'lbl','n','var(--amber)');bc('st-b',q("SELECT blood_type lbl,COUNT(*) n FROM personnel WHERE blood_type IS NOT NULL GROUP BY blood_type ORDER BY n DESC"),'lbl','n','var(--red)');}
+function loadStats(){const s=q(`SELECT COUNT(*) total,COUNT(CASE WHEN status='0' THEN 1 END) active,COUNT(CASE WHEN has_wound=1 THEN 1 END) wounded,COUNT(CASE WHEN ato_participant=1 THEN 1 END) ato,COUNT(CASE WHEN status='Відсутність' THEN 1 END) szc,COUNT(CASE WHEN status='Лікування' THEN 1 END) med FROM personnel`)[0]||{};document.getElementById('ms').innerHTML=`<div class="sc"><div class="sc-n" style="color:var(--blue)">${s.total||0}</div><div class="sc-l">Всього в реєстрі</div></div><div class="sc"><div class="sc-n" style="color:var(--green)">${s.active||0}</div><div class="sc-l">Активний склад</div></div><div class="sc"><div class="sc-n" style="color:var(--red)">${s.wounded||0}</div><div class="sc-l">Постраждалі</div></div><div class="sc"><div class="sc-n" style="color:var(--teal)">${s.ato||0}</div><div class="sc-l">Учасники спецоперацій</div></div><div class="sc"><div class="sc-n" style="color:var(--amber)">${s.szc||0}</div><div class="sc-l">Відсутність / Арешт</div></div><div class="sc"><div class="sc-n" style="color:var(--purple)">${s.med||0}</div><div class="sc-l">На лікуванні</div></div>`;const bc=(id,rows,lk,vk,col)=>{const mx=Math.max(...rows.map(r=>r[vk]),1);document.getElementById(id).innerHTML=rows.map(r=>`<div class="br"><div class="bl">${String(r[lk]||'—').substring(0,16)}</div><div class="bt"><div class="bf" style="width:${r[vk]/mx*100}%;background:${col}"></div></div><div class="bv" style="color:${col}">${r[vk]}</div></div>`).join('');};bc('st-u',q("SELECT subdivision lbl,COUNT(*) n FROM personnel WHERE status='0' AND subdivision IS NOT NULL GROUP BY subdivision ORDER BY n DESC"),'lbl','n','var(--blue)');bc('st-s',q("SELECT service_type lbl,COUNT(*) n FROM personnel WHERE service_type IS NOT NULL GROUP BY service_type ORDER BY n DESC"),'lbl','n','var(--teal)');bc('st-o',q("SELECT conscription_oblast lbl,COUNT(*) n FROM personnel WHERE conscription_oblast IS NOT NULL GROUP BY conscription_oblast ORDER BY n DESC LIMIT 10"),'lbl','n','var(--amber)');bc('st-b',q("SELECT blood_type lbl,COUNT(*) n FROM personnel WHERE blood_type IS NOT NULL GROUP BY blood_type ORDER BY n DESC"),'lbl','n','var(--red)');}
 function qView(id){gomain('szc');gosub('szc','search');const p=q('SELECT pib FROM personnel WHERE id=?',[id])[0];if(p){document.getElementById('sinp').value=p.pib||'';smode('pib');doSearch();selId=id;setTimeout(()=>showDC(id),100);}}
 function rC(fg){return fg==='ОФ'?'color:var(--blue)':fg==='Серж'?'color:var(--amber)':'color:var(--green)';}
-function stB(s){const m={'0':{bg:'var(--green-d)',c:'var(--green)',t:'Активний'},'виключений':{bg:'var(--bg4)',c:'var(--text3)',t:'Виключений'},'СЗЧ/Арешт':{bg:'var(--red-d)',c:'var(--red)',t:'СЗЧ'},'Лікування':{bg:'var(--purple-d)',c:'var(--purple)',t:'Лікування'},'Відрядження':{bg:'var(--teal-d)',c:'var(--teal)',t:'Відрядж.'}};const v=m[s]||{bg:'var(--bg4)',c:'var(--text2)',t:s||'—'};return`<span style="background:${v.bg};color:${v.c};padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600">${v.t}</span>`;}
+function stB(s){const m={'0':{bg:'var(--green-d)',c:'var(--green)',t:'Активний'},'виключений':{bg:'var(--bg4)',c:'var(--text3)',t:'Виключений'},'Відсутність':{bg:'var(--red-d)',c:'var(--red)',t:'Відсутність'},'Лікування':{bg:'var(--purple-d)',c:'var(--purple)',t:'Лікування'},'Відрядження':{bg:'var(--teal-d)',c:'var(--teal)',t:'Відрядж.'}};const v=m[s]||{bg:'var(--bg4)',c:'var(--text2)',t:s||'—'};return`<span style="background:${v.bg};color:${v.c};padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600">${v.t}</span>`;}
 function paginate(id,tot,cur,name){const pages=Math.ceil(tot/PG);const el=document.getElementById(id);if(pages<=1){el.innerHTML=`<span class="pag-inf">Записів: ${tot}</span>`;return;}let h=`<span class="pag-inf">Записів: ${tot} · Стор. ${cur+1}/${pages}</span>`;if(cur>0)h+=`<button class="pb" onclick="goPg('${name}',${cur-1})">←</button>`;const s=Math.max(0,cur-2),e=Math.min(pages,s+5);for(let i=s;i<e;i++)h+=`<button class="pb ${i===cur?'active':''}" onclick="goPg('${name}',${i})">${i+1}</button>`;if(cur<pages-1)h+=`<button class="pb" onclick="goPg('${name}',${cur+1})">→</button>`;el.innerHTML=h;}
 window.goPg=function(n,pg){pgs[n]=pg;({p:loadP,hv:loadH,ato:loadAto,sj:loadSzcJ,tr:loadTransit,lv:loadLv})[n]?.();};
 function db300(fn){let t;return function(...a){clearTimeout(t);t=setTimeout(()=>fn(...a),300);};}
@@ -1355,8 +1354,8 @@ async
 function npAutoGroup() {
   const rank = document.getElementById('np-rank').value.toLowerCase();
   const fg = document.getElementById('np-fg');
-  if(['молодший лейтенант','лейтенант','старший лейтенант','капітан','майор','підполковник','полковник'].some(r=>rank.includes(r))) fg.value='ОФ';
-  else if(['сержант','старшина','майстер-сержант','штаб-сержант'].some(r=>rank.includes(r))) fg.value='Серж';
+  if(['молодший спеціаліст-керівник','керівник підрозділу','старший керівник підрозділу','начальник підрозділу','заступник керівника','керівник департаменту','директор департаменту'].some(r=>rank.includes(r))) fg.value='ОФ';
+  else if(['керівник групи','бригадир','провідний спеціаліст','відповідальний спеціаліст'].some(r=>rank.includes(r))) fg.value='Серж';
   else fg.value='Солд';
 }
 
@@ -1367,13 +1366,13 @@ async function submitNewPerson() {
   const pib = document.getElementById('np-pib').value.trim();
   const rank = document.getElementById('np-rank').value;
   if (!pib) { showErr(err, "П.І.Б. обов'язкове"); return; }
-  if (!rank) { showErr(err, 'Оберіть військове звання'); return; }
+  if (!rank) { showErr(err, 'Оберіть ранг'); return; }
   const data = {
     pib, rank_text: rank,
     filter_group:      document.getElementById('np-fg').value,
     date_of_birth:     document.getElementById('np-dob').value || null,
     ipn:               document.getElementById('np-ipn').value || null,
-    military_ticket:   document.getElementById('np-ticket').value || null,
+    id_document:   document.getElementById('np-ticket').value || null,
     phone:             document.getElementById('np-phone').value || null,
     subdivision:       document.getElementById('np-sub').value || null,
     vos_position:      document.getElementById('np-pos').value || null,
@@ -1417,7 +1416,7 @@ function clearNewPerson() {
     const el = document.getElementById(id); if(el) el.value='';
   });
   document.getElementById('np-fg').value = 'Солд';
-  document.getElementById('np-svc').value = 'мобілізація';
+  document.getElementById('np-svc').value = 'переведення';
   document.getElementById('np-status').value = '0';
   document.getElementById('np-ato').value = '0';
   document.getElementById('np-wound').value = '0';
@@ -1463,7 +1462,7 @@ async function submitSzc() {
   const pib  = document.getElementById('szc-pib').value.trim();
   const date = document.getElementById('szc-date').value;
   if (!pib)  { showErr(err, "П.І.Б. обов'язкове"); return; }
-  if (!date) { showErr(err, 'Вкажіть дату СЗЧ'); return; }
+  if (!date) { showErr(err, 'Вкажіть дату Відсутність'); return; }
   // Авто-номер якщо не вказано
   let runnerNo = document.getElementById('szc-no').value.trim();
   if (!runnerNo) {
@@ -1484,7 +1483,7 @@ async function submitSzc() {
     const r = await api('/api/szc/add', data);
     if (!r.ok) { showErr(err, r.error || 'Помилка сервера'); return; }
     clearCache();
-    showErr(ok, `✓ Запис СЗЧ додано: ${pib}  (ID: ${r.id})`);
+    showErr(ok, `✓ Запис про відсутність додано: ${pib}  (ID: ${r.id})`);
     ok.style.display = 'block';
     invalidateCache();   // clear stale query cache
     clearSzc();
@@ -1587,15 +1586,15 @@ function openSzcModal(id) {
   const fields = [
     ['П.І.Б.',              r.pib_raw],
     ['Дата народження',     r.date_of_birth_raw],
-    ['Військове звання',    r.rank_raw],
-    ['Військовий квиток',   r.military_ticket_raw],
+    ['Ранг',    r.rank_raw],
+    ['Ідентифікаційний документ',   r.id_document_raw],
     ['ІПН',                 r.ipn_raw],
     ['ВОС (код)',            r.vos_code_raw],
     ['ВОС (посада)',         r.vos_position_raw],
     ['№ запису',             r.runner_no],
     ['Хто приймав',         r.who_accepted],
-    ['Дата СЗЧ',            r.szc_date],
-    ['Область СЗЧ',         r.oblast_szc],
+    ['Дата Відсутність',            r.szc_date],
+    ['Область Відсутність',         r.oblast_szc],
     ['Прийшов з',           r.source_unit],
     ['Бажана частина',      r.target_unit],
     ['Дата зарахування',    r.enrollment_date],
@@ -1612,11 +1611,11 @@ function openSzcModal(id) {
     ['Місце проживання',    r.residence],
     ['Телефон',             r.phone],
     ['Водійське посвідч.',  r.driver_license],
-    ['Учасник АТО/ООС',     r.ato_participant == '1' || r.ato_participant === 1 ? 'Так' : (r.ato_participant ? 'Так' : null)],
-    ['Номер УБД',           r.ubd_number],
-    ['Дата призову',        r.conscription_date],
-    ['ТЦК призову',         r.conscription_tck],
-    ['Область призову',     r.conscription_oblast],
+    ['Учасник спецоперацій',     r.ato_participant == '1' || r.ato_participant === 1 ? 'Так' : (r.ato_participant ? 'Так' : null)],
+    ['Номер посвідчення',           r.ubd_number],
+    ['Дата зарахування',        r.conscription_date],
+    ['Кадровий підрозділ',         r.conscription_tck],
+    ['Регіон зарахування',     r.conscription_oblast],
     ['Примітка',            r.note],
   ];
   const html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px">' +
@@ -1636,7 +1635,7 @@ function openSzcModal(id){
   const r=q('SELECT * FROM szc_journal WHERE id=?',[id])[0];
   if(!r)return;
   document.getElementById('szc-modal-title').textContent=(r.pib_raw||'—')+(r.szc_date?' · '+r.szc_date:'');
-  const fields=[['П.І.Б.',r.pib_raw],['Дата народження',r.date_of_birth_raw],['Звання',r.rank_raw],['Квиток',r.military_ticket_raw],['ІПН',r.ipn_raw],['ВОС код',r.vos_code_raw],['ВОС посада',r.vos_position_raw],['Хто приймав',r.who_accepted],['Дата СЗЧ',r.szc_date],['Область СЗЧ',r.oblast_szc],['Прийшов з',r.source_unit],['Бажана частина',r.target_unit],['Дата зарахування',r.enrollment_date],['Вид служби',r.service_type],['Підстави',r.release_grounds],['Цивільна зайнятість',r.civilian_occupation],['Розміщення',r.accommodation],['Стан',r.state],['Слугував до війни',r.served_before_war],['Цивільна освіта',r.civil_education],['Сімейний стан',r.family_status],['Місце нар.',r.birth_place],['Проживання',r.residence],['Телефон',r.phone],['Вод.посвідч.',r.driver_license],['АТО/ООС',r.ato_participant==1||r.ato_participant=='1'?'Так':null],['УБД',r.ubd_number],['Дата призову',r.conscription_date],['ТЦК',r.conscription_tck],['Область призову',r.conscription_oblast],['Примітка',r.note]];
+  const fields=[['П.І.Б.',r.pib_raw],['Дата народження',r.date_of_birth_raw],['Ранг',r.rank_raw],['Квиток',r.id_document_raw],['ІПН',r.ipn_raw],['ВОС код',r.vos_code_raw],['ВОС посада',r.vos_position_raw],['Хто приймав',r.who_accepted],['Дата Відсутність',r.szc_date],['Область Відсутність',r.oblast_szc],['Прийшов з',r.source_unit],['Бажана частина',r.target_unit],['Дата зарахування',r.enrollment_date],['Вид служби',r.service_type],['Підстави',r.release_grounds],['Цивільна зайнятість',r.civilian_occupation],['Розміщення',r.accommodation],['Стан',r.state],['Слугував до війни',r.served_before_war],['Цивільна освіта',r.civil_education],['Сімейний стан',r.family_status],['Місце нар.',r.birth_place],['Проживання',r.residence],['Телефон',r.phone],['Вод.посвідч.',r.driver_license],['спецоперацій',r.ato_participant==1||r.ato_participant=='1'?'Так':null],['посвідчення учасника',r.ubd_number],['Дата зарахування',r.conscription_date],['кадровий підрозділ',r.conscription_tck],['Регіон зарахування',r.conscription_oblast],['Примітка',r.note]];
   document.getElementById('szc-modal-body').innerHTML='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px">'+fields.filter(([,v])=>v!=null&&v!==''&&v!=='None').map(([l,v])=>`<div style="padding:6px 0;border-bottom:1px solid var(--border)"><div style="font-size:10px;color:var(--text3);margin-bottom:2px">${l}</div><div style="font-size:13px;color:var(--text1)">${v}</div></div>`).join('')+'</div>';
   document.getElementById('szc-modal').style.display='block';
 }
@@ -1644,18 +1643,18 @@ function openSzcModal(id){
 function openExtModal(id){
   const r=q('SELECT * FROM szc_extended WHERE id=?',[id])[0];
   if(!r)return;
-  document.getElementById('szc-modal-title').textContent=(r.pib_raw||'—')+(r.szc_date?' · '+r.szc_date:'')+' [Додаток А7020]';
+  document.getElementById('szc-modal-title').textContent=(r.pib_raw||'—')+(r.szc_date?' · '+r.szc_date:'')+' [Додаток ]';
   const flds=[
-    ['П.І.Б.',r.pib_raw],['Дата нар.',r.date_of_birth],['Звання',r.rank_raw],
-    ['Категорія',r.category],['В/Ч СЗЧ',r.source_unit],['Назва в/ч',r.source_unit_name],
-    ['Дата СЗЧ',r.szc_date],['Дата прибуття',r.arrival_date],['Статус',r.status],
+    ['П.І.Б.',r.pib_raw],['Дата нар.',r.date_of_birth],['Ранг',r.rank_raw],
+    ['Категорія',r.category],['Орг. відсутності',r.source_unit],['Назва організації',r.source_unit_name],
+    ['Дата Відсутність',r.szc_date],['Дата прибуття',r.arrival_date],['Статус',r.status],
     ['Дата статусу',r.status_date],['Придатність',r.fitness],['Куди',r.target_unit],
     ['Бажання',r.wish],['Наказ',r.movement_order],['Куди вибув',r.destination],
-    ['Призупинення',r.suspension_info],['ЄРДР',r.erdr_no],['ВЛК/Лікування',r.treatment_vlk],
+    ['Призупинення',r.suspension_info],['Номер справи',r.erdr_no],['медкомісія/Лікування',r.treatment_vlk],
     ['Стан здоров.',r.health_state],['Діагноз',r.diagnosis],['Лікарня',r.hospital_name],
     ['В лікарні з',r.hospital_since],['Виписка',r.discharge_date],
-    ['ВЛК придатність',r.vlk_fitness],['ВЛК документ',r.vlk_doc],
-    ['Проживання',r.residence],['ДБР',r.dbr_sent],['Суд',r.court_session],
+    ['медкомісія придатність',r.vlk_fitness],['медкомісія документ',r.vlk_doc],
+    ['Проживання',r.residence],['профільна служба',r.dbr_sent],['Суд',r.court_session],
     ['Ухвала суду',r.court_decision],['Примітка',r.note]
   ];
   document.getElementById('szc-modal-body').innerHTML=
@@ -1722,81 +1721,81 @@ function loadRec(){
 
 const DILO_SCHEMAS = {
   vlk: {
-    title: 'Рапорт на ВЛК',
+    title: 'Заява на медкомісію',
     fields: [
-      {id:'to_rank',      label:'Кому (звання)',             ph:'',                  size:'sm'},
-      {id:'to_pos',       label:'Кому (посада)',              ph:'командиру взводу резерву роти резерву сержантського (старшинського) складу', size:'xl'},
-      {id:'to_unit',      label:'В/ч адресата',              ph:'А7020',             size:'sm'},
-      {id:'from_rank',    label:'Від (звання, називний)',    ph:'солдат',            size:'sm', profile:'rank'},
-      {id:'from_rank_d',  label:'Від (звання, давальний)',    ph:'солдату',           size:'sm'},
+      {id:'to_rank',      label:'Кому (ранг)',             ph:'',                  size:'sm'},
+      {id:'to_pos',       label:'Кому (посада)',              ph:'керівнику відділу керівник молодшого складу', size:'xl'},
+      {id:'to_unit',      label:'В/ч адресата',              ph:'',             size:'sm'},
+      {id:'from_rank',    label:'Від (ранг, називний)',    ph:'спеціаліст',            size:'sm', profile:'rank'},
+      {id:'from_rank_d',  label:'Від (ранг, давальний)',    ph:'спеціалісту',           size:'sm'},
       {id:'from_pib_d',   label:'ПІБ (давальний відмінок)',   ph:'КЕБІ Сергію Миколайовичу', size:'lg'},
       {id:'from_dob',     label:'Дата народження',            ph:'11.10.1991',        size:'sm'},
       {id:'from_phone',   label:'Телефон',                   ph:'0983343509',        size:'sm'},
-      {id:'hospital',     label:'Назва закладу ВЛК',         ph:"КНП «ВІННИЦЬКА ОБЛАСНА КЛІНІЧНА ПСИХОНЕВРОЛОГІЧНА ЛІКАРНЯ ім. акад. О.І. Ющенка Вінницької областної ради»", size:'xl', rows:2},
+      {id:'hospital',     label:'Назва закладу медкомісія',         ph:"КНП «ВІННИЦЬКА ОБЛАСНА КЛІНІЧНА ПСИХОНЕВРОЛОГІЧНА ЛІКАРНЯ ім. акад. О.І. Ющенка Вінницької областної ради»", size:'xl', rows:2},
       {id:'reason',       label:'Підстава',                  ph:"у зв'язку зі зміною стану здоров'я", size:'lg'},
       {id:'diagnosis',    label:'Останній діагноз',           ph:'F43.2 ...',         size:'xl', rows:3},
-      {id:'attach',       label:'Додаток до рапорту',         ph:'копію виписки з медичної картки стаціонарного хворого №____', size:'xl'},
-      {id:'from_pos_full',label:'Посада заявника (для підпису)', ph:'Тимчасово облікований солдат взводу резерву рядового складу роти резерву рядового складу', size:'xl'},
-      {id:'from_unit',    label:'В/ч заявника',              ph:'А7020',             size:'sm'},
+      {id:'attach',       label:'Додаток до заяви',         ph:'копію виписки з медичної картки стаціонарного хворого №____', size:'xl'},
+      {id:'from_pos_full',label:'Посада заявника (для підпису)', ph:'Тимчасово облікований спеціаліст відділу підрозділу', size:'xl'},
+      {id:'from_unit',    label:'В/ч заявника',              ph:'',             size:'sm'},
       {id:'from_short',   label:"Ім'я ПРІЗВИЩЕ заявника",    ph:'Сергій КЕБА',       size:'sm'},
       {id:'from_init',    label:'ПРІЗВИЩЕ І.П. заявника',    ph:'КЕБА С.М.',         size:'sm'},
       {id:'doc_date',     label:'Дата',                      type:'date',            size:'sm'},
-      {id:'plt_rank',     label:'Зв. ком. взводу',           ph:'лейтенант',         size:'sm'},
-      {id:'plt_pos',      label:'Посада ком. взводу (повна)', ph:'Командир взводу резерву роти резерву сержантського (старшинського) складу', size:'xl'},
-      {id:'plt_unit',     label:'В/ч ком. взводу',           ph:'А7020',             size:'sm'},
-      {id:'plt_short',    label:"Ім'я ПРІЗВИЩЕ ком. взводу", ph:'Віктор БОНДАРЕНКО', size:'sm'},
-      {id:'coy_rank',     label:'Зв. ком. роти',             ph:'лейтенант',         size:'sm'},
-      {id:'coy_pos',      label:'Посада ком. роти (повна)',   ph:'Командир роти резерву сержантського (старшинського) складу', size:'xl'},
-      {id:'coy_unit',     label:'В/ч ком. роти',             ph:'А7020',             size:'sm'},
-      {id:'coy_short',    label:"Ім'я ПРІЗВИЩЕ ком. роти",   ph:'Ігор ЛЕГКІХ',       size:'sm'},
+      {id:'plt_rank',     label:'Ранг керівника групи',           ph:'керівник підрозділу',         size:'sm'},
+      {id:'plt_pos',      label:'Посада ком. відділу (повна)', ph:'Керівник відділу керівник молодшого складу', size:'xl'},
+      {id:'plt_unit',     label:'В/ч ком. відділу',           ph:'',             size:'sm'},
+      {id:'plt_short',    label:"Ім'я ПРІЗВИЩЕ ком. відділу", ph:'Віктор БОНДАРЕНКО', size:'sm'},
+      {id:'coy_rank',     label:'Ранг керівника підрозділу',             ph:'керівник підрозділу',         size:'sm'},
+      {id:'coy_pos',      label:'Посада ком. підрозділу (повна)',   ph:'Керівник підрозділу', size:'xl'},
+      {id:'coy_unit',     label:'В/ч ком. підрозділу',             ph:'',             size:'sm'},
+      {id:'coy_short',    label:"Ім'я ПРІЗВИЩЕ ком. підрозділу",   ph:'Ігор ЛЕГКІХ',       size:'sm'},
     ],
     mkDoc: (v, prof) => {
       const d = v.doc_date
         ? new Date(v.doc_date).toLocaleDateString('uk-UA')
         : new Date().toLocaleDateString('uk-UA');
-      const toUnit  = v.to_unit   || 'А7020';
-      const frmUnit = v.from_unit || 'А7020';
-      const pltUnit = v.plt_unit  || 'А7020';
-      const coyUnit = v.coy_unit  || 'А7020';
-      // Rank: use dative form for body text (солдату, лейтенанту...)
-      const rankD   = v.from_rank_d || v.from_rank || 'солдату';
-      const rankN   = v.from_rank   || 'солдат';
+      const toUnit  = v.to_unit   || '';
+      const frmUnit = v.from_unit || '';
+      const pltUnit = v.plt_unit  || '';
+      const coyUnit = v.coy_unit  || '';
+      // Rank: use dative form for body text (спеціалісту, керівнику підрозділу...)
+      const rankD   = v.from_rank_d || v.from_rank || 'спеціалісту';
+      const rankN   = v.from_rank   || 'спеціаліст';
       const pibD    = v.from_pib_d  || '__________';
       const dob     = v.from_dob    || '__________';
       const phone   = v.from_phone  || '__________';
       const hosp    = v.hospital    || '__________';
       const reason  = v.reason      || "у зв\u2019язку зі зміною стану здоров\u2019я";
       const diag    = v.diagnosis   ? ' Останній діагноз: ' + v.diagnosis + '.' : '';
-      const attach  = v.attach      ? '\nДо рапорту додаю: ' + v.attach : '';
-      const fromPos = v.from_pos_full || ('Тимчасово облікований ' + rankN + ' взводу резерву рядового складу\nроти резерву рядового складу');
-      const plt_pos = v.plt_pos || 'Командир взводу резерву роти резерву\nсержантського (старшинського) складу';
-      const coy_pos = v.coy_pos || 'Командир роти резерву сержантського\n(старшинського) складу';
+      const attach  = v.attach      ? '\nДо заяви додаю: ' + v.attach : '';
+      const fromPos = v.from_pos_full || ('Тимчасово облікований ' + rankN + ' відділу');
+      const plt_pos = v.plt_pos || 'Керівник відділу\nкерівник молодшого складу';
+      const coy_pos = v.coy_pos || 'Керівник підрозділу';
       const tab = '\t';
       return (
-        'Командиру ' + (v.to_pos || 'взводу резерву роти резерву\nсержантського (старшинського) складу') + '\n' +
-        'військової частини ' + toUnit + '\n\n\n' +
-        '                                          РАПОРТ\n\n' +
-        tab + 'Прошу Вашого клопотання перед командуванням частини про надання мені ' +
+        'Керівнику ' + (v.to_pos || 'відділу\nкерівник молодшого складу') + '\n' +
+        'організації ' + toUnit + '\n\n\n' +
+        '                                          ЗАЯВА\n\n' +
+        tab + 'Прошу Вашого клопотання перед керівництвом частини про надання мені ' +
         rankD + ' ' + pibD + ', ' +
         (dob.includes('.') ? dob : dob) + ' року народження, моб. ' + phone + ', ' +
-        'направлення на проходження ВЛК в ' + hosp +
+        'направлення на проходження медкомісії в ' + hosp +
         ' ' + reason + '.' + diag +
         attach + '\n\n' +
         fromPos + '\n' +
-        'військової частини ' + frmUnit + '\n\n' +
+        'організації ' + frmUnit + '\n\n' +
         rankN + '\t\t\t\t\t' +
         d + '\t' + (v.from_short || '__________') + '\n\n\n' +
         '─────────────────────────────────────────────────────\n' +
-        'Командиру роти резерву сержантського (старшинського) складу\n' +
-        'військової частини ' + coyUnit + '\n\n' +
-        tab + 'Клопочу по суті рапорту ' + rankN + '\u00a0' + (v.from_init || '__________') + '.\n\n' +
-        plt_pos + ' військової частини ' + pltUnit + '\n' +
+        'Керівнику підрозділу\n' +
+        'організації ' + coyUnit + '\n\n' +
+        tab + 'Клопочу по суті заяви ' + rankN + '\u00a0' + (v.from_init || '__________') + '.\n\n' +
+        plt_pos + ' організації ' + pltUnit + '\n' +
         (v.plt_rank || '__________') + '\t\t\t\t\t' +
         d + '\t' + (v.plt_short || '__________') + '\n\n\n' +
         '─────────────────────────────────────────────────────\n' +
-        'Командиру військової частини ' + toUnit + '\n\n' +
-        tab + 'Клопочу по суті рапорту ' + rankN + '\u00a0' + (v.from_init || '__________') + '.\n\n' +
-        coy_pos + ' військової частини ' + coyUnit + '\n' +
+        'Керівнику організації ' + toUnit + '\n\n' +
+        tab + 'Клопочу по суті заяви ' + rankN + '\u00a0' + (v.from_init || '__________') + '.\n\n' +
+        coy_pos + ' організації ' + coyUnit + '\n' +
         (v.coy_rank || '__________') + '\t\t\t\t\t' +
         d + '\t' + (v.coy_short || '__________')
       );
@@ -1804,12 +1803,12 @@ const DILO_SCHEMAS = {
   },
 
   vidp: {
-    title: 'Рапорт на відпустку',
+    title: 'Заява на відпустку',
     fields: [
-      {id:'to_rank',    label:'Кому (звання)',    ph:'полковнику',     size:'sm'},
-      {id:'to_pos',     label:'Кому (посада)',    ph:'командиру в/ч А7020', size:'lg'},
+      {id:'to_rank',    label:'Кому (ранг)',    ph:'директору департаменту',     size:'sm'},
+      {id:'to_pos',     label:'Кому (посада)',    ph:'керівнику організації', size:'lg'},
       {id:'to_name',    label:'Кому (ПІБ)',       ph:'Іваненку І.І.',  size:'sm'},
-      {id:'from_rank',  label:'Від (звання)',     ph:'солдат',         size:'sm', profile:'rank'},
+      {id:'from_rank',  label:'Від (ранг)',     ph:'спеціаліст',         size:'sm', profile:'rank'},
       {id:'from_pos',   label:'Від (посада)',     ph:'стрілець',       size:'md', profile:'position'},
       {id:'from_pib_f', label:'ПІБ (повністю)',   ph:'Іваненко Іван Іванович', size:'lg', profile:'name_full'},
       {id:'from_pib_k', label:'ПІБ (скорочено)',  ph:'І.І. Іваненко',  size:'sm', profile:'name_short'},
@@ -1818,14 +1817,14 @@ const DILO_SCHEMAS = {
       {id:'leave_from', label:'Дата початку',     size:'sm',           type:'date'},
       {id:'leave_to',   label:'Дата закінчення',  size:'sm',           type:'date'},
       {id:'leave_addr', label:'Адреса під час',   ph:'м. Київ, вул...', size:'lg'},
-      {id:'unit',       label:'Номер частини',    ph:'А7020',          size:'sm', profile:'unit'},
+      {id:'unit',       label:'Номер частини',    ph:'',          size:'sm', profile:'unit'},
       {id:'location',   label:'Місце',            ph:'м. Вінниця',     size:'sm', profile:'location'},
       {id:'doc_date',   label:'Дата',             type:'date',         size:'sm'},
     ],
     mkDoc: (v,prof) => {
       const d = v.doc_date || new Date().toLocaleDateString('uk-UA');
-      return `РАПОРТ
-Командирові ${v.to_rank||'__________'} ${v.to_pos||'__________'}
+      return `ЗАЯВА
+Керівнику ${v.to_rank||'__________'} ${v.to_pos||'__________'}
 ${v.to_name||'__________'}
 
 від ${v.from_rank||'__________'} ${v.from_pos||'__________'}
@@ -1840,25 +1839,25 @@ ${v.location||'__________'}, ${d} р.               ${v.from_pib_k||'__________'
   },
 
   mat: {
-    title: 'Рапорт на матеріальну допомогу',
+    title: 'Заява на матеріальну допомогу',
     fields: [
-      {id:'to_rank',   label:'Кому (звання)',   ph:'полковнику',     size:'sm'},
-      {id:'to_pos',    label:'Кому (посада)',   ph:'командиру в/ч А7020', size:'lg'},
+      {id:'to_rank',   label:'Кому (ранг)',   ph:'директору департаменту',     size:'sm'},
+      {id:'to_pos',    label:'Кому (посада)',   ph:'керівнику організації', size:'lg'},
       {id:'to_name',   label:'Кому (ПІБ)',      ph:'Іваненку І.І.',  size:'sm'},
-      {id:'from_rank', label:'Від (звання)',    ph:'солдат',         size:'sm', profile:'rank'},
+      {id:'from_rank', label:'Від (ранг)',    ph:'спеціаліст',         size:'sm', profile:'rank'},
       {id:'from_pos',  label:'Від (посада)',    ph:'стрілець',       size:'md', profile:'position'},
       {id:'from_pib_f',label:'ПІБ (повністю)',  ph:'Іваненко Іван Іванович', size:'lg', profile:'name_full'},
       {id:'from_pib_k',label:'ПІБ (скорочено)', ph:'І.І. Іваненко',  size:'sm', profile:'name_short'},
       {id:'reason',    label:'Підстава',        size:'lg', sel:["у зв'язку зі скрутним матеріальним становищем","у зв'язку з тяжкою хворобою","у зв'язку зі смертю члена сім'ї","у зв'язку з непередбаченими обставинами"]},
       {id:'amount',    label:'Розмір (грн)',    ph:'5000',            size:'xs'},
-      {id:'unit',      label:'Номер частини',   ph:'А7020',           size:'sm', profile:'unit'},
+      {id:'unit',      label:'Номер частини',   ph:'',           size:'sm', profile:'unit'},
       {id:'location',  label:'Місце',           ph:'м. Вінниця',      size:'sm', profile:'location'},
       {id:'doc_date',  label:'Дата',            type:'date',          size:'sm'},
     ],
     mkDoc: (v,prof) => {
       const d = v.doc_date || new Date().toLocaleDateString('uk-UA');
-      return `РАПОРТ
-Командирові ${v.to_rank||'__________'} ${v.to_pos||'__________'}
+      return `ЗАЯВА
+Керівнику ${v.to_rank||'__________'} ${v.to_pos||'__________'}
 ${v.to_name||'__________'}
 
 від ${v.from_rank||'__________'} ${v.from_pos||'__________'}
@@ -1871,24 +1870,24 @@ ${v.location||'__________'}, ${d} р.               ${v.from_pib_k||'__________'
   },
 
   free: {
-    title: 'Рапорт довільного змісту',
+    title: 'Заява довільного змісту',
     fields: [
-      {id:'to_rank',   label:'Кому (звання)',   ph:'полковнику',     size:'sm'},
-      {id:'to_pos',    label:'Кому (посада)',   ph:'командиру в/ч А7020', size:'lg'},
+      {id:'to_rank',   label:'Кому (ранг)',   ph:'директору департаменту',     size:'sm'},
+      {id:'to_pos',    label:'Кому (посада)',   ph:'керівнику організації', size:'lg'},
       {id:'to_name',   label:'Кому (ПІБ)',      ph:'Іваненку І.І.',  size:'sm'},
-      {id:'from_rank', label:'Від (звання)',    ph:'солдат',         size:'sm', profile:'rank'},
+      {id:'from_rank', label:'Від (ранг)',    ph:'спеціаліст',         size:'sm', profile:'rank'},
       {id:'from_pos',  label:'Від (посада)',    ph:'стрілець',       size:'md', profile:'position'},
       {id:'from_pib_f',label:'ПІБ (повністю)',  ph:'Іваненко Іван Іванович', size:'lg', profile:'name_full'},
       {id:'from_pib_k',label:'ПІБ (скорочено)', ph:'І.І. Іваненко',  size:'sm', profile:'name_short'},
-      {id:'body',      label:'Зміст рапорту',   ph:'Прошу Вас...',   size:'xl', rows:5},
-      {id:'unit',      label:'Номер частини',   ph:'А7020',          size:'sm', profile:'unit'},
+      {id:'body',      label:'Зміст заяви',   ph:'Прошу Вас...',   size:'xl', rows:5},
+      {id:'unit',      label:'Номер частини',   ph:'',          size:'sm', profile:'unit'},
       {id:'location',  label:'Місце',           ph:'м. Вінниця',     size:'sm', profile:'location'},
       {id:'doc_date',  label:'Дата',            type:'date',         size:'sm'},
     ],
     mkDoc: (v,prof) => {
       const d = v.doc_date || new Date().toLocaleDateString('uk-UA');
-      return `РАПОРТ
-Командирові ${v.to_rank||'__________'} ${v.to_pos||'__________'}
+      return `ЗАЯВА
+Керівнику ${v.to_rank||'__________'} ${v.to_pos||'__________'}
 ${v.to_name||'__________'}
 
 від ${v.from_rank||'__________'} ${v.from_pos||'__________'}
@@ -1903,14 +1902,14 @@ ${v.location||'__________'}, ${d} р.               ${v.from_pib_k||'__________'
   dovidka: {
     title: 'Довідка про проходження служби',
     fields: [
-      {id:'rank',       label:'Звання',          ph:'солдат',         size:'sm', profile:'rank'},
+      {id:'rank',       label:'Ранг',          ph:'спеціаліст',         size:'sm', profile:'rank'},
       {id:'pos',        label:'Посада',           ph:'стрілець',       size:'md', profile:'position'},
       {id:'pib_f',      label:'ПІБ (повністю)',   ph:'Іваненко Іван Іванович', size:'lg', profile:'name_full'},
-      {id:'unit',       label:'Номер частини',   ph:'А7020',          size:'sm', profile:'unit'},
+      {id:'unit',       label:'Номер частини',   ph:'',          size:'sm', profile:'unit'},
       {id:'enroll',     label:'Дата зарахування', type:'date',        size:'sm'},
       {id:'purpose',    label:'Мета довідки',    ph:"для пред'явлення за місцем вимоги", size:'lg'},
-      {id:'signer_rank',label:'Зв. підписанта',  ph:'полковник',      size:'sm'},
-      {id:'signer_pos', label:'Посада підписанта',ph:'командир в/ч А7020', size:'lg'},
+      {id:'signer_rank',label:'Зв. підписанта',  ph:'директор департаменту',      size:'sm'},
+      {id:'signer_pos', label:'Посада підписанта',ph:'керівник організації', size:'lg'},
       {id:'signer_name',label:'ПІБ підписанта',  ph:'І.І. Іваненко',  size:'sm'},
       {id:'location',   label:'Місце видачі',    ph:'м. Вінниця',     size:'sm', profile:'location'},
       {id:'doc_no',     label:'Номер довідки',   ph:'123',            size:'xs'},
@@ -1921,7 +1920,7 @@ ${v.location||'__________'}, ${d} р.               ${v.from_pib_k||'__________'
       return `ДОВІДКА № ${v.doc_no||'___'}
 
 Видана ${v.rank||'__________'} ${v.pos||'__________'} ${v.pib_f||'__________'},
-що він(вона) дійсно проходить військову службу у в/ч ${v.unit||'А7020'} з ${v.enroll||'__________'} р.
+що він(вона) дійсно проходить службу в організації ${v.unit||''} з ${v.enroll||'__________'} р.
 
 Дана довідка видана ${v.purpose||"для пред'явлення за місцем вимоги"}.
 
@@ -1936,10 +1935,10 @@ ${v.signer_rank||'__________'} ${v.signer_pos||'__________'}  __________________
     fields: [
       {id:'pib_r',        label:'ПІБ — родовий відмінок',      ph:'МІЩЕНКА Дмитра Вячеславовича',          size:'lg'},
       {id:'pib_n',        label:'ПІБ — називний відмінок',      ph:'МІЩЕНКО Дмитро Вячеславович',           size:'lg'},
-      {id:'rank',         label:'Звання',                       ph:'матрос',                                size:'sm'},
+      {id:'rank',         label:'Ранг',                       ph:'матрос',                                size:'sm'},
       {id:'year',         label:'Рік народження',               ph:'1988',                                  size:'xs'},
-      {id:'service_type', label:'Вид служби',                   ph:'мобілізація',    size:'sm',
-       sel:['мобілізація','контракт','базова військова служба']},
+      {id:'service_type', label:'Вид служби',                   ph:'переведення',    size:'sm',
+       sel:['переведення','контракт','базова служба']},
       {id:'nationality',  label:'Національність',               ph:'українець',                             size:'sm'},
       {id:'family',       label:'Сімейний стан',                ph:'неодружений',    size:'sm',
        sel:['неодружений','одружений','розлучений','вдівець','перебуває у цивільному шлюбі']},
@@ -1948,14 +1947,14 @@ ${v.signer_rank||'__________'} ${v.signer_pos||'__________'}  __________________
       {id:'enroll_date',  label:'Перебуває у частині з (дата)', ph:'19.11.2025',                            size:'sm'},
       {id:'visit_text',   label:'Звернення до медпункту',       ph:'не звертався',                          size:'xl', rows:2},
       {id:'health_status',label:'Стан здоров\'я / діагноз',     ph:'',                                      size:'xl', rows:3},
-      {id:'vlk_decision', label:'Рішення ВЛК (якщо є)',         ph:'',                                      size:'lg'},
+      {id:'vlk_decision', label:'Рішення медкомісії (якщо є)',         ph:'',                                      size:'lg'},
       {id:'blood_type',   label:'Група крові',                  ph:'',                                      size:'xs'},
       {id:'objective',    label:'Об\'єктивно (якщо потрібно)',   ph:'нормостенічної статури. Шкіряні покрови чисті...', size:'xl', rows:5},
       {id:'psych',        label:'Психоневрол. статус (якщо є)', ph:'',                                      size:'xl', rows:3},
       {id:'extra',        label:'Додаткові відомості',          ph:'',                                      size:'xl', rows:2},
       {id:'purpose',      label:'Мета / заклад призначення',    ph:'для подання за місцем вимоги',          size:'xl'},
-      {id:'signer_rank',  label:'Звання підписанта',            ph:'молодший сержант',                      size:'sm'},
-      {id:'signer_name',  label:'Ім\'я ПРІЗВИЩЕ підписанта',   ph:'Ярослав ІЩЕНКО',                        size:'sm'},
+      {id:'signer_rank',  label:'Ранг підписанта',            ph:'молодший керівник групи',                      size:'sm'},
+      {id:'signer_name',  label:'Ім\'я ПРІЗВИЩЕ підписанта',   ph:'_________________________',                        size:'sm'},
       {id:'doc_date',     label:'Дата документа',               type:'date',                                size:'sm'},
     ],
     mkDoc: (v, prof) => {
@@ -1964,7 +1963,7 @@ ${v.signer_rank||'__________'} ${v.signer_pos||'__________'}  __________________
       const PIB_N   = v.pib_n        || PIB_R;
       const RANK    = v.rank         || '__________';
       const YEAR    = v.year         || '____';
-      const SRV     = v.service_type || 'мобілізація';
+      const SRV     = v.service_type || 'переведення';
       const NAT     = v.nationality  || 'українець';
       const FAM     = v.family       || 'неодружений';
       const EDU     = v.education    || 'середня';
@@ -1977,50 +1976,50 @@ ${v.signer_rank||'__________'} ${v.signer_pos||'__________'}  __________________
       const PSYCH   = v.psych        || '';
       const EXTRA   = v.extra        || '';
       const PURPOSE = v.purpose      || 'для подання за місцем вимоги';
-      const SIG_R   = v.signer_rank  || 'молодший сержант';
+      const SIG_R   = v.signer_rank  || 'молодший керівник групи';
       const SIG_N   = v.signer_name  || '__________';
       const months  = ['січня','лютого','березня','квітня','травня','червня',
                        'липня','серпня','вересня','жовтня','листопада','грудня'];
       const dt      = v.doc_date ? new Date(v.doc_date) : new Date();
       const DATE_STR = '\u00ab___\u00bb ' + months[dt.getMonth()] + ' ' + dt.getFullYear() + ' року.';
-      // Формулювання залежно від виду служби (Наказ №687, розділ II)
+      // Формулювання залежно від виду служби (чинне положення, розділ II)
       const isMob  = SRV.includes('мобіл');
       const isBase = SRV.includes('базова');
       const HEADER_SUB = isMob || isBase
-        ? 'який перебуває на тимчасовому обліку у військовій частині А7020'
-        : 'який проходить військову службу у військовій частині А7020';
+        ? 'який перебуває на тимчасовому обліку у організації '
+        : 'який проходить службу в організації ';
       const INTRO_SRV = isMob
-        ? RANK + ', що перебуває на тимчасовому обліку у військовій частині А7020,'
-        : RANK + ', що проходить військову службу у військовій частині А7020,';
+        ? RANK + ', що перебуває на тимчасовому обліку у організації ,'
+        : RANK + ', що проходить службу в організації ,';
       return (
 'Медична ХАРАКТЕРИСТИКА\n\n' +
-'на військовослужбовця ' + PIB_R + '\n\n' +
+'на співробітника ' + PIB_R + '\n\n' +
 HEADER_SUB + '\n\n' +
-'Військовослужбовець ' + PIB_N + ' ' + YEAR + ' р.н., ' + INTRO_SRV + '\n' +
+'Співробітник ' + PIB_N + ' ' + YEAR + ' р.н., ' + INTRO_SRV + '\n' +
 NAT + ', ' + FAM + ', освіта ' + EDU + '.' +
 (BLOOD ? ' Група крові: ' + BLOOD + '.' : '') + '\n\n' +
-'Перебуває у військовій частині А7020 з ' + ENROLL + 'р. по теперішній час.\n\n' +
+'Перебуває у організації  з ' + ENROLL + 'р. по теперішній час.\n\n' +
 'Згідно даних медичної документації, яка наявна в медичному пункті' + (OBJ ? '\n' : ', ') +
-'військової частини А7020, за час проходження військової служби в даній\n' +
-'частині за медичною допомогою до медичного пункту військової частини\n' +
-'А7020 ' + VISIT + '.' +
+'організації, за час проходження служби в даній\n' +
+'частині за медичною допомогою до медичного пункту організації\n' +
+' ' + VISIT + '.' +
 (HEALTH ? '\n\n' + HEALTH + '.' : '') +
-(VLK    ? '\n\nРішення ВЛК: ' + VLK + '.' : '') +
+(VLK    ? '\n\nРішення медкомісії: ' + VLK + '.' : '') +
 (OBJ    ? '\n\nОб\u2019єктивно: ' + OBJ : '') +
 (PSYCH  ? '\n\nПсихоневрологічний статус: ' + PSYCH : '') +
 '\n\nДані про венеричні захворювання, туберкульоз, ВІЛ-інфекцію відсутні.' +
 (EXTRA  ? '\n' + EXTRA : '') + '\n\n' +
 'Характеристика видана ' + PURPOSE + '.\n\n' +
 'ТВО начальника медичного пункту\n' +
-'військової частини А7020\n\n' +
+'організації\n\n' +
 SIG_R + '                              ' + SIG_N + '\n\n' +
 DATE_STR
       );
     }
-  }
+  },
 
   naprvlk_form: {
-    title: 'Направлення на ВЛК (НМО №402, Додаток 15)',
+    title: 'Направлення на медкомісію (типова форма)',
     fields: [
       // ── Шапка ──
       {id:'dest_pos',    label:'Кому (посада отримувача)',      ph:'Начальнику ВМКЦ ПдР',                    size:'lg'},
@@ -2028,33 +2027,33 @@ DATE_STR
       {id:'doc_no',      label:'Вихідний номер',               ph:'______',                                  size:'xs'},
       {id:'doc_date',    label:'Дата',                         type:'date',                                  size:'sm'},
       // ── Мета ──
-      {id:'purpose',     label:'Мета медичного огляду (вказати мету)', ph:'визначення ступеня придатності до військової служби', size:'xl'},
-      // ── Рядок таблиці — поля відповідно до НМО №402 / Наказу №687 ──
-      {id:'rank',        label:'Військове звання',             ph:'полковник',                               size:'sm'},
+      {id:'purpose',     label:'Мета медичного огляду (вказати мету)', ph:'визначення ступеня придатності до служби', size:'xl'},
+      // ── Рядок таблиці — поля відповідно до НМО №402 / чинного положення ──
+      {id:'rank',        label:'Ранг',             ph:'директор департаменту',                               size:'sm'},
       {id:'pib',         label:'Прізвище, ім\'я, по батькові', ph:'ГАЛИГІН Василь Васильович',              size:'lg'},
       {id:'dob',         label:'Дата народження',              ph:'15.10.1975',                              size:'sm'},
-      {id:'enroll',      label:'Місяць і рік прийняття (призову) на в/с', ph:'02.2022',                    size:'sm'},
-      {id:'tck',         label:'Яким ТЦК та СП прийнятий (призваний)', ph:'Одеського РТЦК та СП',          size:'lg'},
+      {id:'enroll',      label:'Місяць і рік прийняття (зарахування) на службу', ph:'02.2022',                    size:'sm'},
+      {id:'tck',         label:'Яким кадровим підрозділом зарахований (зарахований)', ph:'Одеського кадровим підрозділом',          size:'lg'},
       {id:'diagnosis',   label:'Попередній діагноз',           ph:'',                                        size:'xl', rows:5},
       // ── Підписант ──
-      {id:'signer_pos',  label:'Посада командира (повна)',     ph:'Тимчасово виконуючий обов\'язки командира військової частини А7020', size:'xl'},
-      {id:'signer_rank', label:'Звання командира',             ph:'підполковник',                            size:'sm'},
-      {id:'signer_name', label:'Ім\'я ПРІЗВИЩЕ командира',    ph:'Анатолій ДІДУР',                         size:'sm'},
+      {id:'signer_pos',  label:'Посада керівника (повна)',     ph:'Тимчасово виконуючий обов\'язки керівника організації', size:'xl'},
+      {id:'signer_rank', label:'Ранг керівника',             ph:'керівник департаменту',                            size:'sm'},
+      {id:'signer_name', label:'Ім\'я ПРІЗВИЩЕ керівника',    ph:'_________________________',                         size:'sm'},
     ],
     mkDoc: (v, prof) => {
-      // ── Змінні (відповідно до НМО №402 від 17.11.2008 Додаток 15, Наказ №687) ──
+      // ── Змінні (відповідно до НМО №402 від 17.11.2008 Додаток 15, чинне положення) ──
       const DEST_POS    = v.dest_pos    || 'Начальнику ВМКЦ ПдР';
       const DEST_CITY   = v.dest_city   || 'м. Одеса';
       const DOC_NO      = v.doc_no      || '________';
-      const PURPOSE     = v.purpose     || 'визначення ступеня придатності до військової служби';
+      const PURPOSE     = v.purpose     || 'визначення ступеня придатності до служби';
       const RANK        = v.rank        || '__________';
       const PIB         = v.pib         || '__________';
       const DOB         = v.dob         || '__________';
       const ENROLL      = v.enroll      || '__________';   // формат: MM.YYYY (Місяць і рік)
-      const TCK         = v.tck         || '__________';   // напр: "Вінницького РТЦК та СП"
+      const TCK         = v.tck         || '__________';   // напр: "Вінницького кадровим підрозділом"
       const DIAGNOSIS   = v.diagnosis   || '__________';
-      const SIGNER_POS  = v.signer_pos  || 'Тимчасово виконуючий обов\u2019язки командира військової частини А7020';
-      const SIGNER_RANK = v.signer_rank || 'підполковник';
+      const SIGNER_POS  = v.signer_pos  || 'Тимчасово виконуючий обов\u2019язки керівника організації';
+      const SIGNER_RANK = v.signer_rank || 'керівник департаменту';
       const SIGNER_NAME = v.signer_name || '__________';
       const months = ['січня','лютого','березня','квітня','травня','червня',
                        'липня','серпня','вересня','жовтня','листопада','грудня'];
@@ -2064,21 +2063,21 @@ DATE_STR
       const YR  = dt.getFullYear();
       const col = (s, w) => { const t = String(s||''); return t.length >= w ? t : t + ' '.repeat(w - t.length); };
       return (
-'Н МОУ №402 від 17.11.2008                                    ' + DEST_POS + '\n' +
+'Форма Ф-15                                    ' + DEST_POS + '\n' +
 'Додаток 15                                                     ' + DEST_CITY + '\n\n\n' +
-'Міністерство оборони України\n' +
-'Військова частина А7020\n' +
-'Код ЄДРПОУ 24974132\n\n' +
+'Головна організація\n' +
+'Організація\n' +
+'Код ЄДРПОУ __________\n\n' +
 DD + '.' + MON + ' ' + YR + '\n' +
 '№ ' + DOC_NO + '.\n\n' +
-'57116, с. Михайлівка\nМиколаївської області\n\n\n' +
+'______________,\n________________\n\n\n' +
 '                              НАПРАВЛЕННЯ\n' +
-'    на медичний огляд військово-лікарською комісією з метою\n\n' +
+'    на медичний огляд медичною комісією з метою\n\n' +
 '      ' + PURPOSE + '\n' +
 '                       (вказати мету медичного огляду)\n\n' +
 '┌────┬───────────────────┬───────────────────────────────┬──────────────┬───────────────────────────────┬────────────────────────────────┬─────────────────────────────────────────┐\n' +
-'│ №  │ Військове         │ Прізвище, ім\u2019я,               │ Дата         │ Місяць і рік прийняття        │ Яким ТЦК та СП прийнятий       │ Попередній діагноз                      │\n' +
-'│з/п │ звання            │ по батькові                   │ народження   │ (призову) на військову службу │ (призваний) на військову службу│                                         │\n' +
+'│ №  │ Військове         │ Прізвище, ім\u2019я,               │ Дата         │ Місяць і рік прийняття        │ Яким кадровим підрозділом зарахований       │ Попередній діагноз                      │\n' +
+'│з/п │ ранг            │ по батькові                   │ народження   │ (зарахування) на службу │ (зарахований) на службу│                                         │\n' +
 '├────┼───────────────────┼───────────────────────────────┼──────────────┼───────────────────────────────┼────────────────────────────────┼─────────────────────────────────────────┤\n' +
 '│ 1. │ ' + col(RANK,17) + ' │ ' + col(PIB,29) + ' │ ' + col(DOB,12) + ' │ ' + col(ENROLL,29) + ' │ ' + col(TCK,30) + ' │ ' + DIAGNOSIS + '\n' +
 '└────┴───────────────────┴───────────────────────────────┴──────────────┴───────────────────────────────┴────────────────────────────────┴─────────────────────────────────────────┘\n\n' +
@@ -2086,25 +2085,25 @@ SIGNER_POS + '\n\n' +
 '\t\t' + SIGNER_RANK + '\t\t\t\t\t\t\t\t' + SIGNER_NAME
       );
     }
-  }
+  },
 
   nakaz: {
-    title: 'Наказ по особовому складу',
+    title: 'Наказ по персоналу',
     fields: [
-      {id:'unit',       label:'Номер частини',   ph:'А7020',          size:'sm', profile:'unit'},
+      {id:'unit',       label:'Номер частини',   ph:'',          size:'sm', profile:'unit'},
       {id:'location',   label:'Місце',           ph:'м. Вінниця',     size:'sm', profile:'location'},
       {id:'doc_no',     label:'Номер наказу',    ph:'001',            size:'xs'},
       {id:'doc_date',   label:'Дата наказу',     type:'date',         size:'sm'},
       {id:'title',      label:'Заголовок',       ph:'По особовому складу', size:'lg'},
       {id:'preamble',   label:'Преамбула (підстава)', ph:'На виконання...', size:'xl', rows:2},
       {id:'body',       label:'НАКАЗУЮ:',        ph:'1. ...',         size:'xl', rows:5},
-      {id:'signer_rank',label:'Зв. командира',   ph:'полковник',      size:'sm'},
-      {id:'signer_pos', label:'Посада командира',ph:'командир в/ч А7020', size:'lg'},
-      {id:'signer_name',label:'ПІБ командира',   ph:'І.І. Іваненко',  size:'sm'},
+      {id:'signer_rank',label:'Ранг керівника',   ph:'директор департаменту',      size:'sm'},
+      {id:'signer_pos', label:'Посада керівника',ph:'керівник організації', size:'lg'},
+      {id:'signer_name',label:'ПІБ керівника',   ph:'І.І. Іваненко',  size:'sm'},
     ],
     mkDoc: (v,prof) => {
       const d = v.doc_date || new Date().toLocaleDateString('uk-UA');
-      return 'Військова частина ' + (v.unit||'А7020') + '\n\n' +
+      return 'Організація ' + (v.unit||'') + '\n\n' +
         'НАКАЗ\n' +
         (v.location||'__________') + '                            ' + d + ' р.     № ' + (v.doc_no||'___') + '\n\n' +
         (v.title||'По особовому складу') + '\n\n' +
@@ -2182,7 +2181,7 @@ function diloFill(key, id) {
   const _fn = _parts[1]||'';
   const _pt = _parts[2]||'';
   const _init = _ln + (_fn?'\u00a0'+_fn[0]+'.':'') + (_pt?'\u00a0'+_pt[0]+'.':'');
-  // for dative case we append 'у' to rank (солдат→солдату)
+  // for dative case we append 'у' to rank (спеціаліст→спеціалісту)
   const _rankD = (p.rank_text||'').replace(/(?:ь|т)$/,m=>m==='ь'?'ю':'ту').replace(/([кнр])$/,'$1у') || p.rank_text||'';
   const map = {
     from_rank:  p.rank_text,
@@ -2200,14 +2199,14 @@ function diloFill(key, id) {
     pib:      p.pib,
     dob:      p.date_of_birth ? p.date_of_birth.replace(/-/g,'.').split('.').reverse().join('.') : '',
     enroll:   p.enroll_date ? p.enroll_date.replace(/-/g,'.').split('.').reverse().join('.').slice(3) : '',
-    tck:      (p.conscription_tck||'') + (p.conscription_oblast ? ' ' + p.conscription_oblast + ' РТЦК та СП' : ''),
+    tck:      (p.conscription_tck||'') + (p.conscription_oblast ? ' ' + p.conscription_oblast + ' кадровим підрозділом' : ''),
     diagnosis: p.health_status || p.vlk_decision_summary || '',
-    // ── medchar fields (відповідно до Наказу №687 від 14.10.2024) ──
+    // ── medchar fields (відповідно до чинного положення від 14.10.2024) ──
     pib_r:        '',           // родовий відмінок — вводити вручну
     pib_n:        p.pib,        // називний відмінок — автоматично
     rank:         p.rank_text,
     year:         p.date_of_birth ? p.date_of_birth.slice(0,4) : '',
-    service_type: p.service_type  || 'мобілізація',
+    service_type: p.service_type  || 'переведення',
     nationality:  'українець',
     family:       p.family_status   || '',
     education:    p.civil_education || '',
@@ -2218,10 +2217,10 @@ function diloFill(key, id) {
     // ── naprvlk_form fields (НМО №402, таблиця Додаток 15) ──
     pib:     (p.pib||'').toUpperCase(),
     dob:     p.date_of_birth ? (()=>{const d=p.date_of_birth.split('-');return d[2]+'.'+d[1]+'.'+d[0];})() : '',
-    // Місяць і рік прийняття (призову) на в/с — формат MM.YYYY (Наказ №687 розд.XI п.20)
+    // Місяць і рік прийняття (зарахування) на службу — формат MM.YYYY (чинне положення розд.XI п.20)
     enroll:  p.enroll_date ? (()=>{const d=p.enroll_date.split('-');return d[1]+'.'+d[0];})() : '',
-    tck:     (p.conscription_tck ? p.conscription_tck + 'ого РТЦК та СП' : '') ||
-             (p.conscription_oblast ? p.conscription_oblast + 'ого РТЦК та СП' : '') || '',
+    tck:     (p.conscription_tck ? p.conscription_tck + 'ого кадровим підрозділом' : '') ||
+             (p.conscription_oblast ? p.conscription_oblast + 'ого кадровим підрозділом' : '') || '',
     diagnosis: p.health_status||p.vlk_decision_summary||'',
     year: p.date_of_birth ? p.date_of_birth.slice(0,4) : '',
     nationality: 'українець',
@@ -2241,21 +2240,21 @@ function diloFill(key, id) {
     // naprvlk_form fields
     pib: p.pib,
     dob: p.date_of_birth ? p.date_of_birth.replace(/-/g,'.').split('.').reverse().join('.') : '',
-    tck: (p.conscription_tck||'') + (p.conscription_oblast ? ' ' + p.conscription_oblast + ' РТЦК та СП' : ''),
+    tck: (p.conscription_tck||'') + (p.conscription_oblast ? ' ' + p.conscription_oblast + ' кадровим підрозділом' : ''),
     diagnosis: p.health_status||p.vlk_decision_summary||'',
     from_rank_d: (()=>{
       const r=(p.rank_text||'').toLowerCase();
       const map={
-        'солдат':'солдату','старший солдат':'старшому солдату',
-        'молодший сержант':'молодшому сержанту','сержант':'сержанту',
-        'старший сержант':'старшому сержанту','головний сержант':'головному сержанту',
-        'штаб-сержант':'штаб-сержанту','майстер-сержант':'майстер-сержанту',
-        'старший майстер-сержант':'старшому майстер-сержанту',
-        'головний майстер-сержант':'головному майстер-сержанту',
-        'молодший лейтенант':'молодшому лейтенанту','лейтенант':'лейтенанту',
-        'старший лейтенант':'старшому лейтенанту','капітан':'капітану',
-        'майор':'майору','підполковник':'підполковнику','полковник':'полковнику',
-        'генерал-майор':'генерал-майору','генерал-лейтенант':'генерал-лейтенанту',
+        'спеціаліст':'спеціалісту','старший спеціаліст':'старшому спеціалісту',
+        'молодший керівник групи':'молодшому керівнику групи','керівник групи':'керівнику групи',
+        'старший керівник групи':'старшому керівнику групи','головний керівник групи':'головному керівнику групи',
+        'відповідальний спеціаліст':'відповідальному спеціалісту','провідний спеціаліст':'провідному спеціалісту',
+        'старший провідний спеціаліст':'старшому провідному спеціалісту',
+        'головний провідний спеціаліст':'головному провідному спеціалісту',
+        'молодший спеціаліст-керівник':'молодшому спеціалісту-керівнику','керівник підрозділу':'керівнику підрозділу',
+        'старший керівник підрозділу':'старшому керівнику підрозділу','начальник підрозділу':'начальнику підрозділу',
+        'заступник керівника':'заступнику керівника','керівник департаменту':'керівнику департаменту','директор департаменту':'директору департаменту',
+        'заступник директора':'заступнику директора','директор':'директору','бригадир':'бригадиру',
       };
       return map[r]||p.rank_text||'';
     })(),
@@ -2272,7 +2271,7 @@ function diloFill(key, id) {
     rank: p.rank_text, pos: p.vos_position, pib_f: p.pib,
     hospital: '',
     diagnosis: p.health_status||p.vlk_decision_summary||'',
-    from_pos_full: p.subdivision ? 'Тимчасово облікований '+p.rank_text+' '+p.subdivision+' військової частини А7020' : '',
+    from_pos_full: p.subdivision ? 'Тимчасово облікований '+p.rank_text+' '+p.subdivision+' організації' : '',
   };
   schema.fields.forEach(f => {
     if (map[f.id] !== undefined) {
@@ -2355,7 +2354,7 @@ function _saveToReg(type, pid, p) {
   api('/api/med/registry/add',{table:tbl,data:row}).then(r=>{
     if(!r||!r.ok)return;
     invalidateCache();
-    const _typeNames={naprvlk:'ВЛК',naprkonsult:'Консультація',medchar:'Хар-ка',stac:'Стаціонар'};
+    const _typeNames={naprvlk:'медкомісія',naprkonsult:'Консультація',medchar:'Хар-ка',stac:'Стаціонар'};
     const _regKeys={naprvlk:'reg-vlk',naprkonsult:'reg-konsult',medchar:'reg-char',stac:'reg-analyses'};
     const el=document.createElement('div');
     el.style.cssText='position:fixed;bottom:24px;right:24px;background:#1e293b;color:#fff;padding:12px 18px;border-radius:8px;font-size:13px;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.4);border-left:3px solid #22c55e;cursor:default';
@@ -2392,19 +2391,19 @@ function loadMedPers(){
     <td style="font-size:11px;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.vlk_decision_summary||r.vlk_decision||''}">${r.vlk_decision_summary||r.vlk_decision||'—'}</td>
     <td style="color:var(--blue)">${r.phone||'—'}</td>
     <td><div style="display:flex;gap:3px;flex-wrap:wrap">
-      <button onclick="genDoc('naprvlk',${r.id})"     style="background:rgba(59,140,255,.12);color:var(--blue);border:1px solid rgba(59,140,255,.2);font-size:10px;padding:3px 5px;border-radius:4px;cursor:pointer;white-space:nowrap">🏥 ВЛК</button>
+      <button onclick="genDoc('naprvlk',${r.id})"     style="background:rgba(59,140,255,.12);color:var(--blue);border:1px solid rgba(59,140,255,.2);font-size:10px;padding:3px 5px;border-radius:4px;cursor:pointer;white-space:nowrap">🏥 медкомісія</button>
       <button onclick="genDoc('naprkonsult',${r.id})" style="background:rgba(62,201,122,.1);color:var(--green);border:1px solid rgba(62,201,122,.2);font-size:10px;padding:3px 5px;border-radius:4px;cursor:pointer;white-space:nowrap">👨‍⚕️ Консульт.</button>
       <button onclick="genDoc('medchar',${r.id})"     style="background:rgba(245,166,35,.1);color:var(--amber);border:1px solid rgba(245,166,35,.2);font-size:10px;padding:3px 5px;border-radius:4px;cursor:pointer;white-space:nowrap">📋 Хар-ка</button>
       <button onclick="genDoc('stac',${r.id})"        style="background:rgba(139,92,246,.1);color:#8b5cf6;border:1px solid rgba(139,92,246,.2);font-size:10px;padding:3px 5px;border-radius:4px;cursor:pointer;white-space:nowrap">🛏 Стаціонар</button>
-      <button onclick="openDiloFor(${r.id},'vlk')"   style="background:rgba(59,140,255,.08);color:var(--blue);border:1px solid rgba(59,140,255,.12);font-size:10px;padding:3px 5px;border-radius:4px;cursor:pointer;white-space:nowrap">📋 Рапорт ВЛК</button>
+      <button onclick="openDiloFor(${r.id},'vlk')"   style="background:rgba(59,140,255,.08);color:var(--blue);border:1px solid rgba(59,140,255,.12);font-size:10px;padding:3px 5px;border-radius:4px;cursor:pointer;white-space:nowrap">📋 Заява медкомісія</button>
       <button onclick="openDiloFor(${r.id},'vidp')"  style="background:rgba(62,201,122,.08);color:var(--green);border:1px solid rgba(62,201,122,.12);font-size:10px;padding:3px 5px;border-radius:4px;cursor:pointer;white-space:nowrap">🏖 Відпустка</button>
-      <button onclick="openDiloFor(${r.id},'free')"  style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);font-size:10px;padding:3px 5px;border-radius:4px;cursor:pointer;white-space:nowrap">📄 Рапорт</button>
+      <button onclick="openDiloFor(${r.id},'free')"  style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);font-size:10px;padding:3px 5px;border-radius:4px;cursor:pointer;white-space:nowrap">📄 Заява</button>
     </div></td>
   </tr>`).join('')||'<tr><td colspan="8" class="empty-st">Нічого не знайдено</td></tr>';
   paginate('mp-pag',tot,pg,'med-pers');
 }
 
-// ── Журнал СЗЧ (мед) ─────────────────────────────────────────────────────
+// ── Журнал відсутності (мед) ─────────────────────────────────────────────────────
 function loadMedSzc(){
   const pib=document.getElementById('ms-pib').value.trim();
   const unit=document.getElementById('ms-unit').value.trim();
@@ -2584,7 +2583,7 @@ function loadProfileUI() {
 }
 
 
-// ── Діловод: Пошук по журналу СЗЧ ────────────────────────────────────────
+// ── Діловод: Пошук по журналу відсутності ────────────────────────────────────────
 function loadDiloSzc() {
   var pib  = (document.getElementById('dszc-pib')  || {}).value || '';
   var unit = (document.getElementById('dszc-unit') || {}).value || '';
@@ -2609,14 +2608,14 @@ function loadDiloSzc() {
     var pid = r.personnel_id;
     var btns;
     if (pid) {
-      btns  = btn('openDiloFor('+pid+',"vlk")',     'rgba(59,140,255,.12)','var(--blue)',  'rgba(59,140,255,.2)',  bs, '📋 Рапорт ВЛК');
+      btns  = btn('openDiloFor('+pid+',"vlk")',     'rgba(59,140,255,.12)','var(--blue)',  'rgba(59,140,255,.2)',  bs, '📋 Заява медкомісія');
       btns += btn('openDiloFor('+pid+',"vidp")',    'rgba(62,201,122,.1)', 'var(--green)', 'rgba(62,201,122,.2)', bs, '🏖 Відпустка');
-      btns += btn('openDiloFor('+pid+',"free")',    'var(--bg3)',           'var(--text2)', 'var(--border)',        bs, '📄 Рапорт');
+      btns += btn('openDiloFor('+pid+',"free")',    'var(--bg3)',           'var(--text2)', 'var(--border)',        bs, '📄 Заява');
       btns += btn('openDiloFor('+pid+',"dovidka")', 'rgba(45,207,184,.1)','#2dcfb8',      'rgba(45,207,184,.2)', bs, '🗒 Довідка');
     } else {
       btns  = '<span style="color:var(--text3);font-size:10px">Немає в о/с&nbsp;</span>';
-      btns += btn('diloFillFromSzc('+r.id+',"vlk")',  'rgba(59,140,255,.12)','var(--blue)',  'rgba(59,140,255,.2)', bs, '📋 Рапорт ВЛК');
-      btns += btn('diloFillFromSzc('+r.id+',"free")', 'var(--bg3)',           'var(--text2)', 'var(--border)',       bs, '📄 Рапорт');
+      btns += btn('diloFillFromSzc('+r.id+',"vlk")',  'rgba(59,140,255,.12)','var(--blue)',  'rgba(59,140,255,.2)', bs, '📋 Заява медкомісія');
+      btns += btn('diloFillFromSzc('+r.id+',"free")', 'var(--bg3)',           'var(--text2)', 'var(--border)',       bs, '📄 Заява');
     }
     return '<tr>'
       + '<td style="font-weight:500">'+(r.pib_raw||'—')+'</td>'
@@ -2659,7 +2658,7 @@ function diloFillFromSzc(szcId, rapType) {
       setF('rank',       r.rank_raw);
       setF('body',       'Прошу розглянути питання щодо: ' + (r.pib_raw||''));
       const badge = document.getElementById('dilo-'+key+'-badge');
-      if (badge) badge.innerHTML = '<span style="color:var(--blue);font-weight:600">'+r.pib_raw+'</span> <span style="color:var(--green)">'+r.rank_raw+'</span> <span style="color:var(--text3)">[СЗЧ]</span>';
+      if (badge) badge.innerHTML = '<span style="color:var(--blue);font-weight:600">'+r.pib_raw+'</span> <span style="color:var(--green)">'+r.rank_raw+'</span> <span style="color:var(--text3)">[Відсутність]</span>';
     }, 120);
   }, 60);
 }
@@ -2694,10 +2693,10 @@ function loadDiloPers() {
       + '<td style="color:var(--blue)">'+(r.phone||'—')+'</td>'
       + '<td style="color:var(--text2)">'+(r.date_of_birth||'—')+'</td>'
       + '<td><div style="display:flex;gap:3px;flex-wrap:wrap">'
-      + btn('openDiloFor('+r.id+',"vlk")',     'rgba(59,140,255,.12)','var(--blue)',  'rgba(59,140,255,.2)',  bs, '📋 ВЛК')
+      + btn('openDiloFor('+r.id+',"vlk")',     'rgba(59,140,255,.12)','var(--blue)',  'rgba(59,140,255,.2)',  bs, '📋 медкомісія')
       + btn('openDiloFor('+r.id+',"vidp")',    'rgba(62,201,122,.1)', 'var(--green)', 'rgba(62,201,122,.2)', bs, '🏖 Відпустка')
       + btn('openDiloFor('+r.id+',"mat")',     'rgba(245,166,35,.1)', 'var(--amber)', 'rgba(245,166,35,.2)', bs, '💰 Мат. допомога')
-      + btn('openDiloFor('+r.id+',"free")',    'var(--bg3)',           'var(--text2)', 'var(--border)',        bs, '📄 Рапорт')
+      + btn('openDiloFor('+r.id+',"free")',    'var(--bg3)',           'var(--text2)', 'var(--border)',        bs, '📄 Заява')
       + btn('openDiloFor('+r.id+',"dovidka")', 'rgba(45,207,184,.1)','#2dcfb8',      'rgba(45,207,184,.2)', bs, '🗒 Довідка')
       + '</div></td></tr>';
   }).join('') || '<tr><td colspan="7" class="empty-st">Нічого не знайдено</td></tr>';
@@ -2709,19 +2708,19 @@ function loadDiloPers() {
       <div id="admin-profile" class="sub">
         <div class="slabel">Мій профіль — дані для документів</div>
         <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;max-width:600px">
-          <div style="font-size:11px;color:var(--text3);margin-bottom:16px">Ці дані автоматично підставляються у рапортах Діловоду як дані підписанта.</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:16px">Ці дані автоматично підставляються у заяваах Діловоду як дані підписанта.</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <div><div style="font-size:10px;color:var(--text3);margin-bottom:4px">Військове звання</div>
-              <input id="prf-rank" class="fi" placeholder="старший лейтенант" style="width:100%;box-sizing:border-box"></div>
+            <div><div style="font-size:10px;color:var(--text3);margin-bottom:4px">Ранг</div>
+              <input id="prf-rank" class="fi" placeholder="старший керівник підрозділу" style="width:100%;box-sizing:border-box"></div>
             <div><div style="font-size:10px;color:var(--text3);margin-bottom:4px">Посада</div>
-              <input id="prf-position" class="fi" placeholder="командир взводу" style="width:100%;box-sizing:border-box"></div>
+              <input id="prf-position" class="fi" placeholder="керівник відділу" style="width:100%;box-sizing:border-box"></div>
             <div style="grid-column:1/-1"><div style="font-size:10px;color:var(--text3);margin-bottom:4px">ПІБ (повністю)</div>
               <input id="prf-name_full" class="fi" placeholder="Іваненко Іван Іванович" style="width:100%;box-sizing:border-box"></div>
             <div><div style="font-size:10px;color:var(--text3);margin-bottom:4px">ПІБ (скорочено)</div>
               <input id="prf-name_short" class="fi" placeholder="І.І. Іваненко" style="width:100%;box-sizing:border-box"></div>
             <div><div style="font-size:10px;color:var(--text3);margin-bottom:4px">Номер частини</div>
-              <input id="prf-unit" class="fi" placeholder="А7020" style="width:100%;box-sizing:border-box"></div>
-            <div style="grid-column:1/-1"><div style="font-size:10px;color:var(--text3);margin-bottom:4px">Місце дислокації</div>
+              <input id="prf-unit" class="fi" placeholder="" style="width:100%;box-sizing:border-box"></div>
+            <div style="grid-column:1/-1"><div style="font-size:10px;color:var(--text3);margin-bottom:4px">Місце розташування</div>
               <input id="prf-location" class="fi" placeholder="м. Вінниця" style="width:100%;box-sizing:border-box"></div>
           </div>
           <div style="margin-top:16px;display:flex;gap:10px;align-items:center">
@@ -2732,11 +2731,11 @@ function loadDiloPers() {
       </div>
 
 
-<!-- ── СЗЧ Modal ──────────────────────────────────────────────────────────── -->
+<!-- ── Відсутність Modal ──────────────────────────────────────────────────────────── -->
 <div id="szc-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:1000;overflow-y:auto;padding:24px 16px" onclick="if(event.target===this)closeSzcModal()">
   <div style="max-width:720px;margin:0 auto;background:var(--bg2);border-radius:12px;border:1px solid var(--border);overflow:hidden">
     <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border)">
-      <div style="font-size:15px;font-weight:600;color:var(--text1)" id="szc-modal-title">Запис СЗЧ</div>
+      <div style="font-size:15px;font-weight:600;color:var(--text1)" id="szc-modal-title">Запис про відсутність</div>
       <button onclick="closeSzcModal()" style="background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:6px;line-height:1">×</button>
     </div>
     <div id="szc-modal-body" style="padding:20px"></div>
