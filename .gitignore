@@ -2,3 +2,5 @@ users.json
 *.log
 output/
 *.db
+users.json
+*.log
