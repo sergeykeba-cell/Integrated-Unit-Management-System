@@ -2,7 +2,6 @@
 profile_manager.py
 Управління профілем користувача (SQLite, локально)
 """
-
 import sqlite3
 import os
 import json
@@ -105,13 +104,10 @@ def set_active_profile(profile_name: str) -> bool:
 
 # Структура профілю користувача
 DEFAULT_PROFILE = {
-    "rank": "",           # Військове звання (напр. "старший лейтенант")
     "position": "",       # Посада
     "name_full": "",      # ПІБ повністю (Іваненко Іван Іванович)
     "name_short": "",     # ПІБ скорочено (І.І. Іваненко)
-    "unit": "",           # Номер частини (А1234)
-    "location": "",       # Місце дислокації (м. Дніпро)
+    "location": "",       # Місто (напр. "м. Дніпро")
 }
-
 
 init_db()
