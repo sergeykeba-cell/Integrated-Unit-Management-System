@@ -10,33 +10,49 @@ Patches applied:
   [A5] Dummy hash for non-existent users (timing parity)
   [A6] Session cleanup job (expired sessions GC every hour)
 """
+
 import json, hashlib, hmac, secrets, os, datetime, tempfile, threading, time
 
-USERS_FILE  = os.path.join(os.path.dirname(os.path.abspath(__file__)), "users.json")
+USERS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "users.json")
 _users_lock = threading.Lock()
 
 ROLES = {
-    "admin":    {"label": "Адмін",    "color": "#f05050"},
+    "admin": {"label": "Адмін", "color": "#f05050"},
     "operator": {"label": "Оператор", "color": "#f5a623"},
-    "medic":    {"label": "Медик",    "color": "#3ec97a"},
-    "reader":   {"label": "Читач",    "color": "#7a8490"},
+    "medic": {"label": "Медик", "color": "#3ec97a"},
+    "reader": {"label": "Читач", "color": "#7a8490"},
 }
 
 PERMISSIONS = {
-    "admin":    ["view", "add_personnel", "edit_personnel", "delete_personnel",
-                 "add_szc", "edit_szc", "delete_szc", "add_medical",
-                 "edit_medical", "generate_pdf", "manage_users"],
-    "operator": ["view", "add_personnel", "edit_personnel",
-                 "add_szc", "edit_szc", "generate_pdf"],
-    "medic":    ["view", "add_medical", "edit_medical", "generate_pdf"],
-    "reader":   ["view", "generate_pdf"],
+    "admin": [
+        "view",
+        "add_personnel",
+        "edit_personnel",
+        "delete_personnel",
+        "add_szc",
+        "edit_szc",
+        "delete_szc",
+        "add_medical",
+        "edit_medical",
+        "generate_pdf",
+        "manage_users",
+    ],
+    "operator": [
+        "view",
+        "add_personnel",
+        "edit_personnel",
+        "add_szc",
+        "edit_szc",
+        "generate_pdf",
+    ],
+    "medic": ["view", "add_medical", "edit_medical", "generate_pdf"],
+    "reader": ["view", "generate_pdf"],
 }
 
 
 def _hash(password: str, salt: str) -> str:
     return hashlib.pbkdf2_hmac(
-        "sha256", password.encode("utf-8"),
-        salt.encode("utf-8"), 600_000
+        "sha256", password.encode("utf-8"), salt.encode("utf-8"), 600_000
     ).hex()
 
 
@@ -63,8 +79,13 @@ def save_users(users: dict):
         raise
 
 
-def create_user(username: str, password: str, role: str,
-                display_name: str = "", created_by: str = "system") -> dict:
+def create_user(
+    username: str,
+    password: str,
+    role: str,
+    display_name: str = "",
+    created_by: str = "system",
+) -> dict:
     with _users_lock:
         users = load_users()
         if username in users:
@@ -74,13 +95,13 @@ def create_user(username: str, password: str, role: str,
         salt = secrets.token_hex(32)
         users[username] = {
             "display_name": display_name or username,
-            "role":         role,
-            "salt":         salt,
-            "hash":         _hash(password, salt),
-            "created_by":   created_by,
-            "created_at":   datetime.datetime.now().isoformat(),
-            "last_login":   None,
-            "active":       True,
+            "role": role,
+            "salt": salt,
+            "hash": _hash(password, salt),
+            "created_by": created_by,
+            "created_at": datetime.datetime.now().isoformat(),
+            "last_login": None,
+            "active": True,
         }
         save_users(users)
         return dict(users[username])
@@ -96,7 +117,7 @@ def verify_user(username: str, password: str):
             _hash(password, "0" * 64)
             return None
         expected = u["hash"]
-        actual   = _hash(password, u["salt"])
+        actual = _hash(password, u["salt"])
         # [A4] Constant-time comparison
         if not hmac.compare_digest(actual, expected):
             return None
@@ -122,15 +143,24 @@ def has_permission(role: str, permission: str) -> bool:
 
 
 def init_default_users():
-    """Creates default users only if users.json does not exist."""
+    """Creates default users only if users.json does not exist.
+    Generates a random password per user and prints it once — it is not stored anywhere else.
+    """
     if os.path.exists(USERS_FILE):
         return
     print("  [AUTH] Створення початкових користувачів...")
-    create_user("admin",    "admin1234",  "admin",    "Адміністратор")
-    create_user("operator", "oper1234",   "operator", "Оператор")
-    create_user("medic",    "medic1234",  "medic",    "Медична служба")
-    create_user("reader",   "reader1234", "reader",   "Читач")
-    print("  [AUTH] users.json створено. ЗМІНІТЬ ПАРОЛІ!")
+    for username, role, name in [
+        ("admin", "admin", "Адміністратор"),
+        ("operator", "operator", "Оператор"),
+        ("medic", "medic", "Медична служба"),
+        ("reader", "reader", "Читач"),
+    ]:
+        pwd = secrets.token_urlsafe(12)
+        create_user(username, pwd, role, name)
+        print(f"  [AUTH] {username}: {pwd}")
+    print(
+        "  [AUTH] users.json створено. ЗБЕРЕЖІТЬ ПАРОЛІ ВИЩЕ — вони не зберігаються ніде більше!"
+    )
 
 
 def toggle_user_active(username: str, requesting_user: str) -> bool:
@@ -148,14 +178,14 @@ def toggle_user_active(username: str, requesting_user: str) -> bool:
 
 
 # ── Сесії (in-memory) ─────────────────────────────────────────────────────────
-_sessions: dict = {}   # token -> {username, role, display_name, expires}
-_lock     = threading.Lock()
+_sessions: dict = {}  # token -> {username, role, display_name, expires}
+_lock = threading.Lock()
 SESSION_TTL = 8 * 3600  # 8 hours
 
 
 def create_session(username: str, role: str, display_name: str = "") -> str:
     """[A2] display_name passed as param — no disk I/O here."""
-    token   = secrets.token_hex(32)
+    token = secrets.token_hex(32)
     expires = time.time() + SESSION_TTL
     with _lock:
         # Remove old sessions for this user
@@ -163,11 +193,11 @@ def create_session(username: str, role: str, display_name: str = "") -> str:
             if s["username"] == username:
                 del _sessions[t]
         _sessions[token] = {
-            "username":     username,
-            "role":         role,
+            "username": username,
+            "role": role,
             "display_name": display_name or username,
-            "expires":      expires,
-            "issued_at":    datetime.datetime.now().isoformat(),
+            "expires": expires,
+            "issued_at": datetime.datetime.now().isoformat(),
         }
     return token
 
